@@ -19,6 +19,30 @@ If you have any questions or need clarification, feel free to discuss them in th
 
 Looking forward to our collaboration!
 
+# Install composer dependency
+
+composer install
+
+# Install node modules
+
+npm install / yarn
+
+# Copy environment file
+
+cp .env.example .env
+
+# Set the Application key
+
+php artisan key:generate
+
+# setup the database credentials and migrate database
+
+php artisan migrate
+
+# Damy data Insert with Seeder && Factory
+
+php artisan migrate:fresh --seed
+
 Best regards,
 [Md Jahangir Alam Rohan](https://github.com/rohan9222)
 
