@@ -1,92 +1,73 @@
 <x-app-layout>
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Edit User
+    <div class="flex justify-center">
+        <div class="w-full max-w-lg">
+            <div class="bg-white shadow rounded-lg">
+                <div class="bg-gray-100 p-4 flex justify-between items-center">
+                    <h1 class="text-lg font-semibold">Edit User</h1>
+                    <a href="{{ route('users.index') }}" class="back-btn">← Back</a>
                 </div>
-                <div class="float-end">
-                    <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('users.update', $user->id) }}" method="post">
-                    @csrf
-                    @method("PUT")
-
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
-                        <div class="col-md-6">
-                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user->name }}">
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
-                            @endif
+                <div class="p-4">
+                    <form action="{{ route('users.update', $user->id) }}" method="post" class="space-y-4">
+                        @csrf
+                        @method("PUT")
+    
+                        <div>
+                            <label for="name" class="block font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" name="name" value="{{ $user->name }}" 
+                                   class="w-full mt-1 border-gray-300 rounded-md shadow-sm @error('name') border-red-500 @enderror">
+                            @error('name')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Email Address</label>
-                        <div class="col-md-6">
-                          <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $user->email }}">
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                            @endif
+    
+                        <div>
+                            <label for="email" class="block font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="email" name="email" value="{{ $user->email }}" 
+                                   class="w-full mt-1 border-gray-300 rounded-md shadow-sm @error('email') border-red-500 @enderror">
+                            @error('email')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="password" class="col-md-4 col-form-label text-md-end text-start">Password</label>
-                        <div class="col-md-6">
-                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
+    
+                        <div>
+                            <label for="password" class="block font-medium text-gray-700">Password</label>
+                            <input type="password" id="password" name="password" 
+                                   class="w-full mt-1 border-gray-300 rounded-md shadow-sm @error('password') border-red-500 @enderror">
+                            @error('password')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">Confirm Password</label>
-                        <div class="col-md-6">
-                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+    
+                        <div>
+                            <label for="password_confirmation" class="block font-medium text-gray-700">Confirm Password</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" 
+                                   class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
                         </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
-                        <div class="col-md-6">
-                            <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
-                                @forelse ($roles as $role)
-
-                                    @if ($role!='Super Admin')
-                                    <option value="{{ $role }}" {{ in_array($role, $userRoles ?? []) ? 'selected' : '' }}>
-                                        {{ $role }}
-                                    </option>
-                                    @else
-                                        @if (Auth::user()->hasRole('Super Admin'))
+    
+                        <div>
+                            <label for="roles" class="block font-medium text-gray-700">Roles</label>
+                            <select id="roles" name="roles[]" multiple 
+                                    class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                @foreach ($roles as $role)
+                                    @if ($role != 'Super Admin' || Auth::user()->hasRole('Super Admin'))
                                         <option value="{{ $role }}" {{ in_array($role, $userRoles ?? []) ? 'selected' : '' }}>
                                             {{ $role }}
                                         </option>
-                                        @endif
                                     @endif
-
-                                @empty
-
-                                @endforelse
+                                @endforeach
                             </select>
-                            @if ($errors->has('roles'))
-                                <span class="text-danger">{{ $errors->first('roles') }}</span>
-                            @endif
+                            @error('roles')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update User">
-                    </div>
-
-                </form>
+    
+                        <div class="flex justify-center">
+                            <button type="submit" class="edit-btn">Update User</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</x-app-layout>
+    </x-app-layout>
+    
