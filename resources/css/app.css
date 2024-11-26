@@ -5,3 +5,21 @@
 [x-cloak] {
     display: none;
 }
+.add-new-btn{
+    @apply bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2 px-4 rounded;
+}
+.delete-btn{
+    @apply bg-red-500 hover:bg-red-600 text-white text-sm font-medium py-1 px-3 rounded inline-block;
+}
+.edit-btn, .back-btn{
+    @apply bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-1 px-3 rounded inline-block;
+}
+
+.show-btn{
+    @apply bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium py-1 px-3 rounded inline-block;
+}
+#main-dashbord-content.sideActive {
+    margin-left: 16rem; /* Adjust according to your sidebar width */
+    transition: 0.3s;
+}
+

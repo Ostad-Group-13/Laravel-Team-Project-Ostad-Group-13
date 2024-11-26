@@ -1,39 +1,44 @@
 <x-app-layout>
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Role Information
+    <div class="flex justify-center">
+        <div class="w-full max-w-2xl">
+            <div class="bg-white shadow rounded-lg">
+                <div class="bg-gray-100 px-4 py-3 flex justify-between items-center border-b border-gray-300">
+                    <h2 class="text-lg font-semibold">Role Information</h2>
+                    <a href="{{ route('roles.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-1 px-3 rounded">
+                        &larr; Back
+                    </a>
                 </div>
-                <div class="float-end">
-                    <a href="{{ route('roles.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
-                </div>
-            </div>
-            <div class="card-body">
-
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Name:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                <div class="p-6">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 font-medium mb-1">
+                            <strong>Name:</strong>
+                        </label>
+                        <div class="text-gray-900 text-sm">
                             {{ $role->name }}
                         </div>
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start"><strong>Permissions:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            @if ($role->name=='Super Admin')
-                                <span class="badge bg-primary">All</span>
+                    <div class="mb-4">
+                        <label for="permissions" class="block text-gray-700 font-medium mb-1">
+                            <strong>Permissions:</strong>
+                        </label>
+                        <div class="flex flex-wrap gap-2">
+                            @if ($role->name == 'Super Admin')
+                                <span class="bg-blue-500 text-white text-xs font-medium py-1 px-2 rounded">
+                                    All
+                                </span>
                             @else
                                 @forelse ($rolePermissions as $permission)
-                                    <span class="badge bg-primary">{{ $permission->name }}</span>
+                                    <span class="bg-blue-500 text-white text-xs font-medium py-1 px-2 rounded">
+                                        {{ $permission->name }}
+                                    </span>
                                 @empty
+                                    <span class="text-gray-500 text-sm">No Permissions Assigned</span>
                                 @endforelse
                             @endif
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </x-app-layout>
