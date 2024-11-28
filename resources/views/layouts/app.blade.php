@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +11,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -26,11 +24,16 @@
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
 
         <!-- Sidebar -->
-        <x-admin-sidebar />
+        <div id="sidebar"
+            class="fixed inset-y-0 left-0 w-64 bg-white shadow dark:bg-gray-900 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+            <x-admin-sidebar />
+        </div>
+
+        <!-- Overlay -->
+        <div id="admin-sidebar-overlay" class="hidden md:hidden"></div>
 
         <!-- Main Content -->
         <div id="main-dashbord-content" class="sideActive flex-1 flex flex-col bg-white dark:bg-gray-900">
-
             <div class="flex items-center justify-between w-full bg-white dark:bg-gray-800 shadow px-10 py-2">
                 <div class="flex items-center">
                     <!-- Toggle Button -->
@@ -66,31 +69,55 @@
             </main>
         </div>
     </div>
-
+    
+    <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- JavaScript -->
     <script>
-        // Get the sidebar and toggle button
+        // Get elements
         const sidebar = document.getElementById('sidebar');
         const toggleButton = document.getElementById('toggle-sidebar');
+        const overlay = document.getElementById('admin-sidebar-overlay');
         const mainContent = document.getElementById('main-dashbord-content');
 
-        // Toggle the sidebar open and close
-        toggleButton.addEventListener('click', () => {d
-            // Check if sidebar is currently hidden
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-                sidebar.classList.add('translate-x-0');
-                mainContent.classList.add('sideActive'); // Add class to main content
+        // Function to check screen size
+        function isMobile() {
+            return window.innerWidth < 768; // Tailwind's `md` breakpoint is 768px
+        }
+
+        // Toggle the sidebar and overlay on button click
+        toggleButton.addEventListener('click', () => {
+            if (isMobile()) {
+                // Mobile behavior: Slide the sidebar and show overlay
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('translate-x-0');
+                    overlay.classList.remove('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('translate-x-0');
+                    overlay.classList.add('hidden');
+                }
             } else {
-                sidebar.classList.remove('translate-x-0');
-                sidebar.classList.add('-translate-x-full');
-                mainContent.classList.remove('sideActive'); // Remove class from main content
+                // Desktop behavior: Toggle sidebar visibility
+                if (mainContent.classList.contains('sideActive')) {
+                    mainContent.classList.remove('sideActive');
+                    sidebar.classList.add('-translate-x-full'); // Hide sidebar
+                    sidebar.classList.remove('md:translate-x-0');
+                } else {
+                    mainContent.classList.add('sideActive');
+                    sidebar.classList.remove('-translate-x-full'); // Show sidebar
+                }
             }
         });
 
-
+        // Hide sidebar and overlay when clicking the overlay (mobile only)
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebar.classList.remove('translate-x-0');
+            overlay.classList.add('hidden');
+        });
+        
         // Toaster Message
         @if (Session::has('message'))
             let type = "{{ Session::get('alert-type') }}";

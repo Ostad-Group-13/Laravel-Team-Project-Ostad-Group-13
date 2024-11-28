@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\{CategoryController, RoleController, UserController};
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
 Route::middleware([
