@@ -37,6 +37,19 @@
                                 Settings
                             </a>
                         </li>
+                        <hr>
+                        <li class="mb-2 {{ request()->routeIs('category.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('category.index') }}"
+                                class="block px-6 py-2 ">
+                                Category
+                            </a>
+                        </li>
+                         <li class="mb-2 {{ request()->routeIs('blog.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('blog.index') }}"
+                                class="block px-6 py-2 ">
+                                Blog
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </aside>
