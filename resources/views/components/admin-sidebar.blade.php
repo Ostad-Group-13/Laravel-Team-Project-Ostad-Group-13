@@ -1,5 +1,5 @@
             <!-- Sidebar -->
-            <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-md transform transition-transform duration-300 translate-x-0 z-50">
+            <aside >
               <div class="p-6">
                   <a href="{{ url('/') }}" class="text-lg font-bold text-gray-800 dark:text-white"><img src="{{ asset('images/CP-Logo.png') }}" alt=""></a>
               </div>
