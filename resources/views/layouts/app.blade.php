@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +11,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -35,7 +34,6 @@
 
         <!-- Main Content -->
         <div id="main-dashbord-content" class="sideActive flex-1 flex flex-col bg-white dark:bg-gray-900">
-
             <div class="flex items-center justify-between w-full bg-white dark:bg-gray-800 shadow px-10 py-2">
                 <div class="flex items-center">
                     <!-- Toggle Button -->
@@ -71,8 +69,10 @@
             </main>
         </div>
     </div>
-
+    
     <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         // Get elements
         const sidebar = document.getElementById('sidebar');
@@ -117,6 +117,48 @@
             sidebar.classList.remove('translate-x-0');
             overlay.classList.add('hidden');
         });
+        
+        // Toaster Message
+        @if (Session::has('message'))
+            let type = "{{ Session::get('alert-type') }}";
+            switch (type) {
+                case "success":
+                    // toastr.success("{{ Session::get('message') }}");
+                    toastr.success(
+                        "{{ Session::get('message') }}",
+                        "{{ Session::get('data') }}",
+                        "{{ Session::get('alert-type') }}", {
+                            timeOut: 2000,
+                            progressBar: true,
+                            closeButton: true,
+                            positionClass: "toast-top-right",
+                            hideDuration: "1000",
+                        });
+                    break;
+
+                case "error":
+                    toastr.error(
+                        "{{ Session::get('message') }}",
+                        "{{ Session::get('data') }}",
+                        "{{ Session::get('alert-type') }}", {
+                            timeOut: 2000,
+                            progressBar: true,
+                            closeButton: true,
+                            positionClass: "toast-top-right",
+                            hideDuration: "1000",
+                        }
+                    );
+                    break;
+
+                case "warning":
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+
+                case "info":
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
     </script>
 
     @stack('modals')
