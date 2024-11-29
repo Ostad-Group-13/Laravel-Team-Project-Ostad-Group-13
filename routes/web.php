@@ -3,9 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\{CategoryController, RoleController, UserController};
+use App\Http\Controllers\Frontend\PageController;
+
+
+// pages route
 Route::get('/', function () {
     return view('pages.home');
 });
+
+Route::get('/contact',  [PageController::class, 'contactPage'])->name('contact');
+
+Route::get('/articles',  [PageController::class, 'blogPage']);
 
 Route::middleware([
     'auth:sanctum',

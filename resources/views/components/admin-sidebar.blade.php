@@ -31,13 +31,7 @@
                                 Roles
                             </a>
                         </li>
-                        <li class="mb-2 {{ request()->routeIs('profile.show') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
-                            <a href="{{ route('profile.show') }}"
-                                class="block px-6 py-2 ">
-                                Settings
-                            </a>
-                        </li>
-                        <hr>
+
                         <li class="mb-2 {{ request()->routeIs('category.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
                             <a href="{{ route('category.index') }}"
                                 class="block px-6 py-2 ">

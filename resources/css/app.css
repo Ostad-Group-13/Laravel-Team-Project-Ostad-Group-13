@@ -127,3 +127,75 @@ body{
 .footer_social a svg{
   @apply w-[20px];
 }
+
+
+/* racipe details css */
+
+.rd_head_info_item:not(:first-child){
+  @apply border-l border-[#DBE2E5] pl-[10px];
+  
+}
+.rounded-btn span {
+  @apply block text-center mt-4 text-[12px] font-semibold uppercase text-black;
+  letter-spacing: 3px; 
+}
+.rounded-btn .icon{
+  @apply w-[80px] h-[80px] rounded-full bg-[#E7FAFE] flex items-center justify-center text-[#DBE2E5] cursor-pointer;
+}
+.nutrition ul li{
+  @apply flex justify-between text-[18px] font-medium text-[#00000099] leading-[28px] mb-[10px] pb-[10px] border-b border-[#DBE2E5];
+}
+.nu_value{
+  @apply text-black text-[18px] font-medium leading-[28px];
+}
+.nutrition{
+  @apply bg-[#E7FAFE] px-[30px] py-[40px] rounded-[30px] lg:h-[600px] h-[500px];
+}
+.checktext{
+  @apply text-[18px] leading-[28px] peer-checked:border-black peer-checked:line-through peer-checked:text-[#00000099];
+}
+.checklist ul{
+  @apply space-y-5;
+}
+.checklist ul li{
+  @apply py-[20px];
+}
+.checklist ul li:not(:last-child){
+  @apply border-b border-[#DBE2E5];
+}
+.input-field{
+  @apply w-full px-4 h-[55px] rounded-[16px] border border-[#0000001A] focus:outline-none focus:ring-1 focus:ring-[#0000001A] placeholder:text-[#00000099] placeholder:text-sm placeholder:font-medium placeholder:leading-[28px];
+}
+.input-label{
+  @apply block text-[13px] uppercase leading-[20px] font-medium text-[#00000099] tracking-wider;
+}
+.input-textarea{
+  @apply w-full px-5 py-5 rounded-[16px] border border-[#0000001A] focus:outline-none focus:ring-1 focus:ring-[#0000001A] placeholder:text-[#00000099] placeholder:text-sm placeholder:font-medium placeholder:leading-[28px];
+}
+
+
+.search-blog {
+  margin: 40px 0px;
+}
+.max-w-md {
+  max-width: 40rem !important;
+}
+img.user-profile-img {
+  width: 50px;
+  height: 50px;
+}
+span.border-line {
+  color: #e3dfdf;
+  width: 1px;
+  height: 100%;
+}
+
+.pagination-btn{
+  width: 4rem;
+  height: 4rem;
+}
+
+.blog-details-image {
+  width: 100%;
+  height: auto;
+}
