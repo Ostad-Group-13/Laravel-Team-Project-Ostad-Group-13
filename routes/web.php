@@ -12,8 +12,10 @@ Route::get('/', function () {
 });
 
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contact');
+Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
+Route::get('/articles',  [PageController::class, 'blogPage'])->name('blogPage');
 
-Route::get('/articles',  [PageController::class, 'blogPage']);
+Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
 
 Route::middleware([
     'auth:sanctum',

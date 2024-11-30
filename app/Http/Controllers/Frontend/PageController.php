@@ -14,4 +14,12 @@ class PageController extends Controller
     function blogPage(){
         return view('pages.blog');
     }
+
+    function aboutPage(){
+        return view('pages.about');
+    }
+
+    function racipesPage(){
+        return view('pages.racipes');
+    }
 }

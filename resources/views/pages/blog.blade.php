@@ -148,7 +148,7 @@
         </div>
     </div>
     <div class="pagination flex justify-center items-center mx-auto mt-5">
-      <div class="flex items-center space-x-2">
+      <div class="flex flex-wrap gap-[10px] items-center space-x-2">
         <!-- Active page -->
         <button class="pagination-btn bg-black text-white rounded-md flex items-center justify-center">1</button>
 
