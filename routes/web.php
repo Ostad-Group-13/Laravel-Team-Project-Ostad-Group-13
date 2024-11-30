@@ -36,6 +36,6 @@ Route::middleware([
     //Common Feature For Backend
     Route::get('subscribe', [BackendController::class, 'Subscribe'])->name('subscribe');
     Route::get('contact-us', [BackendController::class, 'contact'])->name('contact');
-    // Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
+    Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 });

@@ -43,7 +43,7 @@
                                  <td class="px-4 py-2 text-sm text-gray-700">
                                    
                                     <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
-                                        <a href="{{ route('user-list',$item->user_id) }}">{{ $item->users->name }}</a>
+                                        <a href="{{ route('User-Post',$item->user_id) }}">{{ $item->users->name }}</a>
                                     </span>
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $item->short_description }}</td>
