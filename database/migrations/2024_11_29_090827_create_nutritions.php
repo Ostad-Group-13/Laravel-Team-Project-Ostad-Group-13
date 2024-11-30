@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('nutritions', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255);
-            $table->string('calories', 255);
-            $table->string('total_fat', 255);
-            $table->string('protein', 255);
-            $table->string('carbohydrates', 255);
-            $table->string('cholesterol', 255);
+            $table->string('name');
+            $table->string('amount');
+            $table->string('unit');
 
             $table->unsignedBigInteger('recipe_id')->nullable();
-            //$table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
 
             $table->timestamps();
         });
