@@ -1,111 +1,142 @@
 <x-app-layout>
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Add New User
+    <div class="flex justify-center">
+        <div class="w-full max-w-2xl">
+            <div class="bg-white shadow rounded-lg">
+                <div class="bg-gray-100 px-4 py-3 flex justify-between items-center border-b border-gray-300">
+                    <h2 class="text-lg font-semibold">Add New User</h2>
+                    <a href="{{ route('users.index') }}" class="back-btn">
+                        &larr; Back
+                    </a>
                 </div>
-                <div class="float-end">
-                    <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('users.store') }}" method="post">
-                    @csrf
-                    <div class="mb-3 row">
-                        <label for="serviceno" class="col-md-4 col-form-label text-md-end text-start">Service Number</label>
-                        <div class="col-md-6">
-                            <input id="serviceno" type="serviceno" class="form-control @error('serviceno') is-invalid @enderror" name="serviceno"  placeholder="Service No" value="{{ old('serviceno') }}" required autocomplete="serviceno" autofocus>
-                            @if ($errors->has('serviceno'))
-                                <span class="text-danger">{{ $errors->first('serviceno') }}</span>
-                            @endif
-                        </div>
-                    </div>
+                <div class="p-6">
+                    <form action="{{ route('users.store') }}" method="post">
+                        @csrf
 
-                    <div class="mb-3 row">
-                        <label for="rank" class="col-md-4 col-form-label text-md-end text-start">Rank</label>
-                        <div class="col-md-6">
-                            <input id="rank" type="rank" class="form-control @error('rank') is-invalid @enderror" name="rank"  placeholder="Rank" value="{{ old('rank') }}" required autocomplete="rank" autofocus>
+                        <!-- Service Number -->
+                        <div class="mb-4">
+                            <label for="serviceno" class="block text-gray-700 font-medium mb-1">Service Number</label>
+                            <input 
+                                id="serviceno" 
+                                type="text" 
+                                name="serviceno" 
+                                value="{{ old('serviceno') }}" 
+                                placeholder="Service No" 
+                                required 
+                                autocomplete="serviceno" 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none @error('serviceno') border-red-500 @enderror">
                             @if ($errors->has('serviceno'))
-                                <span class="text-danger">{{ $errors->first('serviceno') }}</span>
+                                <span class="text-red-500 text-sm">{{ $errors->first('serviceno') }}</span>
                             @endif
                         </div>
 
-                    </div>
+                        <!-- Rank -->
+                        <div class="mb-4">
+                            <label for="rank" class="block text-gray-700 font-medium mb-1">Rank</label>
+                            <input 
+                                id="rank" 
+                                type="text" 
+                                name="rank" 
+                                value="{{ old('rank') }}" 
+                                placeholder="Rank" 
+                                required 
+                                autocomplete="rank" 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none @error('rank') border-red-500 @enderror">
+                            @if ($errors->has('rank'))
+                                <span class="text-red-500 text-sm">{{ $errors->first('rank') }}</span>
+                            @endif
+                        </div>
 
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
-                        <div class="col-md-6">
-                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+                        <!-- Name -->
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-medium mb-1">Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                value="{{ old('name') }}" 
+                                placeholder="Name" 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none @error('name') border-red-500 @enderror">
                             @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <span class="text-red-500 text-sm">{{ $errors->first('name') }}</span>
                             @endif
                         </div>
-                    </div>
 
-                    <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Email Address</label>
-                        <div class="col-md-6">
-                          <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
+                        <!-- Email -->
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                value="{{ old('email') }}" 
+                                placeholder="Email Address" 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none @error('email') border-red-500 @enderror">
                             @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                <span class="text-red-500 text-sm">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
-                    </div>
 
-                    <div class="mb-3 row">
-                        <label for="password" class="col-md-4 col-form-label text-md-end text-start">Password</label>
-                        <div class="col-md-6">
-                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                        <!-- Password -->
+                        <div class="mb-4">
+                            <label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Password" 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none @error('password') border-red-500 @enderror">
                             @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>
                             @endif
                         </div>
-                    </div>
 
-                    <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">Confirm Password</label>
-                        <div class="col-md-6">
-                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
+                        <!-- Confirm Password -->
+                        <div class="mb-4">
+                            <label for="password_confirmation" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                id="password_confirmation" 
+                                name="password_confirmation" 
+                                placeholder="Confirm Password" 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none">
                         </div>
-                    </div>
 
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
-                        <div class="col-md-6">
-                            <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
+                        <!-- Roles -->
+                        <div class="mb-4">
+                            <label for="roles" class="block text-gray-700 font-medium mb-1">Roles</label>
+                            <select 
+                                id="roles" 
+                                name="roles[]" 
+                                multiple 
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none @error('roles') border-red-500 @enderror">
                                 @forelse ($roles as $role)
-
-                                    @if ($role!='Super Admin')
+                                    @if ($role != 'Super Admin')
                                         <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
-                                        {{ $role }}
-                                        </option>
-                                    @else
-                                        @if (Auth::user()->hasRole('Super Admin'))
-                                            <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
                                             {{ $role }}
-                                            </option>
-                                        @endif
+                                        </option>
+                                    @elseif (Auth::user()->hasRole('Super Admin'))
+                                        <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
+                                            {{ $role }}
+                                        </option>
                                     @endif
-
                                 @empty
-
+                                    <option disabled>No roles available</option>
                                 @endforelse
                             </select>
                             @if ($errors->has('roles'))
-                                <span class="text-danger">{{ $errors->first('roles') }}</span>
+                                <span class="text-red-500 text-sm">{{ $errors->first('roles') }}</span>
                             @endif
                         </div>
-                    </div>
 
-                    <div class="mb-3 row">
-                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add User">
-                    </div>
-
-                </form>
+                        <!-- Submit Button -->
+                        <div class="mt-6 flex justify-center">
+                            <button type="submit" class="add-new-btn">
+                                Add User
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </x-app-layout>
