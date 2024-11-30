@@ -13,20 +13,21 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('photo', 255);
-            $table->string('title', 255);
-            $table->string('slug', 255);
-            $table->string('pre_time', 255);
-            $table->string('cook_time', 255);
+            $table->string('photo');
+            $table->string('title');
+            $table->string('slug')->nullable();
+            $table->string('pre_time');
+            $table->string('cook_time');
+            $table->string('video_link')->nullable();
 
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
-           //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            //$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->text('short_description');
-            $table->longText('long_description');
+            $table->longText('directions');
 
             $table->timestamps();
         });
