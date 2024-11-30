@@ -37,8 +37,8 @@
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $category->name }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <img @if ($category->image) ? src="{{ asset($category->image) }}" : src="default.jpg" @endif"
-                                        alt="" width="120" height="120">
+                                    <img @if ($category->image) src="{{ asset($category->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                        width="120" height="80">
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     @if ($category->status == 'active')
@@ -49,13 +49,15 @@
                                 </td>
 
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
-                                    <a href="{{ route('category.edit', $category->id) }}" class="edit-btn">Edit</a>
+                                    <a href="{{ route('category.edit', $category->id) }}" class="edit-btn"
+                                        onclick="edit(event)">Edit</a>
                                     <form action="{{ route('category.destroy', $category) }}" method="post"
                                         class="inline">
                                         @csrf
                                         @method('DELETE')
 
-                                        <button type="submit" class="delete-btn inline-flex items-center gap-2 ">
+                                        <button type="submit" class="delete-btn inline-flex items-center gap-2"
+                                            onclick="DeleteConfirm(event)">
                                             Delete</button>
 
                                     </form>

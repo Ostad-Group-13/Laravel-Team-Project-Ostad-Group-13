@@ -50,6 +50,24 @@
                                 Blog
                             </a>
                         </li>
+                        <li class="mb-2 {{ request()->routeIs('subscribe') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('subscribe') }}"
+                                class="block px-6 py-2 ">
+                                Subscription
+                            </a>
+                        </li>
+                        <li class="mb-2 {{ request()->routeIs('contact') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('contact') }}"
+                                class="block px-6 py-2 ">
+                                Contact US
+                            </a>
+                        </li>
+                         {{-- <li class="mb-2 {{ request()->routeIs('user-list') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('user-list') }}"
+                                class="block px-6 py-2 ">
+                                User Blog
+                            </a>
+                        </li> --}}
                     </ul>
                 </nav>
             </aside>
