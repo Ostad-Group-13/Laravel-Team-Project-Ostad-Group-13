@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
         //
         $categories = Category::latest('id')->paginate(10);
-        return view('category.index', compact('categories'));
+        return view('backend.category.index', compact('categories'));
     }
 
     /**
@@ -31,41 +31,44 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('category.create');
+        return view('backend.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,Category $category)
+    public function store(Request $request, Category $category)
     {
         # Validation
-       
-        // $validated = $request->validate([
-        //     'name' => 'required',
+        $request->validate([
+            'categoryName' => 'required',
+            'status' => 'required|string|in:active,inactive',
+        ], [
+            'categoryName.required' => 'Sorry Category Name is Empty',
+            'status.required' => 'Sorry Status is Empty',
+        ]);
 
-        // ]);
 
-      
         // $category = new Category();
 
         if ($request->file('FileUpload')) {
 
             # upload image using helper function
             $url = uploadImage($request->file('FileUpload'), 'category');
-            $category->image = $url; 
+            $category->image = $url;
         }
-        
-        $category->name = $request->categoryName;
+
+        $category->name = $request->input('categoryName');
         $category->slug = Str::slug($request->categoryName);
-        $category->status = $request->status;
-        $category->color = $request->color;
+        $category->status = $request->input('status');
+        $category->color = $request->input('color');
         $category->save();
 
         $notification = [
-            'message' => 'Create Category Successfully',
+            'message' => 'Created Category Successfully',
             'alert-type' => 'success'
         ];
+
 
         return redirect()->route('category.index')->with($notification);
     }
@@ -86,7 +89,7 @@ class CategoryController extends Controller
         //
 
         // return $category->id;
-        return view('category.edit', compact('category'));
+        return view('backend.category.edit', compact('category'));
     }
 
     /**
@@ -95,14 +98,13 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
 
-
         if ($request->file('FileUpload')) {
 
             # old img delete
             deleteImage($category->image);
 
             # Image upload
-            $category->image =uploadImage($request->file('FileUpload'), 'category');
+            $category->image = uploadImage($request->file('FileUpload'), 'category');
         }
 
         $category->name = $request->categoryName;
@@ -124,7 +126,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        
+
         #img upload and old img delete
         // if (File::exists($category->image)) {
         //     File::delete($category->image);

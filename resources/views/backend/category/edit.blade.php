@@ -3,7 +3,7 @@
         <div class="w-full">
             <div class="bg-white shadow rounded-lg">
                 <div class="bg-gray-100 px-4 py-3 flex justify-between items-center border-b border-gray-300">
-                    <h2 class="text-lg font-semibold">Create Category</h2>
+                    <h2 class="text-lg font-semibold">Edit Category</h2>
                     <a href="{{ route('category.index') }}" class="back-btn">
                         &larr; Back
                     </a>
@@ -14,7 +14,7 @@
                         @method('PUT')
                         <div class="flex gap-2">
                             <!-- Category Name -->
-                            <div class="mb-4 w-1/3">
+                            <div class="mb-4 w-8/12">
                                 <label for="categoryName" class="block text-gray-700 font-medium mb-1">Category Name
                                     :</label>
                                 <input id="categoryName" type="text" name="categoryName"
@@ -27,7 +27,7 @@
                             </div>
 
                             <!-- Status -->
-                            <div class="w-1/4">
+                            <div class="w-3/12">
                                 <label for="status"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
                                     option</label>
@@ -44,10 +44,14 @@
                                 @endif
                             </div>
 
-                            <div class="w-1/4">
-                                <label for="color">Color</label>
-                                <input type="color" id="html5colorpicker" name="color"
-                                    value="{{ $category->color }}" style="width:85%;">
+                        
+                            <div class="w-2/12">
+                                <label for="status"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Select a Color</label>
+                                <input type="color" id="html5colorpicker" name="color" value="{{ $category->color }}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full rounded"
+                                    style="width: 20%;height: 50px;padding: 5px;">
                             </div>
 
 
@@ -55,22 +59,14 @@
 
                         </div>
                         <!-- Image -->
-                        <div class="mb-4">
-                            <label for="rank" class="block text-gray-700 font-medium mb-1">Image</label>
-
-
-                            <input
-                                class="px-3 py-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                id="file_input" type="file" name="FileUpload">
-                            <img src="{{ asset($category->image) }}" width="250" height="180" alt=""
-                                class="mt-3 rounded">
-                            {{-- 
-                            @if ($errors->has('rank'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('rank') }}</span>
-                            @endif --}}
+                        <div class="w-1/4 rounded">
+                            <label for="FileUpload" class="block text-gray-700 font-medium mb-1">Image</label>
+                            <input type="file" class="dropify @error('FileUpload') border-red-500 @enderror"
+                                 @if ($category->image) ? data-default-file="{{ asset($category->image) }}":  @else  data-default-file="{{ asset('uploads/no-image.png') }}" @endif data-height="250"   name="FileUpload">
+                            @if ($errors->has('FileUpload'))
+                                <span class="text-red-500 text-sm">{{ $errors->first('FileUpload') }}</span>
+                            @endif
                         </div>
-
-
 
                         <!-- Submit Button -->
                         <div class="mt-6">
