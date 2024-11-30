@@ -9,10 +9,10 @@
           <nav>
             <ul class="flex items-center gap-[50px]">
               <li><a href="{{ url('/') }}">Home</a></li>
-              <li><a href="#">Recipes</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="{{ route('racipesPage') }}">Recipes</a></li>
+              <li><a href="{{ route('aboutPage') }}">About us</a></li>
+              <li><a href="{{ route('blogPage') }}">Blog</a></li>
+              <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
           </nav>
         </div>
@@ -59,10 +59,10 @@
       <nav class="p-4">
         <ul class="flex flex-col gap-4">
           <li><a href="{{ url('/') }}">Home</a></li>
-          <li><a href="#">Recipes</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="{{ route('racipesPage') }}">Recipes</a></li>
+          <li><a href="{{ route('aboutPage') }}">About us</a></li>
+          <li><a href="{{ route('blogPage') }}">Blog</a></li>
+          <li><a href="{{ route('contact') }}">Contact</a></li>
         </ul>
         @if (Route::has('login'))
         @auth
