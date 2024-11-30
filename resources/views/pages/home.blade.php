@@ -146,5 +146,7 @@
 
     <x-racipes />
 
+    <x-newsletter />
+
 
 </x-guest-layout>

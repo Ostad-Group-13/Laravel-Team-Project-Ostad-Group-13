@@ -3,10 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
+use App\Http\Controllers\Frontend\PageController;
 
+
+// pages route
 Route::get('/', function () {
     return view('pages.home');
 });
+
+Route::get('/contact',  [PageController::class, 'contactPage'])->name('contact');
+Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
+Route::get('/articles',  [PageController::class, 'blogPage'])->name('blogPage');
+
+Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
 
 Route::middleware([
     'auth:sanctum',
