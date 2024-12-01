@@ -24,6 +24,7 @@
         "jquery-ui": "^1.14.1",
         "moment": "^2.30.1",
         "slick-carousel": "^1.8.1",
+        "sweetalert2": "^11.14.5",
         "toastr": "^2.1.4"
     }
 }
