@@ -8,15 +8,22 @@ use App\Livewire\Comments;
 
 
 // pages route
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [PageController::class, 'homePage'])->name('homePage');
 
-Route::get('/contact',  [PageController::class, 'contactPage'])->name('contact');
+Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
-Route::get('/articles',  [PageController::class, 'blogPage'])->name('blogPage');
 
 Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
+
+Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
+
+Route::get('/articles/{blog:slug}', [App\Http\Controllers\Frontend\BlogController::class, 'show'])->name('article.show');
+
+
+Route::post('/subscribe', [PageController::class, 'collectEmail'])->name('newsletter.subscribe');
+
+
+
 
 Route::middleware([
     'auth:sanctum',

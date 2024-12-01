@@ -142,7 +142,7 @@ class BlogController extends Controller
         if ($request->hasFile('FileUpload')) {
 
             # OLD image Delete
-            deleteImage($blog->image);
+            deleteImage(image: $blog->image);
 
             # Upload Image
             $blog->image = uploadImage($request->file('FileUpload'), 'blog');

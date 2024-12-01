@@ -1,4 +1,5 @@
 <x-guest-layout>
+
     <!-- slider area start -->
     <section class="slider_area py-[40px]">
       <div class="container">
@@ -62,7 +63,6 @@
     </section>
     <!-- slider area end -->
 
-
     <section class="category_area py-[50px]">
       <div class="container">
         <div class="flex sm:flex-row flex-col gap-10 items-center justify-between mb-[80px]">
@@ -75,63 +75,15 @@
         </div>
 
         <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-[30px] justify-center pt-[50px]">
+          @foreach ($categorys as  $category)
+
           <div class="category_card">
             <div class="category_item" style="background: linear-gradient(180deg, #70824600, #7082461A);">
               <div class="category_img">
-                <img src="./assets/img/cat/cat01.png" alt="category-img">
+                <img src="{{ asset($category->image) }}" alt="category-img">
               </div>
               <div class="category_content">
-                <a href="#"><h3 class="category_title">Breakfast</h3></a>
-              </div>
-            </div>
-          </div>
-          <div class="category_card">
-            <div class="category_item" style="background: linear-gradient(180deg, #6CC63F00, #6CC63F1A);">
-              <div class="category_img">
-                <img src="./assets/img/cat/cat02.png" alt="category-img">
-              </div>
-              <div class="category_content">
-                <a href="#"><h3 class="category_title">Vegan</h3></a>
-              </div>
-            </div>
-          </div>
-          <div class="category_card">
-            <div class="category_item" style="background: linear-gradient(180deg, #CC261B00, #CC261B1A);">
-              <div class="category_img">
-                <img src="./assets/img/cat/cat03.png" alt="category-img">
-              </div>
-              <div class="category_content">
-                <a href="#"><h3 class="category_title">Meat</h3></a>
-              </div>
-            </div>
-          </div>
-          <div class="category_card">
-            <div class="category_item" style="background: linear-gradient(180deg, #CC261B00, #CC261B1A);">
-              <div class="category_img">
-                <img src="./assets/img/cat/cat03.png" alt="category-img">
-              </div>
-              <div class="category_content">
-                <a href="#"><h3 class="category_title">Meat</h3></a>
-              </div>
-            </div>
-          </div>
-          <div class="category_card">
-            <div class="category_item" style="background: linear-gradient(180deg, #CC261B00, #CC261B1A);">
-              <div class="category_img">
-                <img src="./assets/img/cat/cat03.png" alt="category-img">
-              </div>
-              <div class="category_content">
-                <a href="#"><h3 class="category_title">Meat</h3></a>
-              </div>
-            </div>
-          </div>
-          <div class="category_card">
-            <div class="category_item" style="background: linear-gradient(180deg, #CC261B00, #CC261B1A);">
-              <div class="category_img">
-                <img src="./assets/img/cat/cat03.png" alt="category-img">
-              </div>
-              <div class="category_content">
-                <a href="#"><h3 class="category_title">Meat</h3></a>
+                <a href="{{ route('category.show', $category->slug) }}"><h3 class="category_title">{{ $category->name }}</h3></a>
               </div>
             </div>
           </div>
