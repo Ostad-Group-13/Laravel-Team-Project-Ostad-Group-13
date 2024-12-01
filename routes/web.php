@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
 use App\Http\Controllers\Frontend\PageController;
+use App\Livewire\Comments;
 
 
 // pages route
@@ -47,4 +48,6 @@ Route::middleware([
     Route::get('contact-us', [BackendController::class, 'contact'])->name('contact');
     Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
+
+    Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
 });
