@@ -195,10 +195,6 @@ span.border-line {
   height: 4rem;
 }
 
-.blog-details-image {
-  width: 100%;
-  height: auto;
-}
 
 .filter_item{
   @apply border border-[#DBE2E5] rounded-[10px] px-[20px] py-[15px] mb-[15px];
