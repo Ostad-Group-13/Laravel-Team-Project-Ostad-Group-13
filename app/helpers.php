@@ -29,7 +29,6 @@ function uploadImage($file, $path)
 
 function deleteImage($image)
 {
-
    if (File::exists($image)) {
       File::delete($image);
    }

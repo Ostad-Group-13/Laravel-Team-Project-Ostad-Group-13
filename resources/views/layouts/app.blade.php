@@ -95,7 +95,7 @@
 
     <!--  Summernote JS -->
     <script src="{{ asset('assets/backend/plugins') }}/summernote/summernote-lite.min.js"></script>
-   
+
     <!--  Sweet Alert 2 JS -->
     <script src="{{ asset('assets/backend/') }}/js/sweetalert2.all.min.js"></script>
 
@@ -242,7 +242,7 @@
             ]
         });
 
-         // create data 
+         // create data
         // @if (Session::get('message'))
         //     Swal.fire({
         //         position: "top-end",
@@ -251,7 +251,7 @@
         //         showConfirmButton: false,
         //         timer: 1500
         //     });
-            
+
         // @endif
 
         // $('.dropify').dropify();
@@ -265,7 +265,7 @@
         height: 200
 
     });
-      
+
     </script>
 
     @stack('modals')
