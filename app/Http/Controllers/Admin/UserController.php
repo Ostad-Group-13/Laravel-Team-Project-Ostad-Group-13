@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -27,11 +28,13 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('users.index', [
-            'users' => User::latest('id')->paginate(10)
+        
+          return view('users.index', [
+            'users' => User::latest('id')->paginate(10) 
         ]);
+
     }
 
     /**
