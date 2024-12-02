@@ -1,42 +1,43 @@
 <x-app-layout>
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    User Information
+    <div class="flex justify-center">
+        <div class="w-full max-w-2xl">
+            <div class="bg-white shadow-md rounded-lg">
+                <div class="px-6 py-4 border-b border-gray-300 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">User Information</h2>
+                    <a href="{{ route('users.index') }}" class="back-btn inline-flex items-center gap-2">
+                        &larr; Back
+                    </a>
                 </div>
-                <div class="float-end">
-                    <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
-                </div>
-            </div>
-            <div class="card-body">
-
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Name:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+                <div class="px-6 py-4">
+    
+                    <div class="mb-4 flex items-center">
+                        <label for="name" class="w-1/3 text-sm font-medium text-gray-600"><strong>Name:</strong></label>
+                        <div class="w-2/3 text-sm text-gray-800">
                             {{ $user->name }}
                         </div>
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start"><strong>Email Address:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+    
+                    <div class="mb-4 flex items-center">
+                        <label for="email" class="w-1/3 text-sm font-medium text-gray-600"><strong>Email Address:</strong></label>
+                        <div class="w-2/3 text-sm text-gray-800">
                             {{ $user->email }}
                         </div>
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start"><strong>Roles:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
+    
+                    <div class="mb-4 flex items-center">
+                        <label for="roles" class="w-1/3 text-sm font-medium text-gray-600"><strong>Roles:</strong></label>
+                        <div class="w-2/3 flex flex-wrap gap-2">
                             @forelse ($user->getRoleNames() as $role)
-                                <span class="badge bg-primary">{{ $role }}</span>
+                                <span class="bg-blue-500 text-white text-xs font-medium px-2 py-1 rounded">{{ $role }}</span>
                             @empty
+                                <span class="text-sm text-gray-500">No roles assigned</span>
                             @endforelse
                         </div>
                     </div>
+                    
+                </div>
             </div>
         </div>
     </div>
-</div>
-</x-app-layout>
+    </x-app-layout>
+    

@@ -24,6 +24,10 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             SuperAdminSeeder::class,
+            CategorySeeder::class,
+            BlogSeeder::class,
+            ContactSeeder::class,
+            SubscriptionSeeder::class,
         ]);
     }
 }
