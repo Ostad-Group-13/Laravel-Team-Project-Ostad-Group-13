@@ -88,6 +88,8 @@
             </div>
           </div>
 
+          @endforeach
+
         </div>
 
 
