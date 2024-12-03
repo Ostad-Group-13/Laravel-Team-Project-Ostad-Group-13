@@ -2,42 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\{CategoryController, RoleController, UserController};
-use App\Http\Controllers\Frontend\PageController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-// pages route
 Route::get('/', function () {
-    return view('pages.home');
+    return view('welcome');
 });
 
-Route::get('/contact',  [PageController::class, 'contactPage'])->name('contact');
-Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
-Route::get('/articles',  [PageController::class, 'blogPage'])->name('blogPage');
-
-Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-
-    Route::resources([
-        'roles' => RoleController::class,
-        'users' => UserController::class,
-    ]);
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    /**
-     * Develop By Hasib Feature
-     */
-    # Category Route
-    Route::resource('category', CategoryController::class);
-    # Blog Route
-    Route::resource('blog', BlogController::class);
-
-});
+// Route::get('/admin/dashboard', function () {
+//     return view('dashboard');
+// });
+Route::resource('blogs', BlogController::class);

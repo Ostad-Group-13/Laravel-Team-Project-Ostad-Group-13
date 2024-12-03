@@ -2,64 +2,58 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Trait\ApiResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogResource;
+use App\Http\Requests\BlogStoreRequest;
+use App\Http\Requests\BlogUpdateRequest;
+use App\Repositories\Blog\BlogRepository;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+    protected $blogRepository;
+    public function __construct(BlogRepository $blogRepository)
+    {
+        $this->blogRepository = $blogRepository;
+    }
+
+    public function store(BlogStoreRequest $request)
+    {
+        try {
+            $data = $this->blogRepository->store($request);
+            return $this->ResponseSuccess(new BlogResource($data), "Blog Create Successfully", 201);
+        } catch (\Exception $ex) {
+            return $this->ResponseError($ex->getMessage());
+        }
+    }
     public function index()
     {
-        //
+        $perPage = request('per_page');
+        $data = $this->blogRepository->allPaginated($perPage);
+        if (!$data) {
+            return $this->ResponseError([], null, 'No Data Found', 200, 'error');
+        }
+        return $this->ResponseSuccess($data);
+    }
+    public function update(BlogUpdateRequest $request, $id)
+    {
+        try {
+            $data = $this->blogRepository->update($request, $id);
+            return $this->ResponseSuccess(new BlogResource($data), "Blog Updated Successfully", 201);
+        } catch (\Exception $ex) {
+            return $this->ResponseError($ex->getMessage());
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $data = $this->blogRepository->delete($id);
+            return $this->ResponseSuccess($data, null, 'Blog Deleted Successfully!', 201);
+        } catch (\Exception $ex) {
+            return $this->ResponseError($ex->getMessage());
+        }
     }
 }
