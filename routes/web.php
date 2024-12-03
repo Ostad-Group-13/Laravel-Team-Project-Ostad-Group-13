@@ -1,11 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
-use App\Http\Controllers\Frontend\PageController;
+use BackendController;
 use App\Livewire\Comments;
 
+use Illuminate\Support\Facades\Routeers\Admin\{BackendController, CategoryController, RoleController, UserController};
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Frontend\PageController;
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/admin/dashboard', function () {
+//     return view('dashboard');
+// });
+// Route::resource('blogs', BlogController::class);
 
 // pages route
 Route::get('/', [PageController::class, 'homePage'])->name('homePage');

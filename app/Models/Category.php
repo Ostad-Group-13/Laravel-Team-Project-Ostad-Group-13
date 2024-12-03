@@ -3,16 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Category extends Model
 {
-    //
-
-    protected $guarded = [];
-
-    # Relationship
-    function blog(){
-        return $this->hasMany(Blog::class);
-    }
-
+    use HasFactory;
+    protected $guarded = ['id'];
 }
