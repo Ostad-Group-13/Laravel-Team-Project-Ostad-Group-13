@@ -12,7 +12,7 @@
               <li><a href="{{ route('racipesPage') }}">Recipes</a></li>
               <li><a href="{{ route('aboutPage') }}">About us</a></li>
               <li><a href="{{ route('blogPage') }}">Blog</a></li>
-              <li><a href="{{ route('contact') }}">Contact</a></li>
+              <li><a href="{{ route('contactPage') }}">Contact</a></li>
             </ul>
           </nav>
         </div>
@@ -62,7 +62,7 @@
           <li><a href="{{ route('racipesPage') }}">Recipes</a></li>
           <li><a href="{{ route('aboutPage') }}">About us</a></li>
           <li><a href="{{ route('blogPage') }}">Blog</a></li>
-          <li><a href="{{ route('contact') }}">Contact</a></li>
+          <li><a href="{{ route('contactPage') }}">Contact</a></li>
         </ul>
         @if (Route::has('login'))
         @auth

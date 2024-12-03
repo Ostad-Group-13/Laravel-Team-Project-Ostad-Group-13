@@ -73,7 +73,7 @@ class BlogSeeder extends Seeder
                 'slug' => Str::slug("We’re Hiring a Communications Assistant!"),
                 'short_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac ultrices odio. Nulla at congue diam, at dignissim turpis. Ut vehicula sed velit a faucibus. In feugiat vestibulum velit vel pulvinar.',
                 'long_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac ultrices odio. Nulla at congue diam, at dignissim turpis. Ut vehicula sed velit a faucibus. In feugiat vestibulum velit vel pulvinar.',
-                'image' => 'https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg=',
+                'image' => 'https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg',
             ]
 
         ];
