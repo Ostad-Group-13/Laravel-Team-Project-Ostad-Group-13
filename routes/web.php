@@ -1,10 +1,13 @@
 <?php
 
-use BackendController;
+//use BackendController;
 use App\Livewire\Comments;
-
-use Illuminate\Support\Facades\Routeers\Admin\{BackendController, CategoryController, RoleController, UserController};
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BackendController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\PageController;
 
 
@@ -43,6 +46,8 @@ Route::get('/articles/{blog:slug}', [App\Http\Controllers\Frontend\BlogControlle
 
 
 Route::post('/subscribe', [PageController::class, 'collectEmail'])->name('newsletter.subscribe');
+
+Route::get('/search-blogs', [App\Http\Controllers\Frontend\BlogController::class, 'search'])->name('search.blogs');
 
 
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('slug')->nullable();
             $table->string('pre_time');
             $table->string('cook_time');
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->string('nutritions_text')->nullable();
-            $table->text('short_description');
-            $table->longText('directions');
+            $table->text('short_description')->nullable();
+            $table->longText('directions')->nullable();
 
             $table->timestamps();
         });

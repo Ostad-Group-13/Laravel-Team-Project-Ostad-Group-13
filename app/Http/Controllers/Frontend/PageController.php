@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Recipe;
 use App\Models\Category;
+use App\Models\Nutrition;
+use App\Models\Ingredient;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Service\FileUploadService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 
 class PageController extends Controller
 {
@@ -39,8 +45,9 @@ class PageController extends Controller
             'email' => $request->email,
         ]);
     
-        return redirect()->back()->with('message', 'Thank you for subscribing!');
+        return response()->json(['status' => 'success', 'message' => 'Subscribed successfully.']);
     }
+
 
 
 

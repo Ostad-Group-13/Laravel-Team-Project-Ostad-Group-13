@@ -191,8 +191,10 @@ span.border-line {
 }
 
 .pagination-btn{
-  width: 4rem;
-  height: 4rem;
+  @apply px-5 py-3;
+}
+.pagination-btn:disabled{
+  @apply cursor-not-allowed bg-gray-100 text-gray-300;
 }
 
 
@@ -205,4 +207,10 @@ span.border-line {
 }
 .filter_list_item input[type='checkbox'] {
   @apply mr-2;
+}
+.nutrition-block{
+  @apply flex flex-col md:flex-row gap-4 mt-5;
+}
+.nutrition-block input{
+  @apply w-full;
 }
