@@ -71,5 +71,9 @@ class User extends Authenticatable
 
     public function blogs(){
         return $this->hasMany(Blog::class);
+    } 
+    
+    public function recipe(){
+        return $this->hasMany(Recipe::class);
     }
 }
