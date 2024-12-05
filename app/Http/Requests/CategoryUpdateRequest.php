@@ -22,11 +22,11 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
-            'slug' => 'required|string|unique:categories,slug|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            'status' => 'required|in:active,inactive'
+            // 'name' => 'required|string|max:255',
+            // 'color' => 'required|string|max:255',
+            // 'slug' => 'required|string',
+            // 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            // 'status' => 'required|in:active,inactive'
         ];
     }
 }

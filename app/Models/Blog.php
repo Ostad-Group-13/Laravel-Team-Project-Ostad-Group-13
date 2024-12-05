@@ -10,9 +10,10 @@ class Blog extends Model
 
  use HasFactory;
     protected $guarded = [];
+
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'cat_id');
     }
 
     public function user(): BelongsTo

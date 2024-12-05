@@ -1,15 +1,15 @@
 <?php
 
 //use BackendController;
-use App\Livewire\Comments;
+// use UserControllerport\Facades\Routeommentsp\Requestport\Facades\Routeport\Facades\Routeers\Admin\{ UserController};
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BackendController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\PageController;
 
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,8 +72,11 @@ Route::middleware([
      */
 
     # Category Route
+    // Route::get('/all-categories', [CategoryController::class, 'allCategories']);
+    // Route::get('/categories/status/{id}', [CategoryController::class, 'status']);
     Route::resource('category', CategoryController::class);
     # Blog Route
+    // Route::get('/all-blogs', [BlogController::class, 'allBlogs']);
     Route::resource('blog', BlogController::class);
     Route::get('blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
 
@@ -83,5 +86,5 @@ Route::middleware([
     Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
-    Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
+    // Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
 });
