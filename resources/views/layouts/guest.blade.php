@@ -34,6 +34,19 @@
 
         <x-footer />
 
+
+        <script>
+
+            const favicon = document.querySelectorAll('.favrict_icon');
+            favicon.forEach(icon => {
+              icon.addEventListener('click', () => {
+              icon.classList.toggle('active');
+              })
+            })
+          
+          
+          </script>
+
         @livewireScripts
     </body>
 </html>

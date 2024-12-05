@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BackendController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\PageController;
-
+use App\Http\Controllers\Frontend\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +39,9 @@ Route::get('/', [PageController::class, 'homePage'])->name('homePage');
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/recipes',  [PageController::class, 'recipesPage'])->name('recipesPage');
+Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
+
+Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipe.show');
 
 Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
 
