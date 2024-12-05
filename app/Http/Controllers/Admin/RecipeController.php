@@ -125,17 +125,26 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipe $recipe)
+    public function show($id)
     {
 
 
+        
+
         // return Ingredient::where('recipe_id', $recipe->id)->with('nutrition')->get();
         // return Nutrition::where('recipe_id', $recipe->id)->get();
-        //  $recipe = Recipe::Where('id',$recipe->id)->with('ingredient','nutrition')->get();
         // $recipe = Recipe::Where('id',$recipe->id)->get();
+        $recipe = Recipe::Where('id',$id)->with(['ingredient', 'nutritions'])->get();
         // return $recipe;
         // return view('backend.recipe.show', ['recipe' => $recipe]);
-        return view('backend.recipe.show', compact('recipe'));
+
+        // return view('backend.recipe.show', compact('recipe'));
+
+
+        // $recipe = Recipe::with(['ingredient', 'nutritions'])->find($id);
+        // return $recipe;
+
+        return view('backend.recipe.show', ['recipe' => $recipe]);
     }
 
     /**

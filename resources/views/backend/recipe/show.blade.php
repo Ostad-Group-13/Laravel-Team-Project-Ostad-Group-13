@@ -25,9 +25,8 @@
 
                             {{-- <img @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif"
                                 alt="" width="120" height="120"> --}}
-                                
-                                <img src="{{ asset($recipe->photo) }}" 
-                                alt="" width="120" height="120">
+
+                            <img src="{{ asset($recipe->photo) }}" alt="" width="120" height="120">
 
                         </td>
                         <tr class="bg-gray-200 border-b-2 ">
@@ -64,7 +63,8 @@
                             <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">
                                 Video Link :</th>
                             <td>
-                                <iframe src="{{ $recipe->video_link }}"  width="560" height="315" frameborder="0"  allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe src="{{ $recipe->video_link }}" width="560" height="315" frameborder="0"
+                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
                                 {{-- <iframe src="http://www.youtube.com/embed/{{ $recipe->video_link }}" width="560"
                                     height="315" frameborder="0" allowfullscreen></iframe> --}}
@@ -107,16 +107,39 @@
                                 :</th>
                             <td>{!! $recipe->directions !!}</td>
                         </tr>
-                        <tr class="">
+                        {{-- <tr class="">
                             <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">
                                 Ingredient
                                 :</th>
-                            {{-- <td>{{ $recipe->nutrition->id }}</td> --}}
+                            <td>{{ $recipe->nutrition->id }}</td>
 
-                            {{-- @foreach ($recipe->ingredient as $ing)
+                           @foreach ($recipe->ingredient as $ing)
                                 <td>{{ $ing->id }}</td>
-                            @endforeach --}}
-                        </tr>
+                            @endforeach
+                        </tr> --}}
+
+                        <!-- Ingredients -->
+                        <div class="recipe-ingredients">
+                            <h2>Ingredients</h2>
+                            @foreach ($recipe['ingredient'] as $ingredient)
+                                <h3>{{ $ingredient['ingredients_title'] }}</h3>
+                                <ul>
+                                    @foreach (json_decode($ingredient['ingredients_list'], true) as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </div>
+
+                        <!-- Nutrition Information -->
+    <div class="recipe-nutrition">
+        <h2>Nutrition Information</h2>
+        <ul>
+            @foreach ($recipe['nutritions'] as $nutrient)
+                <li>{{ $nutrient['name'] }}: {{ $nutrient['amount'] }} {{ $nutrient['unit'] }}</li>
+            @endforeach
+        </ul>
+    </div>
 
                     </thead>
                 </table>

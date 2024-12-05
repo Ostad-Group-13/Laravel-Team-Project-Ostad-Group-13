@@ -21,7 +21,7 @@ class Recipe extends Model
   
     public function ingredient()
     {
-        return $this->hasMany(Ingredient::class,'id');
+        return $this->hasMany(Ingredient::class);
     }
 
 
