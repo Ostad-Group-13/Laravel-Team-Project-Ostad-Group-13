@@ -48,59 +48,9 @@
                 <!-- siderbar -->
                 <div class="sidebar lg:w-1/3 w-full">
 
-                    <div class="sider_item">
-                        <h2 class="text-2xl font-bold mb-6">Other Recipe</h2>
+                    <x-sidebar-recipe :recipes="$recipes" />
 
-                        <!-- Recipe Cards Container -->
-                        <div class="space-y-4">
-                            <!-- Recipe Card 1 -->
-                            <div class="flex gap-4 items-center">
-                                <div class="sm:w-[180px] sm:h-[120px] w-[100px] h-[80px] flex-shrink-0">
-                                    <img src="./assets/img/racipes/siderc.jpg" alt="Chicken Meatball"
-                                        class="w-full h-full object-cover rounded-lg">
-                                </div>
-                                <div>
-                                    <h3
-                                        class="font-semibold sm:text-[20px] text-[16px] leading-tight sm:leading-[28px]">
-                                        Chicken Meatball with Creamy Chees...</h3>
-                                    <p class="text-sm text-gray-600 mt-[16px]">By Andreas Paula</p>
-                                </div>
-                            </div>
-                            <!-- Recipe Card 2 -->
-                            <div class="flex gap-4 items-center">
-                                <div class="sm:w-[180px] sm:h-[120px] w-[100px] h-[80px] flex-shrink-0">
-                                    <img src="./assets/img/racipes/siderc.jpg" alt="Chicken Meatball"
-                                        class="w-full h-full object-cover rounded-lg">
-                                </div>
-                                <div>
-                                    <h3
-                                        class="font-semibold sm:text-[20px] text-[16px] leading-tight sm:leading-[28px]">
-                                        Chicken Meatball with Creamy Chees...</h3>
-                                    <p class="text-sm text-gray-600 mt-[16px]">By Andreas Paula</p>
-                                </div>
-                            </div>
-                            <!-- Recipe Card 3 -->
-                            <div class="flex gap-4 items-center">
-                                <div class="sm:w-[180px] sm:h-[120px] w-[100px] h-[80px] flex-shrink-0">
-                                    <img src="./assets/img/racipes/siderc.jpg" alt="Chicken Meatball"
-                                        class="w-full h-full object-cover rounded-lg">
-                                </div>
-                                <div>
-                                    <h3
-                                        class="font-semibold sm:text-[20px] text-[16px] leading-tight sm:leading-[28px]">
-                                        Chicken Meatball with Creamy Chees...</h3>
-                                    <p class="text-sm text-gray-600 mt-[16px]">By Andreas Paula</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="adds mt-[60px]">
-                        <div class="adds_img">
-                            <img src="./assets/img/adds/Ads.jpg" alt="adds">
-                        </div>
-                    </div>
+                    <x-sidebar-add />
 
                 </div>
             </div>

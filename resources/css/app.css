@@ -140,7 +140,7 @@ body{
   letter-spacing: 3px; 
 }
 .rounded-btn .icon{
-  @apply w-[80px] h-[80px] rounded-full bg-[#E7FAFE] flex items-center justify-center text-[#DBE2E5] cursor-pointer;
+  @apply w-[80px] h-[80px] rounded-full bg-[#E7FAFE] flex items-center justify-center text-[#DBE2E5] cursor-pointer hover:bg-[#FF6363] hover:text-white transition-all duration-300 ease-in-out;
 }
 .nutrition ul li{
   @apply flex justify-between text-[18px] font-medium text-[#00000099] leading-[28px] mb-[10px] pb-[10px] border-b border-[#DBE2E5];
@@ -149,7 +149,7 @@ body{
   @apply text-black text-[18px] font-medium leading-[28px];
 }
 .nutrition{
-  @apply bg-[#E7FAFE] px-[30px] py-[40px] rounded-[30px] lg:h-[600px] h-[500px];
+  @apply bg-[#E7FAFE] px-[30px] py-[40px] rounded-[30px] lg:h-[500px] h-[500px];
 }
 .checktext{
   @apply text-[18px] leading-[28px] peer-checked:border-black peer-checked:line-through peer-checked:text-[#00000099];

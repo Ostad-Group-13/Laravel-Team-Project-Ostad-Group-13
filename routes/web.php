@@ -1,15 +1,15 @@
 <?php
 
 //use BackendController;
-// use UserControllerport\Facades\Routeommentsp\Requestport\Facades\Routeport\Facades\Routeers\Admin\{ UserController};
+use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\BackendController;
+use App\Http\Controllers\Admin\RecipeController As Recipe;
+use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
+  
 use App\Http\Controllers\Frontend\PageController;
-
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Frontend\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +35,15 @@ Route::get('/', function () {
 // pages route
 Route::get('/', [PageController::class, 'homePage'])->name('homePage');
 
+Route::get('/', [PageController::class, 'homePage']);
+
+
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
+Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
+
+Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipes.show');
 
 Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
 
@@ -86,5 +91,11 @@ Route::middleware([
     Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
-    // Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
+    Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
+
+    // Backend Recipe Route
+    Route::resource('recipe', Recipe::class);
+    
+
+
 });
