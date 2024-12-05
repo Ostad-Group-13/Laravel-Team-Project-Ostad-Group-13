@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\RecipeController As Recipe;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
   
 use App\Http\Controllers\Frontend\PageController;
-
+use App\Http\Controllers\Frontend\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +41,9 @@ Route::get('/', [PageController::class, 'homePage']);
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/recipes',  [PageController::class, 'recipesPage'])->name('recipesPage');
+Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
+
+Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipe.show');
 
 Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
 

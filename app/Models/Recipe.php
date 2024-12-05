@@ -13,40 +13,26 @@ class Recipe extends Model
 
     # Relationship
 
-   public function category(){
-        return $this->belongsTo(Category::class,'category_id');
+   function category()
+    {
+        return $this->belongsTo(Category::class);
     }
-
-//    function category()
-//     {
-//         return $this->belongsTo(Category::class);
-//     }
   
   
-    public function user(){
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    // public function ingredient(){
-    //     return $this->belongsTo(Ingredient::class, 'recipe_id');
-
-    // }
-
-    // public function nutrition(){
-    //     return $this->belongsTo(Nutrition::class, 'recipe_id');
-
-    // }
-
     public function ingredient()
     {
         return $this->hasMany(Ingredient::class,'id');
     }
 
-    public function nutrition()
-    {
-        return $this->hasMany(Nutrition::class,'id');
+
+    function user(){
+        return $this->belongsTo(User::class);
     }
-  
+
+    function nutritions(){
+        return $this->hasMany(Nutrition::class);
+    }
+
 
 
 

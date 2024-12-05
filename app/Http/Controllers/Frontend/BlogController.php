@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
     function index() {
-        return view('pages.blog.index' );
+        $recipes = Recipe::take(3)->inRandomOrder()->with('user')->get();
+        return view('pages.blog.index', compact('recipes'));
 
     }
 
