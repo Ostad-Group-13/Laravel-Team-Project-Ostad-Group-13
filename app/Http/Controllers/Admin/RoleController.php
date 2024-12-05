@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use DB;
+use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use DB;
 
 class RoleController extends Controller
 {

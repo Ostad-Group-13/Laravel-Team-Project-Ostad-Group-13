@@ -12,10 +12,10 @@
         <nav>
           <ul class="flex items-center lg:gap-[50px] gap-[20px] flex-wrap justify-center">
             <li><a href="{{ url('/') }}">Home</a></li>
-            <li><a href="#">Racipes</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{{ route('recipesPage') }}">Recipes</a></li>
+            <li><a href="{{ route('aboutPage') }}">About us</a></li>
+            <li><a href="{{ route('blogPage') }}">Blog</a></li>
+            <li><a href="{{ route('contactPage') }}">Contact</a></li>
           </ul>
         </nav>
       </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Trait\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,46 +26,50 @@ class CategoryController extends Controller
     {
         try {
             $data = $this->categoryRepository->store($request);
-            return $this->ResponseSuccess(new CategoryResource($data), "Category Create Successfully", 201);
+            return redirect()->route('category.index')
+            ->withSuccess('Category Created successfully.');
         } catch (\Exception $ex) {
-            return $this->ResponseError($ex->getMessage());
+            return $ex->getMessage();
         }
     }
 
     public function index()
     {
-        $perPage = request('per_page');
-        $data = $this->categoryRepository->allPaginated($perPage);
-        if (!$data) {
-            return $this->ResponseError([], null, 'No Data Found', 200, 'error');
-        }
-        return $this->ResponseSuccess($data);
+        $perPage = 10;
+        $data['categories'] = $this->categoryRepository->allPaginated($perPage);
+        return view('backend.category.index',$data);
     }
-    public function update(CategoryUpdateRequest $request, $id)
+
+    public function create(){
+        return view('backend.category.create');
+    }
+
+    public function edit(Category $category)
+    {
+       $data['category'] = $category;
+        return view('backend.category.edit',$data);
+    }
+    // public function update(CategoryUpdateRequest $request, Category $category){
+
+    // }
+    public function update(CategoryUpdateRequest $request, Category  $category)
     {
         try {
-            $data = $this->categoryRepository->update($request, $id);
-            return $this->ResponseSuccess(new CategoryResource($data), "Category Updated Successfully", 201);
+            $this->categoryRepository->update($request, $category->id);
+            return redirect()->route('category.index')
+                ->withSuccess('Category Updated successfully.');
         } catch (\Exception $ex) {
-            return $this->ResponseError($ex->getMessage());
+            return $ex->getMessage();
         }
     }
 
     public function destroy($id){
         try {
             $data = $this->categoryRepository->delete($id);
-            return $this->ResponseSuccess($data, null, 'Category Deleted Successfully!', 201);
+            return redirect()->route('category.index')
+            ->withSuccess('Category Deleted successfully.');
         } catch (\Exception $ex) {
-            return $this->ResponseError($ex->getMessage());
-        }
-    }
-
-    public function status($id){
-        try {
-            $data = $this->categoryRepository->status($id);
-            return $this->ResponseSuccess($data, null, 'Status Updated Successfully!', 201);
-        } catch (\Exception $ex) {
-            return $this->ResponseError($ex->getMessage());
+            return $ex->getMessage();
         }
     }
 

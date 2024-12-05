@@ -12,6 +12,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+        <!--  axios -->
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -20,15 +24,26 @@
     </head>
     <body>
 
-
         <x-header />
-
 
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
             {{ $slot }}
         </div>
-
+  
         <x-footer />
+
+
+        <script>
+
+            const favicon = document.querySelectorAll('.favrict_icon');
+            favicon.forEach(icon => {
+              icon.addEventListener('click', () => {
+              icon.classList.toggle('active');
+              })
+            })
+          
+          
+          </script>
 
         @livewireScripts
     </body>

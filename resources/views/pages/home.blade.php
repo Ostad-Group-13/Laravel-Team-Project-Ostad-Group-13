@@ -97,9 +97,30 @@
 
     </section>
 
-    <x-racipes />
+    <section class="racipes_area py-[50px]">
+      <div class="container">
+        <div class="mb-[80px]">
+          <div class="section_title_area text-center">
+            <h2 class="section_title">Simple and tasty recipes</h2>
+            <p>Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut<br> labore et dolore magna aliqut enim ad minim </p>
+          </div>
+        </div>
+    
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[40px] ">
+    
+          @foreach ($recipes as $recipe )
+            
+          <x-recipe-item :recipe="$recipe" />
+    
+          @endforeach
+    
+        </div>
+      </div>
+    
+    </section>
 
     <x-newsletter />
+
 
 
 </x-guest-layout>
