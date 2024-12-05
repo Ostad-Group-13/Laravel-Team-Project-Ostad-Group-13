@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\RecipeController As Recipe;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
 use App\Http\Controllers\Frontend\PageController;
 use App\Livewire\Comments;
@@ -9,6 +10,9 @@ use App\Livewire\Comments;
 
 // pages route
 Route::get('/', [PageController::class, 'homePage'])->name('homePage');
+
+Route::get('/', [PageController::class, 'homePage']);
+
 
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
@@ -57,4 +61,10 @@ Route::middleware([
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
     Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
+
+    // Backend Recipe Route
+    Route::resource('recipe', Recipe::class);
+    
+
+
 });

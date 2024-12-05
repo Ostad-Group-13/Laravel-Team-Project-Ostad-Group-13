@@ -10,9 +10,14 @@ class Category extends Model
 
     protected $guarded = [];
 
+
     # Relationship
     function blog(){
         return $this->hasMany(Blog::class);
+    }
+        
+    function recipe(){
+        return $this->hasMany(Recipe::class);
     }
 
 }
