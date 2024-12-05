@@ -1,12 +1,36 @@
 <?php
 
+//use BackendController;
+use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\RecipeController As Recipe;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
+  
 use App\Http\Controllers\Frontend\PageController;
-use App\Livewire\Comments;
 
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/admin/dashboard', function () {
+//     return view('dashboard');
+// });
+// Route::resource('blogs', BlogController::class);
 
 // pages route
 Route::get('/', [PageController::class, 'homePage'])->name('homePage');
@@ -17,7 +41,7 @@ Route::get('/', [PageController::class, 'homePage']);
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
+Route::get('/recipes',  [PageController::class, 'recipesPage'])->name('recipesPage');
 
 Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
 
@@ -25,6 +49,8 @@ Route::get('/articles/{blog:slug}', [App\Http\Controllers\Frontend\BlogControlle
 
 
 Route::post('/subscribe', [PageController::class, 'collectEmail'])->name('newsletter.subscribe');
+
+Route::get('/search-blogs', [App\Http\Controllers\Frontend\BlogController::class, 'search'])->name('search.blogs');
 
 
 

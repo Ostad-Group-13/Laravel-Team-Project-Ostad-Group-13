@@ -97,7 +97,7 @@
 
     </section>
 
-    <x-racipes />
+    <x-racipes :recipes="$recipes" />
 
     <x-newsletter />
 
