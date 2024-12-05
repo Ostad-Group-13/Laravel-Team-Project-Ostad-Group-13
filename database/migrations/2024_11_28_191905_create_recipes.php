@@ -14,23 +14,28 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+          
             $table->string('photo')->nullable();
             $table->string('slug')->nullable();
             $table->string('pre_time');
             $table->string('cook_time');
+            $table->string('photo')->nullable();
             $table->string('video_link')->nullable();
 
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-
+          
+           $table->text('short_description')->nullable();
+            $table->longText('directions')->nullable();
+          
+           $table->string('nutrition_text')->nullable();
+                      
+            #Relationship
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
-            $table->string('nutritions_text')->nullable();
-            $table->text('short_description')->nullable();
-            $table->longText('directions')->nullable();
-
+          
             $table->timestamps();
+
         });
     }
 
