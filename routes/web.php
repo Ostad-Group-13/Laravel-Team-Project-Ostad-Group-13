@@ -43,7 +43,7 @@ Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
 Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
 
-Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipe.show');
+Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipes.show');
 
 Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
 

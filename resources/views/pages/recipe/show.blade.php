@@ -1,7 +1,6 @@
 <x-guest-layout>
 
 
-
   <div class="racipe_details_area py-[80px]">
     <div class="container">
       <div class="racipe_details_wrapp flex flex-col lg:flex-row gap-[40px] items-center">
@@ -133,7 +132,7 @@
       </div>
 
       <div class="short_desc py-[80px]">
-        <p>{{ $recipe->short_description }}</p>
+        <p>{!! $recipe->short_description !!}</p>
       </div>
 
 
@@ -142,9 +141,13 @@
         <div class="ingridents lg:w-2/3 w-full">
           <h2 class="text-[36px] font-semibold mb-4">Ingredients</h2>
 
+          @foreach ($recipe->ingredients as $ingredient)
+            
           <div class="checklist py-[30px]">
-            <h3 class="text-[24px] font-semibold mb-4">For main dish</h3>
+            <h3 class="text-[24px] font-semibold mb-4">{{ $ingredient->ingredients_title }}</h3>
             <ul>
+              @foreach (json_decode($ingredient['ingredients_list'], true) as $item)
+                
               <li>
                 <label class="flex items-center space-x-2">
                   <input type="checkbox" class="hidden peer">
@@ -153,101 +156,24 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>
                   </span>
-                  <span class="checktext">Custom Checkbox</span>
+                  <span class="checktext">{{ $item }}</span>
                 </label>
               </li>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Lorem ipsum dolor sit amet</span>
-                </label>
-              </li>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Lorem ipsum dolor sit amet</span>
-                </label>
-              </li>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Custom Checkbox</span>
-                </label>
-              </li>
+
+              @endforeach
+
             </ul>
           </div>
 
-          <div class="checklist py-[30px]">
-            <h3 class="text-[24px] font-semibold mb-4">For main dish</h3>
-            <ul>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Custom Checkbox</span>
-                </label>
-              </li>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Lorem ipsum dolor sit amet</span>
-                </label>
-              </li>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Lorem ipsum dolor sit amet</span>
-                </label>
-              </li>
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6  flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">Custom Checkbox</span>
-                </label>
-              </li>
-            </ul>
-          </div>
+          @endforeach
+
 
           <!-- description -->
          <div class="description mt-6">
           <h2 class="text-[36px] font-semibold mb-4">Directions</h2>
 
           <div class="desc-content">
-            {{ $recipe->directions }}
+            {!! $recipe->directions !!}
           </div>
 
          </div>

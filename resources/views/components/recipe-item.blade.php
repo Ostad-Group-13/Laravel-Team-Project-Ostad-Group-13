@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="recipe_content py-[24px] px-[10px]">
-    <a href="{{ route('recipe.show', $recipe->slug) }}"><h3 class="recipe_title mb-[24px]">{{ $recipe->title }}</h3></a>
+    <a href="{{ route('recipes.show', $recipe->slug) }}"><h3 class="recipe_title mb-[24px]">{{ $recipe->title }}</h3></a>
     <div class="flex items-center gap-6">
       <div class="flex items-center gap-2">
         <div class="icon">
