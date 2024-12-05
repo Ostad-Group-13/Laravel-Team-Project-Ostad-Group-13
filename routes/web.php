@@ -3,9 +3,10 @@
 //use BackendController;
 use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
+//use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BackendController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\PageController;
@@ -38,7 +39,7 @@ Route::get('/', [PageController::class, 'homePage'])->name('homePage');
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/racipes',  [PageController::class, 'racipesPage'])->name('racipesPage');
+Route::get('/recipes',  [PageController::class, 'recipesPage'])->name('recipesPage');
 
 Route::get('/articles',  [App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogPage');
 
