@@ -6,20 +6,19 @@ use App\Models\Recipe;
 use App\Models\Category;
 use App\Models\Nutrition;
 use App\Models\Ingredient;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Service\FileUploadService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
 
     function homePage(){
         $categorys = Category::take(6)->get();
-        //return $categorys;
-        return view('pages.home', ['categorys' => $categorys]);
+        $recipes = Recipe::take(6)->with('category')->get();
+        //return $recipes;
+        return view('pages.home', ['categorys' => $categorys, 'recipes' => $recipes]);
     }
 
     function contactPage(){
@@ -31,8 +30,8 @@ class PageController extends Controller
         return view('pages.about');
     }
 
-    function racipesPage(){
-        return view('pages.racipes');
+    function recipesPage(){
+        return view('pages.recipes');
     }
 
     function collectEmail(Request $request)
@@ -47,7 +46,6 @@ class PageController extends Controller
     
         return response()->json(['status' => 'success', 'message' => 'Subscribed successfully.']);
     }
-
 
 
 

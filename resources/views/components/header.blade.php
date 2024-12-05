@@ -9,7 +9,7 @@
           <nav>
             <ul class="flex items-center gap-[50px]">
               <li><a href="{{ url('/') }}">Home</a></li>
-              <li><a href="{{ route('racipesPage') }}">Recipes</a></li>
+              <li><a href="{{ route('recipesPage') }}">Recipes</a></li>
               <li><a href="{{ route('aboutPage') }}">About us</a></li>
               <li><a href="{{ route('blogPage') }}">Blog</a></li>
               <li><a href="{{ route('contactPage') }}">Contact</a></li>
@@ -59,7 +59,7 @@
       <nav class="p-4">
         <ul class="flex flex-col gap-4">
           <li><a href="{{ url('/') }}">Home</a></li>
-          <li><a href="{{ route('racipesPage') }}">Recipes</a></li>
+          <li><a href="{{ route('recipesPage') }}">Recipes</a></li>
           <li><a href="{{ route('aboutPage') }}">About us</a></li>
           <li><a href="{{ route('blogPage') }}">Blog</a></li>
           <li><a href="{{ route('contactPage') }}">Contact</a></li>
