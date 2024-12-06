@@ -5,9 +5,9 @@ use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\RecipeController As Recipe;
-use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
-  
+use App\Http\Controllers\Admin\RecipeController as Recipe;
+use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
+
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\RecipeController;
 
@@ -95,7 +95,8 @@ Route::middleware([
 
     // Backend Recipe Route
     Route::resource('recipe', Recipe::class);
-    
+    Route::get('recipe/status/{recipe}', [Recipe::class, 'RecipeStatus'])->name('recipe.status');
 
-
+    # Backend User Recipe Route
+    Route::resource('user-recipe', UserRecipeController::class);
 });

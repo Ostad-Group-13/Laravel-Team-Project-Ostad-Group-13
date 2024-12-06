@@ -13,22 +13,27 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->nullable();
           
-            $table->string('photo')->nullable();
             $table->string('slug')->nullable();
-            $table->string('pre_time');
-            $table->string('cook_time');
+
+            $table->string('pre_time')->nullable();
+            $table->string('cook_time')->nullable();
+            $table->string('photo')->nullable();
+
             $table->string('video_link')->nullable();
 
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
           
-           $table->text('short_description')->nullable();
+            $table->text('short_description')->nullable();
             $table->longText('directions')->nullable();
           
-           $table->string('nutrition_text')->nullable();
-                      
+            $table->string('nutrition_text')->nullable();
+
+            $table->enum('recipe_type',['asian','indian','thai','chines'])->default('asian')->nullable();
+            $table->enum('recipe_status',['pending','approved'])->default('pending')->nullable();
+                
             #Relationship
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

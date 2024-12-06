@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\File;
 
 function uploadImage($file, $path)
 {
-    $fileName = time() . '.' . $file->getClientOriginalExtension();
-    $file->move(public_path('uploads/' . $path . '/'), $fileName);
-    return "uploads/$path/" . $fileName;
+   $fileName = time() . '.' . $file->getClientOriginalExtension();
+   $file->move(public_path('uploads/' . $path . '/'), $fileName);
+   return "uploads/$path/" . $fileName;
 }
 
 # Delete Image
@@ -33,4 +33,3 @@ function deleteImage($image)
       File::delete($image);
    }
 }
-

@@ -17,21 +17,22 @@ class Recipe extends Model
     {
         return $this->belongsTo(Category::class);
     }
-  
-  
+
+    function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function ingredients()
     {
         return $this->hasMany(Ingredient::class);
     }
-
-
-    function user(){
-        return $this->belongsTo(User::class);
-    }
-
+  
     function nutritions(){
         return $this->hasMany(Nutrition::class);
     }
+
+    
 
 
 
