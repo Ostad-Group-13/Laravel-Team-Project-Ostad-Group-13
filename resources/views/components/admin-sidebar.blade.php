@@ -96,6 +96,13 @@
                                 User Blog
                             </a>
                         </li> --}}
+
+                        <li
+                            class="mb-2 {{ request()->routeIs('user-recipe.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('user-recipe.index') }}" class="block px-6 py-2 ">
+                                User Recipe
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </aside>

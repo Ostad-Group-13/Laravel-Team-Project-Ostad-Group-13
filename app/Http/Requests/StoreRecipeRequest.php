@@ -21,30 +21,40 @@ class StoreRecipeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
        
+        return [
+
             'recipeTitle' => 'required|string|max:255',
             'pre_time' => 'required|nullable|string|max:255',
             'cook_time' => 'required|nullable|string|max:255',
-            'cat_id' => 'required|string',
-
+            'cat_id' => 'required|nullable|string',
+            'recipe_type' => 'required|nullable|string',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'video_link' => 'nullable|string',
+            'video_link' => 'nullable|file',
 
             'short_description' => 'required|nullable|string',
             'directions' => 'nullable|string',
             'nutrition_text' => 'required|nullable|string',
 
-            'ingredients' => 'nullable|array',
-            'ingredients.*.title' => 'required_with:ingredients|string|max:255',
-            'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
-            'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
+            #ingredients 
+            // 'ingredients' => 'nullable|array',
+            // 'ingredients.*.title' => 'required_with:ingredients|string|max:255',
+            // 'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
+            // 'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
 
-            'nutritions' => 'nullable|array',
-            'nutritions.*.name' => 'required_with:nutritions|string|max:255',
-            'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
-            'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
+            #nutritions
+            // 'nutritions' => 'nullable|array',
+            // 'nutritions.*.name' => 'required_with:nutritions|string|max:255',
+            // 'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
+            // 'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
 
         ];
+
+
+        // $request->validate([
+        //     'field' => 'required|numeric|between:1,10',
+        // ], [
+        //     'field.between' => 'The :attribute must be between 1 and 10.',
+        // ]);
     }
 }
