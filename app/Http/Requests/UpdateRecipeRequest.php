@@ -34,15 +34,15 @@ class UpdateRecipeRequest extends FormRequest
             'directions' => 'nullable|string',
             'nutrition_text' => 'required|nullable|string',
 
-            'ingredients' => 'nullable|array',
-            'ingredients.*.title' => 'required_with:ingredients|string|max:255',
-            'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
-            'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
+            // 'ingredients' => 'nullable|array',
+            // 'ingredients.*.title' => 'required_with:ingredients|string|max:255',
+            // 'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
+            // 'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
 
-            'nutritions' => 'nullable|array',
-            'nutritions.*.name' => 'required_with:nutritions|string|max:255',
-            'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
-            'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
+            // 'nutritions' => 'nullable|array',
+            // 'nutritions.*.name' => 'required_with:nutritions|string|max:255',
+            // 'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
+            // 'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
 
         ];
     }

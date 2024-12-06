@@ -3,7 +3,7 @@
         <div class="w-full">
             <div class="bg-white shadow rounded-lg">
                 <div class="bg-gray-100 px-4 py-3 flex justify-between items-center border-b border-gray-300">
-                    <h2 class="text-lg font-semibold flex gap-2"><x-add-icon/>Create Recipe</h2>
+                    <h2 class="text-lg font-semibold flex gap-2"><x-add-icon />Create Recipe</h2>
                     <a href="{{ route('recipe.index') }}" class="back-btn">
                         &larr; Back
                     </a>
@@ -11,7 +11,6 @@
                 <div class="p-6">
                     <form action="{{ route('recipe.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-
                         <div class="flex gap-2">
 
                             <!-- Title -->
@@ -49,14 +48,102 @@
 
                         </div>
 
-                        <div class="flex gap-2">
-                            <!-- Short Description -->
-                            <div class="mb-4 w-3/4">
+                        {{-- <div class="mb-4 w-3/4">
                                 <label for="short_description" class="block text-gray-700 font-medium mb-1">
                                     Short Description:</label>
                                 <textarea id="description" name="short_description" placeholder="Short Description"
                                     class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out summernote @error('short_description') border-red-500 @enderror">{{ old('short_description') }}</textarea>
                                 @error('short_description')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div> --}}
+
+                              <div class="flex gap-2">
+                            <!-- pre_time -->
+                            <div class="mb-4 w-2/12">
+                                <label for="pre_time" class="block text-gray-700 font-medium mb-1">
+                                    Pre Time:</label>
+                                <input type="number" id="pre_time" min="1" name="pre_time" placeholder="Pre Time"
+                                    value="{{ old('pre_time') }}"
+                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('pre_time') border-red-500 @enderror">
+
+                                @error('pre_time')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+
+                            </div>
+
+                            <!-- cook_time -->
+                            <div class="mb-4 w-2/12">
+                                <label for="cook_time" class="block text-gray-700 font-medium mb-1">Cook Time:</label>
+                                <input type="number" id="cook_time"  min="1" id="cook_time" name="cook_time" placeholder="Cook Time"
+                                    value="{{ old('cook_time') }}"
+                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('cook_time') border-red-500 @enderror">
+
+                                @error('cook_time')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+
+                            </div>
+
+                            <!-- Video Link -->
+                            <div class="mb-4 w-5/12">
+                                <label for="video_link" class="block text-gray-700 font-medium mb-1">
+                                    Video Link:</label>
+                                <input id="video_link" type="file" name="video_link" placeholder="Video Link"
+                                    value="{{ old('video_link') }}"
+                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('video_link') border-red-500 @enderror">
+
+                                @error('video_link')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+
+                            </div>
+
+                            <!-- Recipe Type -->
+                            <div class="w-3/12">
+                                <label for="recipe_type"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Select an Recipe Type</label>
+                                <select id="recipe_type" name="recipe_type"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+                                    @error('recipe_type') border-red-500 @enderror"
+                                    value="{{ old('recipe_type') }}">
+                                    <option selected>Select Recipe Type</option>
+                                    <option value="asian">Asian</option>
+                                    <option value="thai">Thai</option>
+                                    <option value="chines">Chines</option>
+                                    <option value="indian">Indian</option>
+                                </select>
+                                @error('recipe_type')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                        </div>
+
+
+                        <!-- Short Description -->
+                        <div class="">
+                            <label for="short_description" class="block text-gray-700 font-medium mb-1">
+                                Short Description:</label>
+                            <textarea id="description" name="short_description" placeholder="Short Description" cols="5" rows="2"
+                                class="px-2 py-3 rounded w-full pt-2 border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out  @error('short_description') border-red-500 @enderror">{{ old('short_description') }}</textarea>
+                            @error('short_description')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="flex gap-2">
+                            <!-- directions -->
+                            <div class="w-3/4">
+                                <label for="directions" class="block text-gray-700 font-medium mb-1">
+                                    Directions:</label>
+                                <textarea id="description" name="directions" placeholder="Directions" 
+                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out summernote @error('directions') border-red-500 @enderror">
+                            {{ old('directions') }}</textarea>
+
+                                @error('directions')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -73,67 +160,11 @@
                             </div>
                         </div>
 
-                        <!-- directions -->
-                        <div class="mb-4">
-                            <label for="directions" class="block text-gray-700 font-medium mb-1">
-                                Directions:</label>
-                            <textarea id="description" name="directions" placeholder="Directions...!!"
-                                class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out summernote @error('directions') border-red-500 @enderror">
-                            {{ old('directions') }}</textarea>
-
-                            @error('directions')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="flex gap-2">
-                            <!-- pre_time -->
-                            <div class="mb-4 w-2/12">
-                                <label for="pre_time" class="block text-gray-700 font-medium mb-1">
-                                    Pre Time:</label>
-                                <input type="text" id="pre_time" name="pre_time" placeholder="Pre Time"
-                                    value="{{ old('pre_time') }}"
-                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('pre_time') border-red-500 @enderror">
-
-                                @error('pre_time')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-
-                            </div>
-
-                            <!-- cook_time -->
-                            <div class="mb-4 w-2/12">
-                                <label for="cook_time" class="block text-gray-700 font-medium mb-1">Cook Time:</label>
-                                <input type="text" id="cook_time" name="cook_time" placeholder="Cook Time"
-                                    value="{{ old('cook_time') }}"
-                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('cook_time') border-red-500 @enderror">
-
-                                @error('cook_time')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-
-                            </div>
-
-                            <!-- Video Link -->
-                            <div class="mb-4 w-8/12">
-                                <label for="pre_time" class="block text-gray-700 font-medium mb-1">
-                                    Video Link:</label>
-                                <input id="video_link" name="video_link" placeholder="Video Link"
-                                    value="{{ old('video_link') }}"
-                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('video_link') border-red-500 @enderror">
-
-                                @error('video_link')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-
-                            </div>
-
-                        </div>
-
+                      
                         <div>
                             <label for="nutrition_text" class="block text-gray-700 font-medium mb-1">Nutrition
                                 Text</label>
-                            <textarea name="nutrition_text" id="nutrition_text" cols="5" rows="2"
+                            <textarea name="nutrition_text" id="nutrition_text" cols="5" rows="2" placeholder="Nutrition Text..." 
                                 class="px-2 py-3 rounded w-full pt-2 border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('nutrition_text') border-red-500 @enderror">{{ old('nutrition_text') }}</textarea>
                             @error('nutrition_text')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>

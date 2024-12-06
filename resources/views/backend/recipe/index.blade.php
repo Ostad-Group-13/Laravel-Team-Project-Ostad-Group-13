@@ -29,6 +29,8 @@
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">image</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Category</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">User</th>
+                            <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Recipe Type</th>
+                            <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Status</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Action</th>
                         </tr>
                     </thead>
@@ -38,30 +40,65 @@
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $recipe->title }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <img @if ($recipe->image) src="{{ asset($recipe->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                    <img @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         width="80" height="40">
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <span class="text-white px-2 py-1 bg-gray-400 rounded">{{ $recipe->category->name }}</span>
+                                    @if($recipe->category_id !== null)
+                                      
+                                    <span class="text-white px-3 py-2 bg-gray-400 rounded">{{ $recipe->category->name }}</span>
+                                    @else
+                                    <span class="text-red-600 px-3 py-2 font-semibold rounded">No Category</span>
+
+                                    @endif
+                                </td>
+
+                                <td class="px-4 py-2 text-sm text-gray-700">
+                                    @if ($recipe->user_id != null)
+                                
+                                    <span class="text-white px-3 py-2 bg-blue-500 rounded">{{ $recipe->user->name }}</span>
+
+                                    @else
+                                     <span class="text-red-600 px-3 py-2 font-semibold rounded">No User</span>
+
+                                    @endif
+
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <span class="text-white px-2 py-1 bg-blue-500 rounded">{{ $recipe->user->name }}</span>
+                                    <span
+                                        class="text-white px-3 py-2 bg-teal-700 rounded  capitalize">{{ $recipe->recipe_type }}</span>
+                                </td>
+                                <td class="px-4 py-2 text-sm text-gray-700">
+                                    @if ($recipe->recipe_status == 'pending')
+                                        <span class="text-orange-600 rounded text-lg font-semibold  capitalize">{{ $recipe->recipe_status }}</span>
+                                    @else
+                                        <span class="text-green-600 rounded  text-lg font-semibold capitalize">{{ $recipe->recipe_status }}</span>
+                                    @endif
+
                                 </td>
 
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
+
+                                    @if ($recipe->recipe_status == 'pending')
+                                        <a href="{{ route('recipe.status', $recipe) }}"
+                                            class="bg-green-600 px-2 py-1.5 rounded text-white">Approved</a>
+                                    @else
+                                        <a href="{{ route('recipe.status', $recipe) }}"
+                                            class="bg-red-600 px-2 py-1.5 rounded text-white">Pending</a>
+                                    @endif
+
                                     <a href="{{ route('recipe.show', $recipe) }}" class="show-btn">Show</a>
-                                         <a href="{{ route('recipe.edit', $recipe) }}" class="edit-btn"
-                                        onclick="edit(event)">
-                                       Edit
-                                    </a>
+                                    @if (Auth::user()->hasRole('Super Admin'))
+                                        <a href="{{ route('recipe.edit', $recipe) }}" class="edit-btn">Edit</a>
+                                    @endif
+
                                     <form action="{{ route('recipe.destroy', $recipe) }}" method="post"
                                         class="inline">
                                         @csrf
                                         @method('DELETE')
 
-                                        <button type="submit" class="delete-btn"
-                                            onclick="DeleteConfirm(event)">
-                                           Delete</button>
+                                        <button type="submit" class="delete-btn" onclick="DeleteConfirm(event)">
+                                            Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -76,7 +113,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{-- {{ $recipes->links() }} --}}
+                {{ $recipes->links() }}
             </div>
         </div>
     </div>

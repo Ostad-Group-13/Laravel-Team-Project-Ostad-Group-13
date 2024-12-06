@@ -15,20 +15,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
 
-use function App\helpers\uploadImage;
+use Illuminate\Support\Facades\Storage;
+
+
 
 
 // use App\Models\Ingredient;
 
 class RecipeController extends Controller
 {
+   
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
-        $recipes = Recipe::all();
+        $recipes = Recipe::latest()->paginate(10);
         return view('backend.recipe.index', compact('recipes'));
     }
 
@@ -45,15 +49,27 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRecipeRequest $request)
+    public function store(StoreRecipeRequest $request, Recipe $recipe)
     {
+
+        // return $request->all();
+
 
         try {
 
             DB::beginTransaction();
 
             // Handle file upload for photo
-            $photo = $request->hasFile('photo') ? $request->file('photo')->store('recipes', 'public') : null;
+            $url = '';
+
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $url = $file->move('uploads/recipes/', $filename);
+                $recipe->photo = $url;
+               
+            }
+
 
             // Create the recipe record
             $recipe = Recipe::create([
@@ -63,7 +79,7 @@ class RecipeController extends Controller
                 'pre_time' => $request['pre_time'],
                 'cook_time' => $request['cook_time'],
                 'video_link' => $request['video_link'],
-                'photo' => $photo,
+                'photo' => $url,
                 'category_id' => $request->cat_id,
                 'user_id' => Auth::user()->id,
 
@@ -72,6 +88,8 @@ class RecipeController extends Controller
                 'directions' => $request->directions,
 
             ]);
+
+          
 
             // Create ingredients and their lists (if provided)
             if (!empty($request['ingredients'])) {
@@ -87,13 +105,17 @@ class RecipeController extends Controller
 
             // Create nutrition data (if provided)
             if (!empty($request['nutritions'])) {
+
+                $data = [];
+
                 foreach ($request['nutritions'] as $nutrition) {
-                    Nutrition::create([
-                        'name' => $nutrition['name'],
-                        'amount' => $nutrition['amount'],
-                        'unit' => $nutrition['unit'],
-                        'recipe_id' => $recipe->id,
-                    ]);
+
+                    $data['name'] = $nutrition['name'];
+                    $data['amount'] = $nutrition['amount'];
+                    $data['unit'] = $nutrition['unit'];
+                    $data['recipe_id'] = $recipe->id;
+
+                    Nutrition::insert($data);
                 }
             }
 
@@ -103,13 +125,7 @@ class RecipeController extends Controller
             return redirect()->route('recipe.index');
         } catch (\Exception $th) {
             DB::rollBack();
-            // return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
-            // $toasterMessage = [
-            //     'message' => "Recipe Created Successfully...",
-            //     'alert-type' => "error",
-            //     'sms' => $th->getMessage()
-            // ];
-            return redirect()->route('recipe.index');
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
         }
 
 
@@ -118,33 +134,17 @@ class RecipeController extends Controller
             'alert-type' => "success"
         ];
 
-        // return redirect()->route('recipe.index')->with($toasterMessage);
         return redirect()->route('recipe.index')->with($toasterMessage);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Recipe $recipe)
     {
 
-
-        
-
-        // return Ingredient::where('recipe_id', $recipe->id)->with('nutrition')->get();
-        // return Nutrition::where('recipe_id', $recipe->id)->get();
-        // $recipe = Recipe::Where('id',$recipe->id)->get();
-        $recipe = Recipe::Where('id',$id)->with(['ingredient', 'nutritions'])->get();
-        // return $recipe;
-        // return view('backend.recipe.show', ['recipe' => $recipe]);
-
-        // return view('backend.recipe.show', compact('recipe'));
-
-
-        // $recipe = Recipe::with(['ingredient', 'nutritions'])->find($id);
-        // return $recipe;
-
-        return view('backend.recipe.show', ['recipe' => $recipe]);
+        // $recipe = Recipe::Where('slug', $slug)->with('ingredients', 'nutritions')->first();
+        return view('backend.recipe.show', compact('recipe'));
     }
 
     /**
@@ -153,7 +153,14 @@ class RecipeController extends Controller
     public function edit(Recipe $recipe)
     {
         $categories = Category::all();
-        return view('backend.recipe.edit', compact('recipe', 'categories'));
+
+        // Assuming ingredients and nutritions are stored as JSON or related models
+        $ingredients = $recipe->ingredients; // Adjust if using JSON or relationship
+        $nutritions = $recipe->nutritions;
+
+        // return view('backend.recipe.edit', ['recipe' => $recipe, 'categories' => $categories ]);
+
+        return view('backend.recipe.edit', compact('recipe', 'ingredients', 'nutritions', 'categories'));
     }
 
     /**
@@ -162,34 +169,101 @@ class RecipeController extends Controller
     public function update(UpdateRecipeRequest $request, Recipe $recipe)
     {
 
+        try {
+            DB::beginTransaction();
 
-        // Handle file upload for photo
-        $photo = $request->hasFile('photo') ? $request->file('photo')->store('recipes', 'public') : null;
+            // Validate input data
+            // $validatedData = $request->validate([
+            //     'title' => 'required|string|max:255',
+            //     'slug' => 'required|string|max:255|unique:recipes,slug,' . $recipe->id,
+            //     'pre_time' => 'nullable|string|max:255',
+            //     'cook_time' => 'nullable|string|max:255',
+            //     'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            //     'ingredients' => 'nullable|array',
+            //     'ingredients.*.title' => 'required_with:ingredients|string|max:255',
+            //     'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
+            //     'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
+            //     'nutritions' => 'nullable|array',
+            //     'nutritions.*.name' => 'required_with:nutritions|string|max:255',
+            //     'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
+            //     'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
+            // ]);
+
+            // Handle file upload for photo
+            // if ($request->hasFile('photo')) {
+            //     if ($recipe->photo) {
+            //         Storage::disk('public')->delete($recipe->photo);
+            //     }
+            //     $photo = $request->file('photo')->store(
+            //         'recipes',
+            //         'public'
+            //     );
+            //     $recipe->photo = $photo;
+            // }
+
+            if ($request->hasFile('photo')) {
+
+                // $file = $request->file('photo');
+                // $filename = time() . '.' . $file->getClientOriginalExtension();
+                // $url = $file->move('uploads/recipes/', $filename);
+                
+                // uploadImage($request->file('photo'), 'recipes');
+                // $recipe->photo = $url;
+                $recipe->save();
+            }
+
+            // Update recipe
+            $recipe->update([
+                'title' => $request['recipeTitle'],
+                'slug' => Str::slug($request['recipeTitle']),
+                'pre_time' => $request['pre_time'],
+                'cook_time' => $request['cook_time'],
+                'category_id' => $request->cat_id,
+                'user_id' => Auth::user()->id,
+                'short_description' => $request->short_description,
+                'directions' => $request->directions,
+                'nutrition_text' => $request->nutrition_text,
+
+            ]);
 
 
+            // Update ingredients
+            $recipe->ingredients()->delete();
+            if (!empty($request['ingredients'])) {
+                foreach ($request['ingredients'] as $ingredient) {
+                    $recipe->ingredients()->create([
+                        'ingredients_title' => $ingredient['title'],
+                        // 'ingredients_title' => json_encode($ingredient['title']),
+                        'ingredients_list' => json_encode($ingredient['ingredients_list']),
+                        // 'recipe_id' => $recipe->id,
+                    ]);
+                }
+            }
 
-        $recipe->title = $request->recipeTitle;
-        $recipe->slug = Str::slug($request->recipeTitle);
-        $recipe->pre_time = $request->pre_time;
-        $recipe->cook_time = $request->cook_time;
-        $recipe->video_link = $request->video_link;
-        $recipe->category_id = $request->cat_id;
-        $recipe->user_id = 2;
-        $recipe->nutrition_text  = $request->nutrition_text;
-        $recipe->short_description = $request->short_description;
-        $recipe->directions = $request->directions;
-        $recipe->photo = $photo;
-        $recipe->video_link = $request->video_link;
+            // Update nutritions
+            $recipe->nutritions()->delete();
+            if (!empty($request['nutritions'])) {
+                foreach ($request['nutritions'] as $nutrition) {
+                    $recipe->nutritions()->create([
+                        'name' => $nutrition['name'],
+                        'amount' => $nutrition['amount'],
+                        'unit' => $nutrition['unit'],
+                        // 'recipe_id' => $recipe->id,
 
+                    ]);
+                }
+            }
 
-        $recipe->save();
+            DB::commit();
+            // return response()->json(['status' => 'success', 'message' => 'Recipe updated successfully.']);
+            return redirect()->route('recipe.index');
 
-        $ToasterMessage = [
-            'message' => "Recipe Updated Successfully...",
-            'alert-type' => "success"
-        ];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
 
-        return redirect()->route('recipe.index')->with($ToasterMessage);
+        // return redirect()->route('recipe.index');
     }
 
     /**
@@ -203,6 +277,28 @@ class RecipeController extends Controller
         $toasterMessage = [
             'message' => "Recipe Deleted Successfully",
             'alert-type' => "error"
+        ];
+
+        return redirect()->route('recipe.index')->with($toasterMessage);
+    }
+
+
+
+    function RecipeStatus(Recipe $recipe)
+    {
+
+
+        if ($recipe->recipe_status == 'pending') {
+            $status = 'approved';
+        } else {
+            $status = 'pending';
+        }
+
+        $recipe->recipe_status = $status;
+        $recipe->save();
+        $toasterMessage = [
+            'message' => "Recipe Status Changed Successfully",
+            'alert-type' => "info"
         ];
 
         return redirect()->route('recipe.index')->with($toasterMessage);
