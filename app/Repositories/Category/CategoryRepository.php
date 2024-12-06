@@ -9,7 +9,7 @@ use App\Repositories\Category\CategoryInterface;
 
 class CategoryRepository implements CategoryInterface
 {
-    private $file_path = 'public/category';
+    private $file_path = 'uploads/';
     public function store($request)
     {
 
@@ -20,7 +20,7 @@ class CategoryRepository implements CategoryInterface
             'status' => $request->status,
         ]);
         $image_path = (new FileUploadService())->imageUpload($request, $data, $this->file_path);
-        
+
         $data->update([
             'image' => $image_path
         ]);
@@ -68,16 +68,5 @@ class CategoryRepository implements CategoryInterface
             return true;
         }
         return false;
-    }
-    public function status($id)
-    {
-        $data = $this->show($id);
-        if ($data->status == 'active') {
-            $data->status = 'inactive';
-        } elseif ($data->status == 'inactive') {
-            $data->status = 'active';
-        }
-        $data->save();
-        return $data;
     }
 }

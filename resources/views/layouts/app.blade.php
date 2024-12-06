@@ -205,7 +205,7 @@
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!",
-                timer: 2000
+                timer: 10000
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({

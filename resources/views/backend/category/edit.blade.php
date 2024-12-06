@@ -15,14 +15,14 @@
                         <div class="flex gap-2">
                             <!-- Category Name -->
                             <div class="mb-4 w-8/12">
-                                <label for="categoryName" class="block text-gray-700 font-medium mb-1">Category Name
+                                <label for="name" class="block text-gray-700 font-medium mb-1">Category Name
                                     :</label>
-                                <input id="categoryName" type="text" name="categoryName"
+                                <input id="name" type="text" name="name"
                                     value="{{ $category->name }}" placeholder="Category Name" required
-                                    autocomplete="categoryName"
-                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('categoryName') border-red-500 @enderror">
-                                @if ($errors->has('categoryName'))
-                                    <span class="text-red-500 text-sm">{{ $errors->first('categoryName') }}</span>
+                                    autocomplete="name"
+                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('name') border-red-500 @enderror">
+                                @if ($errors->has('name'))
+                                    <span class="text-red-500 text-sm">{{ $errors->first('name') }}</span>
                                 @endif
                             </div>
 
@@ -44,7 +44,7 @@
                                 @endif
                             </div>
 
-                        
+
                             <div class="w-2/12">
                                 <label for="status"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -60,11 +60,11 @@
                         </div>
                         <!-- Image -->
                         <div class="w-1/4 rounded">
-                            <label for="FileUpload" class="block text-gray-700 font-medium mb-1">Image</label>
-                            <input type="file" class="dropify @error('FileUpload') border-red-500 @enderror"
-                                 @if ($category->image) ? data-default-file="{{ asset($category->image) }}":  @else  data-default-file="{{ asset('uploads/no-image.png') }}" @endif data-height="250"   name="FileUpload">
-                            @if ($errors->has('FileUpload'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('FileUpload') }}</span>
+                            <label for="image" class="block text-gray-700 font-medium mb-1">Image</label>
+                            <input type="file" class="dropify @error('image') border-red-500 @enderror"
+                                 @if ($category->image) ? data-default-file="{{ asset($category->image) }}":  @else  data-default-file="{{ asset('uploads/no-image.png') }}" @endif data-height="250"   name="image">
+                            @if ($errors->has('image'))
+                                <span class="text-red-500 text-sm">{{ $errors->first('image') }}</span>
                             @endif
                         </div>
 

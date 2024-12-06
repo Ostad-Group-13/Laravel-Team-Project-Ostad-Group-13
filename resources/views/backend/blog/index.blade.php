@@ -32,23 +32,23 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse ($blog as $item)
+                        @forelse ($blogs as $item)
                             <tr>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $item->title }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <span class="text-gray-200 bg-blue-500 px-1 py-1 rounded">{{ $item->category->name }}</span>
-                                    
+                                    <span class="text-gray-200 bg-blue-500 px-1 py-1 rounded">{{ isset($item->category->name)?$item->category->name:'N/A' }}</span>
+
                                 </td>
                                  <td class="px-4 py-2 text-sm text-gray-700">
-                                   
+
                                     <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
-                                        <a href="{{ route('User-Post',$item->user_id) }}">{{ $item->users->name }}</a>
+                                        <a href="{{ route('User-Post',$item->user_id) }}">{{ isset($item->user->name)?$item->user->name:'N/A' }}</a>
                                     </span>
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $item->short_description }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <img @if ($item->image) src="{{ asset($item->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif"
+                                    <img @if ($item->image) src="{{ asset($item->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         alt="" width="120" height="120">
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2 flex align-item-center">
@@ -76,7 +76,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{ $blog->links() }}
+                {{ $blogs->links() }}
             </div>
         </div>
     </div>
