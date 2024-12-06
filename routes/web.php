@@ -41,7 +41,7 @@ Route::get('/', [PageController::class, 'homePage']);
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
+Route::get('/recipes-filter',  [RecipeController::class, 'index'])->name('recipesPage');
 
 Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipes.show');
 
