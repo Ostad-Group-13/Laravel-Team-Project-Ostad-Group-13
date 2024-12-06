@@ -9,16 +9,17 @@ use App\Repositories\Blog\BlogInterface;
 
 class BlogRepository implements BlogInterface
 {
-    private $file_path = 'public/blog';
+    private $file_path = 'uploads/';
     public function store($request)
     {
 
+        $auth = auth()->user();
         $data = Blog::create([
             'title' => $request->title,
-            'slug' => Str::slug($request->slug, '-'),
+            'slug' => Str::slug($request->title, '-'),
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
-            'user_id' => $request->user_id,
+            'user_id' => $auth->id,
             'cat_id' => $request->cat_id,
         ]);
 
@@ -31,7 +32,7 @@ class BlogRepository implements BlogInterface
     }
     public function allPaginated($perPage)
     {
-        $data = Blog::latest('id')
+        $data = Blog::latest('id')->with('category', 'user')
             ->paginate($perPage);
         return $data;
     }
@@ -48,12 +49,13 @@ class BlogRepository implements BlogInterface
     public function update($request, $id)
     {
         $data = $this->show($id);
+        $auth = auth()->user();
         $data->update([
-            'title' => $request->name,
-            'slug' => Str::slug($request->slug, '-'),
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '-'),
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
-            'user_id' => $request->user_id,
+            'user_id' =>  $auth->id,
             'cat_id' => $request->cat_id,
         ]);
 

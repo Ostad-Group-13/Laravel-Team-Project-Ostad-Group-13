@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('title')->nullable();
           
             $table->string('slug')->nullable();
+
             $table->string('pre_time')->nullable();
             $table->string('cook_time')->nullable();
             $table->string('photo')->nullable();
+
             $table->string('video_link')->nullable();
 
             $table->unsignedBigInteger('category_id')->nullable();
