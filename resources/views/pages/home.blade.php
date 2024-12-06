@@ -100,4 +100,5 @@
     <x-newsletter />
 
 
+
 </x-guest-layout>

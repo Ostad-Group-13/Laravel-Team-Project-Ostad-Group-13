@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\RecipeSliderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
+use App\Http\Controllers\Admin\{BackendController,
+    CategoryController,
+    RecipeController,
+    RoleController,
+    UserController};
 use App\Http\Controllers\Frontend\PageController;
 use App\Livewire\Comments;
 
@@ -58,3 +63,10 @@ Route::middleware([
 
     Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
 });
+/*develop by ekramul*/
+Route::post('create-recipe', [RecipeController::class, 'CreateRecipe'])->name('create-recipe');
+Route::get('list-recipe', [RecipeController::class, 'ListRecipe'])->name('list-recipe');
+Route::post('by-recipe-id', [RecipeController::class, 'ByRecipeID'])->name('by-recipe-id');
+Route::delete('delete-recipe', [RecipeController::class, 'DeleteRecipe'])->name('delete-recipe');
+Route::post('update-recipe', [RecipeController::class, 'UpdateRecipe'])->name('update-recipe');
+Route::resource('recipe-slider', RecipeSliderController::class);
