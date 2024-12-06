@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Recipe;
+use App\Models\Contact;
 use App\Models\Category;
-use App\Models\Nutrition;
-use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
 
     function homePage(){
-        $categorys = Category::take(6)->get();
+        $categorys = Category::where('status', 'active')->take(6)->get();
         $recipes = Recipe::take(6)->with('category')->get();
-        //return $recipes;
+        //return $categorys;
         return view('pages.home', ['categorys' => $categorys, 'recipes' => $recipes]);
     }
 
@@ -25,7 +23,35 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
-
+    public function storeContact(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required',
+            ]);
+    
+            Contact::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'enquiry_type' => $request->enquiry_type,
+                'message' => $request->message,
+            ]);
+    
+            return response()->json(['status' => 'success', 'message' => 'Message sent successfully.']);
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Return validation errors
+            return response()->json([
+                'status' => 'error',
+                'errors' => $e->errors(),
+            ], 422);
+        }
+    }
+    
     function aboutPage(){
         return view('pages.about');
     }
@@ -45,6 +71,14 @@ class PageController extends Controller
         ]);
     
         return response()->json(['status' => 'success', 'message' => 'Subscribed successfully.']);
+    }
+
+
+    function categoryByRecipe(Category $category){
+        $category = Category::where('slug', $category->slug)->with('recipe')->first();
+        //return $category;
+        return view('pages.recipe.category-by-recipe', compact('category'));
+        
     }
 
 

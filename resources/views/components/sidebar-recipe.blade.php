@@ -1,3 +1,4 @@
+@if ($recipes ->isNotEmpty()) 
 <div class="sider_item">
   <h2 class="text-2xl font-bold mb-6">Other Recipe</h2>
   
@@ -9,7 +10,7 @@
         <img src="{{ asset($recipe->photo) }}" alt="Chicken Meatball" class="w-full h-full object-cover rounded-lg">
       </div>
       <div>
-        <a href="{{ route('recipe.show', $recipe->slug) }}"><h3 class="font-semibold sm:text-[20px] text-[16px] leading-tight sm:leading-[28px]">{{ $recipe->title }}</h3></a>
+        <a href="{{ route('recipes.show', $recipe->slug) }}"><h3 class="font-semibold sm:text-[20px] text-[16px] leading-tight sm:leading-[28px]">{{ $recipe->title }}</h3></a>
         <p class="text-sm text-gray-600 mt-[16px]">By {{ $recipe->user->name }}</p>
       </div>
     </div>
@@ -18,3 +19,4 @@
 
   </div>
 </div>
+@endif
