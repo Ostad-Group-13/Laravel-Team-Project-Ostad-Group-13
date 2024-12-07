@@ -8,8 +8,8 @@
     </div>
     <div class="blog-posted-by flex justify-center items-center mt-4">
       <div class="flex items-center gap-2 text-sm text-gray-500">
-        <img class="rounded-full user-profile-img" src="{{ asset($blog->users->profile_photo_url) }}" alt="User">
-        <span class="font-medium">{{ $blog->users->name }}</span>
+        <img class="rounded-full user-profile-img" src="{{ asset($blog->user->profile_photo_url) }}" alt="User">
+        <span class="font-medium">{{ $blog->user->name }}</span>
         <span class="border-line">|</span>
         <span>{{ $blog->created_at->format('d F Y') }}</span>
       </div>
@@ -24,7 +24,7 @@
         <img src="{{ asset($blog->image) }}" class="blog-details-image rounded-[50px] mx-auto max-w-full h-full object-cover" alt="Blog Details">
       </div>
     </div>
-    <div class="mt-8">
+    <div class="mt-8 max-w-4xl mx-auto">
       <p class="text-center text-lg text-gray-700">
         {{ $blog->long_description }}
       </p>

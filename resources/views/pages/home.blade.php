@@ -83,10 +83,12 @@
                 <img src="{{ asset($category->image) }}" alt="category-img">
               </div>
               <div class="category_content">
-                <a href="{{ route('category.show', $category->slug) }}"><h3 class="category_title">{{ $category->name }}</h3></a>
+                <a href="{{ route('category.by.recipe', $category->slug) }}"><h3 class="category_title">{{ $category->name }}</h3></a>
               </div>
             </div>
           </div>
+
+          @endforeach
 
         </div>
 
@@ -95,7 +97,27 @@
 
     </section>
 
-    <x-racipes />
+    <section class="racipes_area py-[50px]">
+      <div class="container">
+        <div class="mb-[80px]">
+          <div class="section_title_area text-center">
+            <h2 class="section_title">Simple and tasty recipes</h2>
+            <p>Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut<br> labore et dolore magna aliqut enim ad minim </p>
+          </div>
+        </div>
+    
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[40px] ">
+    
+          @foreach ($recipes as $recipe )
+            
+          <x-recipe-item :recipe="$recipe" />
+    
+          @endforeach
+    
+        </div>
+      </div>
+    
+    </section>
 
     <x-newsletter />
 
