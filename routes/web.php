@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\RecipeSliderController;
+
 //use BackendController;
 use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
@@ -7,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\RecipeController as Recipe;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
-
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\RecipeController;
 
@@ -104,5 +107,8 @@ Route::middleware([
     # Backend User Recipe List Route
     Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
-  
+
 });
+
+/*develop by ekramul*/
+Route::resource('recipe-slider', RecipeSliderController::class);

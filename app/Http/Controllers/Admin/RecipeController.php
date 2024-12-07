@@ -329,7 +329,7 @@ class RecipeController extends Controller
 
     /*
     * User Recipe List
-    *   
+    *
     */
 
     public function UserRecipe()
@@ -347,6 +347,7 @@ class RecipeController extends Controller
         // } else {
         //     echo 'no';
         // }
+
 
     }
 }
