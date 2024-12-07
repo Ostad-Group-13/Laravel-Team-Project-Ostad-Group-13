@@ -20,7 +20,8 @@
 
            <span class="">
              <h2 class=" bg-gray-200 px-3 py-2 border border-blue-600 rounded">
-                Manage User Post</h2>
+                <a href="{{ route('users.index') }}">Back User List</a>
+                </h2>
            </span>
 
         </div>
@@ -42,17 +43,17 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 border-2 border-blue-500">
-                        @forelse ($userList as $user)
+                        @forelse ($userList as $list)
                             <tr class="">
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $user->title }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ $list->title }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    {{ Str::limit($user->short_description, 40, ' ...') }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $user->category->name }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $user->user->name }} </td>
+                                    {{ Str::limit($list->short_description, 40, ' ...') }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ $list->category->name }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ $list->user->name }} </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
 
-                                    <img @if ($user->image) src="{{ asset($user->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                    <img @if ($list->image) src="{{ asset($list->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         alt="" width="120" height="120">
                                 </td>
 
