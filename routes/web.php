@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\RecipeSliderController;
+
 //use BackendController;
 use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
@@ -109,3 +112,6 @@ Route::middleware([
     Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
     Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
 });
+
+/*develop by ekramul*/
+Route::resource('recipe-slider', RecipeSliderController::class);
