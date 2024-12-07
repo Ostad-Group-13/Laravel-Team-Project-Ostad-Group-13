@@ -49,7 +49,7 @@ class BackendController extends Controller
 
     $user = User::where('id',$UserPost)->first();
          
-    $userList = Blog::where('user_id', $UserPost)->with('users')->get();
+    $userList = Blog::where('user_id', $UserPost)->with('user')->get();
 
     return view('backend.user-list-post', compact('userList','user'));
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title')->nullable();
           
             $table->string('slug')->nullable();
+        
 
             $table->string('pre_time')->nullable();
             $table->string('cook_time')->nullable();
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->longText('directions')->nullable();
           
-            $table->string('nutrition_text')->nullable();
+            $table->text('nutrition_text')->nullable();
 
             $table->enum('recipe_type',['asian','indian','thai','chines'])->default('asian')->nullable();
             $table->enum('recipe_status',['pending','approved'])->default('pending')->nullable();

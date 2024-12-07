@@ -49,7 +49,7 @@
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     {{ Str::limit($user->short_description, 40, ' ...') }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $user->category->name }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $user->users->name }} </td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ $user->user->name }} </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
 
                                     <img @if ($user->image) src="{{ asset($user->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
