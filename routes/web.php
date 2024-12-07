@@ -41,7 +41,7 @@ Route::get('/', [PageController::class, 'homePage']);
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
+Route::get('/recipes-filter',  [RecipeController::class, 'index'])->name('recipesPage');
 
 Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipes.show');
 
@@ -54,6 +54,11 @@ Route::post('/subscribe', [PageController::class, 'collectEmail'])->name('newsle
 
 Route::get('/search-blogs', [App\Http\Controllers\Frontend\BlogController::class, 'search'])->name('search.blogs');
 
+Route::post('/store-contact', [PageController::class, 'storeContact'])->name('store.contact');
+
+Route::get('/category/{category:slug}', [PageController::class, 'categoryByRecipe'])->name(name: 'category.by.recipe');
+
+
 
 
 
@@ -61,7 +66,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+])->prefix('admin')->group(function () {
 
     Route::resources([
         'roles' => RoleController::class,

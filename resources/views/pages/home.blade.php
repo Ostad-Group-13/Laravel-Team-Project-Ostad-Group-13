@@ -83,7 +83,7 @@
                 <img src="{{ asset($category->image) }}" alt="category-img">
               </div>
               <div class="category_content">
-                <a href="{{ route('category.show', $category->slug) }}"><h3 class="category_title">{{ $category->name }}</h3></a>
+                <a href="{{ route('category.by.recipe', $category->slug) }}"><h3 class="category_title">{{ $category->name }}</h3></a>
               </div>
             </div>
           </div>

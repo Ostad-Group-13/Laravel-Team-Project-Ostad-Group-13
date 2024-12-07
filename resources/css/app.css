@@ -214,3 +214,24 @@ span.border-line {
 .nutrition-block input{
   @apply w-full;
 }
+#ContacterrorContainer {
+  background-color: #ffe5e5; /* Light red background */
+  border: 1px solid #ff4d4d; /* Red border */
+  color: #d8000c; /* Dark red text */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+div#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+}
+span[aria-current='page']{
+  @apply !bg-[#FF6363];
+}
+li.filter_list_item {
+  margin-bottom: 7px;
+}
