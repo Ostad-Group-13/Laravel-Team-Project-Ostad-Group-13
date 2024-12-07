@@ -32,9 +32,12 @@ class Recipe extends Model
         return $this->hasMany(Nutrition::class);
     }
 
-    
 
 
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
 
 
 }

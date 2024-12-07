@@ -107,7 +107,10 @@ Route::middleware([
     # Backend User Recipe List Route
     Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
-
+    # Favorite
+    Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
+    Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+    Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
 });
 
 /*develop by ekramul*/

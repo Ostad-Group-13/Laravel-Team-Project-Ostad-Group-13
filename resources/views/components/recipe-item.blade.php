@@ -1,4 +1,12 @@
 <div class="racipe_item">
+  {{-- <input type="text" name="recipe" value="{{ $recipe->id }}"> --}}
+
+  @if(auth()->user()->favoriteRecipes->contains($recipe->id))
+    <button onclick="toggleFavorite({{ $recipe->id }}, true)" class="px-2 py-2 bg-red-500 rounded ">Unfavorite</button>
+@else
+    <button onclick="toggleFavorite({{ $recipe->id }}, false)" class="px-2 py-2 bg-green-500 rounded ">Favorite</button>
+@endif
+
   <div class="w-full h-[250px] rounded-[30px] overflow-hidden relative">
     <img class="w-full h-full object-cover" src="{{ asset($recipe->photo) }}" alt="">
     <div class="recipe_type absolute top-[20px] left-[20px] px-[10px] py-[3px] rounded-[30px] bg-[#FF6363] text-white capitalize">
@@ -37,3 +45,17 @@
   </div>
 </div>
 
+<script>
+  function toggleFavorite(recipeId, isFavorite) {
+    const url = isFavorite ? '/recipes/${recipeId}/unfavorite' : '/recipes/${recipeId}/favorite';
+
+    axios.post(url)
+        .then(response => {
+            console.log(response.data.message);
+            // Update UI accordingly
+        })
+        .catch(error => {
+            console.error(error.response.data);
+        });
+}
+</script>
