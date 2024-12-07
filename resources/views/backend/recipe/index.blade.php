@@ -38,7 +38,8 @@
                         @forelse ($recipes as $recipe)
                             <tr>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $recipe->title }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ Str::limit($recipe->title,10) }}</td>
+                                {{-- <td class="px-4 py-2 text-sm text-gray-700">{{ $recipe->title }}</td> --}}
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     <img @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         width="80" height="40">

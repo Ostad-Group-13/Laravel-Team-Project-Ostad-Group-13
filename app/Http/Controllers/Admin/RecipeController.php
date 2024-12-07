@@ -190,27 +190,30 @@ class RecipeController extends Controller
             // ]);
 
             // Handle file upload for photo
-            // if ($request->hasFile('photo')) {
-            //     if ($recipe->photo) {
-            //         Storage::disk('public')->delete($recipe->photo);
-            //     }
-            //     $photo = $request->file('photo')->store(
-            //         'recipes',
-            //         'public'
-            //     );
-            //     $recipe->photo = $photo;
-            // }
-
             if ($request->hasFile('photo')) {
+                if ($recipe->photo) {
+                    // Storage::disk('public')->delete($recipe->photo);
+                    // unlink($recipe->photo);
 
-                // $file = $request->file('photo');
-                // $filename = time() . '.' . $file->getClientOriginalExtension();
-                // $url = $file->move('uploads/recipes/', $filename);
-                
-                // uploadImage($request->file('photo'), 'recipes');
-                // $recipe->photo = $url;
-                $recipe->save();
+                }
+                $photo = $request->file('photo')->store('recipes','public');
+                $recipe->photo = $photo;
             }
+
+            # old image  delete
+            
+
+
+
+
+            // $url = '';
+
+            // if ($request->hasFile('photo')) {
+            //     $file = $request->file('photo');
+            //     $filename = time() . '.' . $file->getClientOriginalExtension();
+            //     $url = $file->move('uploads/recipes/', $filename);
+            //     $recipe->photo = $url;
+            // }
 
             // Update recipe
             $recipe->update([
@@ -233,9 +236,8 @@ class RecipeController extends Controller
                 foreach ($request['ingredients'] as $ingredient) {
                     $recipe->ingredients()->create([
                         'ingredients_title' => $ingredient['title'],
-                        // 'ingredients_title' => json_encode($ingredient['title']),
                         'ingredients_list' => json_encode($ingredient['ingredients_list']),
-                        // 'recipe_id' => $recipe->id,
+                        'recipe_id' => $recipe->id,
                     ]);
                 }
             }
@@ -248,7 +250,7 @@ class RecipeController extends Controller
                         'name' => $nutrition['name'],
                         'amount' => $nutrition['amount'],
                         'unit' => $nutrition['unit'],
-                        // 'recipe_id' => $recipe->id,
+                        'recipe_id' => $recipe->id,
 
                     ]);
                 }
@@ -271,9 +273,8 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        
         $recipe->delete();
-
         $toasterMessage = [
             'message' => "Recipe Deleted Successfully",
             'alert-type' => "error"

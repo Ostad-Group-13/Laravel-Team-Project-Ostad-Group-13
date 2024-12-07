@@ -184,6 +184,7 @@
                                         Remove
                                     </button>
 
+                                 
                                     <!-- Ingredient Title -->
                                     <div class="mb-4">
                                         <label for="ingredient-title-{{ $ingredient }}"
