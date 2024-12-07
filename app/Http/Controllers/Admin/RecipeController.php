@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
-
-use Illuminate\Support\Facades\Storage;
 
 
 
@@ -190,30 +191,47 @@ class RecipeController extends Controller
             // ]);
 
             // Handle file upload for photo
-            if ($request->hasFile('photo')) {
-                if ($recipe->photo) {
-                    // Storage::disk('public')->delete($recipe->photo);
-                    // unlink($recipe->photo);
+            // if ($request->hasFile('photo')) {
+            //     if ($recipe->photo) {
+            //         // Storage::disk('public')->delete($recipe->photo);
+            //         // unlink($recipe->photo);
 
-                }
-                $photo = $request->file('photo')->store('recipes', 'public');
-                $recipe->photo = $photo;
-            }
+            //     }
+            //     $photo = $request->file('photo')->store('recipes', 'public');
+            //     $recipe->photo = $photo;
+            // }
 
             # old image  delete
 
 
 
+            $url = '';
+
+            if ($request->hasFile('photo')) {
 
 
-            // $url = '';
+                #img upload and old img delete
+                if (File::exists($recipe->photo)) {
+                    File::delete($recipe->photo);
+                }
 
-            // if ($request->hasFile('photo')) {
-            //     $file = $request->file('photo');
-            //     $filename = time() . '.' . $file->getClientOriginalExtension();
-            //     $url = $file->move('uploads/recipes/', $filename);
-            //     $recipe->photo = $url;
-            // }
+                # Image upload
+
+                $file = $request->file('photo');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $url = $file->move('uploads/recipes/', $filename);
+                $recipe->photo = $url;
+            }
+
+
+            // # Image upload
+            // $file = $request->file('FileUpload');
+            // $filename = time() . '.' . $file->getClientOriginalExtension();
+            // // $url = $file->move(public_path('uploads/car'), $filename);
+            // $url = $file->move('uploads/blog/', $filename);
+            // // $file->move('uploads/car', $filename);
+            // // $url = uploadImage($request->file('image'), 'car');
+            // $blog->image = $url;
 
             // Update recipe
             $recipe->update([
@@ -221,11 +239,17 @@ class RecipeController extends Controller
                 'slug' => Str::slug($request['recipeTitle']),
                 'pre_time' => $request['pre_time'],
                 'cook_time' => $request['cook_time'],
+                'photo' => $url,
+                'video_link' => $request['video_link'],
+
                 'category_id' => $request->cat_id,
                 'user_id' => Auth::user()->id,
                 'short_description' => $request->short_description,
                 'directions' => $request->directions,
                 'nutrition_text' => $request->nutrition_text,
+
+                'recipe_type' => $request->recipe_type,
+
 
             ]);
 
@@ -287,7 +311,6 @@ class RecipeController extends Controller
     function RecipeStatus(Recipe $recipe)
     {
 
-
         if ($recipe->recipe_status == 'pending') {
             $status = 'approved';
         } else {
@@ -298,9 +321,32 @@ class RecipeController extends Controller
         $recipe->save();
         $toasterMessage = [
             'message' => "Recipe Status Changed Successfully",
-            'alert-type' => "info"
+            'alert-type' => "success"
         ];
 
         return redirect()->route('recipe.index')->with($toasterMessage);
+    }
+
+    /*
+    * User Recipe List
+    *   
+    */
+
+    public function UserRecipe()
+    {
+
+        $user = Auth::user()->id;
+
+        $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
+
+        return view('backend.userRecipe.index', compact('recipes'));
+
+        // if (Auth::check() == 1) {
+
+        //     $recipes = Recipe::where('user_id', $user)->with('ingredients', 'nutritions')->paginate(6);
+        // } else {
+        //     echo 'no';
+        // }
+
     }
 }

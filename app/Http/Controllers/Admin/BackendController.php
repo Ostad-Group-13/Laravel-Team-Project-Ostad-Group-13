@@ -33,7 +33,7 @@ class BackendController extends Controller
 
       // return "User Is : ". $user;
 
-    $userList = Blog::where('user_id', $user->id)->with('users')->get();
+    $userList = Blog::where('user_id', $user->id)->with('user')->get();
 
       // $user = Auth::User()->id;
       // $userList = Blog::where('user_id',$user)->with('category','users')->get();

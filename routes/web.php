@@ -93,7 +93,7 @@ Route::middleware([
     //Common Feature For Backend
     Route::get('subscribe', [BackendController::class, 'Subscribe'])->name('subscribe');
     Route::get('contact-us', [BackendController::class, 'contact'])->name('contact');
-    Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
+    // Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
     Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
@@ -101,7 +101,8 @@ Route::middleware([
     // Backend Recipe Route
     Route::resource('recipe', Recipe::class);
     Route::get('recipe/status/{recipe}', [Recipe::class, 'RecipeStatus'])->name('recipe.status');
+    # Backend User Recipe List Route
+    Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
-    # Backend User Recipe Route
-    Route::resource('user-recipe', UserRecipeController::class);
+  
 });
