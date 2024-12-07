@@ -1,10 +1,9 @@
-<x-guest-layout>
 
 
-  <div class="racipe_details_area py-[80px]">
+  <div id="printRecipe" class="hidden racipe_details_area py-[30px]">
     <div class="container">
       <div class="racipe_details_wrapp flex flex-col lg:flex-row gap-[40px] items-center">
-        <div class="rd_head_info lg:w-2/3 w-full">
+        <div class="rd_head_info w-full">
           <h1 class="xl:text-[64px] md:text-[50px] text-[35px] leading-tight font-semibold text-black">{{ $recipe->title }}</h1>
           <div class="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-[20px] items-center py-[50px]">
             <div class="rd_head_info_item">
@@ -59,64 +58,13 @@
             </div>
           </div>
         </div>
-        <div class="lg:w-1/3 w-full text-end mb-[30px] lg:mb-0 ">
-          <div class="print&shareButton flex lg:justify-end justify-start w-full gap-[30px]">
-            <button type="button" onclick="printRecipe()" class="rounded-btn">
-              <div class="icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.99988 9V2H17.9999V9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M5.99988 18H3.99988C3.46944 18 2.96074 17.7893 2.58566 17.4142C2.21059 17.0391 1.99988 16.5304 1.99988 16V11C1.99988 10.4696 2.21059 9.96086 2.58566 9.58579C2.96074 9.21071 3.46944 9 3.99988 9H19.9999C20.5303 9 21.039 9.21071 21.4141 9.58579C21.7892 9.96086 21.9999 10.4696 21.9999 11V16C21.9999 16.5304 21.7892 17.0391 21.4141 17.4142C21.039 17.7893 20.5303 18 19.9999 18H17.9999" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M17.9999 14H5.99988V22H17.9999V14Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>                  
-              </div>
-              <span>Print</span>
-            </button>
-            <a href="#" class="rounded-btn">
-              <div class="icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 12V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V12" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M16 6L12 2L8 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M12 2V15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>                                   
-              </div>
-              <span>SHARE</span>
-            </a>
-          </div>
-        </div>
+
       </div>
 
       <div class="image_and_Nutrition flex flex-col lg:flex-row gap-[40px] justify-between">
-        <div class="image lg:w-2/3 w-full">
 
-          <div class="relative w-full max-w-4xl mx-auto h-64 sm:h-80 md:h-[400px] lg:h-[500px] rounded-[30px] shadow-lg overflow-hidden bg-white">
-            <!-- Preview Image -->
-            <img id="video-preview" 
-                 src="{{ asset($recipe->photo) }}" 
-                 alt="Video Preview" 
-                 class="w-full h-full object-cover">
-            
-            <!-- Play Button -->
-            <button id="play-button" 
-                    class="absolute inset-0 flex items-center justify-center bg-transparent z-10">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                   viewBox="0 0 24 24" 
-                   fill="currentColor" 
-                   class="w-20 h-20 text-gray-800">
-                <circle cx="12" cy="12" r="10" fill="white"></circle>
-                <path d="M10 8l6 4-6 4V8z" fill="black"></path>
-              </svg>
-            </button>
-
-            <video class="hidden w-full object-cover max-w-4xl mx-auto h-64 sm:h-80 md:h-[400px] lg:h-[500px]" id="video-iframe" Controls src="{{ asset($recipe->video_link) }}"></video>
-          
-          </div>
-          
-          
-  
-        </div>
-
-        <div class="nutrition_info lg:w-1/3 w-full">
-          <div class="nutrition grid">
+        <div class="nutrition_info w-full">
+          <div class="nutrition !h-auto grid">
               <div>
                 <h2 class="text-2xl font-semibold mb-4">Nutrition Information</h2>
                 <ul class="mt-[30px]">
@@ -138,34 +86,36 @@
 
       <div class="flex flex-col lg:flex-row gap-[40px]">
 
-        <div class="ingridents lg:w-2/3 w-full">
+        <div class="ingridents w-full">
           <h2 class="text-[36px] font-semibold mb-4">Ingredients</h2>
 
-          @foreach ($recipe->ingredients as $ingredient)
-            
-          <div class="checklist py-[30px]">
-            <h3 class="text-[24px] font-semibold mb-4">{{ $ingredient->ingredients_title }}</h3>
-            <ul>
-              @foreach (json_decode($ingredient['ingredients_list'], true) as $item)
-                
-              <li>
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="hidden peer">
-                  <span class="w-6 h-6 ml-0 flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  <span class="checktext">{{ $item }}</span>
-                </label>
-              </li>
+          <div class="flex flex-wrap gap-[40px]">
+            @foreach ($recipe->ingredients as $ingredient)
+              
+            <div class="checklist py-[30px]">
+              <h3 class="text-[24px] font-semibold mb-4">{{ $ingredient->ingredients_title }}</h3>
+              <ul>
+                @foreach (json_decode($ingredient['ingredients_list'], true) as $item)
+                  
+                <li>
+                  <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="hidden peer">
+                    <span class="w-6 h-6 ml-0 flex rounded-full border-2 border-gray-300 items-center justify-center peer-checked:border-black peer-checked:bg-black">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 peer-checked:block">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    </span>
+                    <span class="checktext">{{ $item }}</span>
+                  </label>
+                </li>
 
-              @endforeach
+                @endforeach
 
-            </ul>
+              </ul>
+            </div>
+
+            @endforeach
           </div>
-
-          @endforeach
 
 
           <!-- description -->
@@ -181,63 +131,9 @@
         </div>
 
 
-        <!-- siderbar -->
-        <div class="sidebar lg:w-1/3 w-full">
-
-
-          <x-sidebar-recipe :recipes="$recipes" />
-
-          <x-sidebar-add />
-
-
-        </div>
 
       </div>
 
     </div>
   </div>
 
-  <x-print-recipe :recipe="$recipe" />
-
-
-
-
-
-  <script>
-
-
-    // Select elements
-    const playButton = document.getElementById('play-button');
-    const previewImage = document.getElementById('video-preview');
-    const videoIframe = document.getElementById('video-iframe');
-
-    // Add event listener to the play button
-    playButton.addEventListener('click', () => {
-        // Hide preview image and play button
-        previewImage.classList.add('hidden');
-        playButton.classList.add('hidden');
-
-        // Show iframe and set video source
-        videoIframe.classList.remove('hidden');
-        videoIframe.play();
-    });
-
-
-
-    function printRecipe() {
-      var printContent = document.getElementById('printRecipe').innerHTML;
-      var originalContent = document.body.innerHTML;
-      
-      document.body.innerHTML = printContent;
-      window.print();
-      document.body.innerHTML = originalContent;
-    }
-
-
-</script>
-
-
-
-
-
-</x-guest-layout>

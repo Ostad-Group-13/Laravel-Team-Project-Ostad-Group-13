@@ -223,3 +223,15 @@ span.border-line {
   margin-top: 10px;
 }
 
+div#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+}
+span[aria-current='page']{
+  @apply !bg-[#FF6363];
+}
+li.filter_list_item {
+  margin-bottom: 7px;
+}
