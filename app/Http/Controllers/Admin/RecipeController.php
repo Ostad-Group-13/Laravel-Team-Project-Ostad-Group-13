@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
-   
+
 
     /**
      * Display a listing of the resource.
@@ -67,7 +67,6 @@ class RecipeController extends Controller
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $url = $file->move('uploads/recipes/', $filename);
                 $recipe->photo = $url;
-               
             }
 
 
@@ -86,10 +85,11 @@ class RecipeController extends Controller
                 'nutrition_text' => $request->nutrition_text,
                 'short_description' => $request->short_description,
                 'directions' => $request->directions,
+                'recipe_type' => $request->recipe_type,
 
             ]);
 
-          
+
 
             // Create ingredients and their lists (if provided)
             if (!empty($request['ingredients'])) {
@@ -196,12 +196,12 @@ class RecipeController extends Controller
                     // unlink($recipe->photo);
 
                 }
-                $photo = $request->file('photo')->store('recipes','public');
+                $photo = $request->file('photo')->store('recipes', 'public');
                 $recipe->photo = $photo;
             }
 
             # old image  delete
-            
+
 
 
 
@@ -259,7 +259,6 @@ class RecipeController extends Controller
             DB::commit();
             // return response()->json(['status' => 'success', 'message' => 'Recipe updated successfully.']);
             return redirect()->route('recipe.index');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -273,7 +272,7 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        
+
         $recipe->delete();
         $toasterMessage = [
             'message' => "Recipe Deleted Successfully",
