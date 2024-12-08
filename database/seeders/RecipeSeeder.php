@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 
 use App\Models\Ingredient;
-use App\Models\Nutrition;
 use App\Models\Nutritions;
 use App\Models\Recipe;
 use Illuminate\Support\Str;
@@ -25,12 +24,11 @@ class RecipeSeeder extends Seeder
         // Recipe::insert($recipe);
 
         # for loop
-        
+
         for($i = 1; $i <= 5; $i++){
-            
-            $id = rand(100000, 999999);
+            $id = rand(1, 100);
             $title = fake()->sentence(10);
-            
+
             Recipe::create([
                 'title' => $title,
                 'slug' => Str::slug($title),
@@ -38,25 +36,21 @@ class RecipeSeeder extends Seeder
                 'cook_time' => rand(10, 45),
 
                 // 'photo' => 'https://img.freepik.com/premium-photo/meat-stew-with-with-eggplant-carrots-onions-peppers-zucchini_209364-343.jpg',
-// https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg
-
+                // https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg
 
                 'photo' => 'https://picsum.photos/id/' . $id . '/200/300/',
-
-
-
 
                 'video_link' => "https://www.pexels.com/video/delicious-fish-cooking-with-fresh-herbs-29643123/",
 
                 'short_description' => fake()->sentence(35),
-                
+
                 'directions' => fake()->paragraph(50),
 
                 'nutrition_text' => fake()->sentence(20),
 
                 'category_id' => rand(1,5),
                 'user_id' => rand(1,4),
-                
+
                 'recipe_type' => fake()->randomElement(['asian', 'indian','thai','chines']),
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
             ]);
@@ -160,7 +154,7 @@ class RecipeSeeder extends Seeder
         ];
 
         foreach ($nutrition as $value) {
-            
+
             Nutritions::create($value);
         }
 

@@ -119,6 +119,18 @@
                             </a>
                         </li>
                         <li
+                            class="mb-2 {{ request()->routeIs('recipe-slider.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear ">
+                            <a href="{{ route('recipe-slider.index') }}" class="flex gap-2 align-middle px-6 py-2 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+                                </svg>
+
+                                Recipe Slider
+                            </a>
+                        </li>
+                        <li
                             class="mb-2 {{ request()->routeIs('contact') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear ">
                             <a href="{{ route('contact') }}" class="flex gap-2 align-middle px-6 py-2 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
