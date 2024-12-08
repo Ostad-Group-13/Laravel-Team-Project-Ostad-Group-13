@@ -8,7 +8,6 @@ class Nutritions extends Model
 {
     protected $table = 'nutrition';
 
-    protected $table = "nutrition";
     protected $guarded = [];
 
     #Relationship
