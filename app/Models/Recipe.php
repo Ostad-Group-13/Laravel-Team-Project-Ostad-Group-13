@@ -29,7 +29,7 @@ class Recipe extends Model
     }
 
     function nutritions(){
-        return $this->hasMany(Nutrition::class);
+        return $this->hasMany(Nutritions::class);
     }
 
 

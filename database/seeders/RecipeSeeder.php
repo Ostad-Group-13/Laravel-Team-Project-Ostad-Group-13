@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 
 use App\Models\Ingredient;
-use App\Models\Nutrition;
 use App\Models\Nutritions;
 use App\Models\Recipe;
 use Illuminate\Support\Str;
