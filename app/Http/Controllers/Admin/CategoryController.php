@@ -3,145 +3,74 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Trait\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
-
-use function App\helpers\deleteImage;
-use function App\helpers\uploadImage;
-
-// use function App\uploadImage;
+use App\Http\Resources\CategoryResource;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
+use App\Repositories\Category\CategoryRepository;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    use ApiResponse;
+
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        //
-        $categories = Category::latest('id')->paginate(10);
-        return view('backend.category.index', compact('categories'));
+        $this->categoryRepository = $categoryRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(CategoryStoreRequest $request)
     {
-        //
+        try {
+            $data = $this->categoryRepository->store($request);
+            return redirect()->route('category.index')
+            ->withSuccess('Category Created successfully.');
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function index()
+    {
+        $perPage = 10;
+        $data['categories'] = $this->categoryRepository->allPaginated($perPage);
+        return view('backend.category.index',$data);
+    }
+
+    public function create(){
         return view('backend.category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request, Category $category)
-    {
-        # Validation
-        $request->validate([
-            'categoryName' => 'required',
-            'status' => 'required|string|in:active,inactive',
-        ], [
-            'categoryName.required' => 'Sorry Category Name is Empty',
-            'status.required' => 'Sorry Status is Empty',
-        ]);
-
-
-        // $category = new Category();
-
-        if ($request->file('FileUpload')) {
-
-            # upload image using helper function
-            $url = uploadImage($request->file('FileUpload'), 'category');
-            $category->image = $url;
-        }
-
-        $category->name = $request->input('categoryName');
-        $category->slug = Str::slug($request->categoryName);
-        $category->status = $request->input('status');
-        $category->color = $request->input('color');
-        $category->save();
-
-        $notification = [
-            'message' => 'Created Category Successfully',
-            'alert-type' => 'success'
-        ];
-
-
-        return redirect()->route('category.index')->with($notification);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Category $category)
     {
-        //
-
-        // return $category->id;
-        return view('backend.category.edit', compact('category'));
+       $data['category'] = $category;
+        return view('backend.category.edit',$data);
     }
+    // public function update(CategoryUpdateRequest $request, Category $category){
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Category $category)
+    // }
+    public function update(CategoryUpdateRequest $request, Category  $category)
     {
-
-        if ($request->file('FileUpload')) {
-
-            # old img delete
-            deleteImage($category->image);
-
-            # Image upload
-            $category->image = uploadImage($request->file('FileUpload'), 'category');
+        try {
+            $this->categoryRepository->update($request, $category->id);
+            return redirect()->route('category.index')
+                ->withSuccess('Category Updated successfully.');
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
         }
-
-        $category->name = $request->categoryName;
-        $category->slug = Str::slug($request->categoryName);
-        $category->status = $request->status;
-        $category->color = $request->color;
-        $category->save();
-
-        $notification = [
-            'message' => 'Category Successfully Updated...',
-            'alert-type' => 'info'
-        ];
-
-        return redirect()->route('category.index')->with($notification);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-
-        #img upload and old img delete
-        // if (File::exists($category->image)) {
-        //     File::delete($category->image);
-        // }
-
-        //Delete Image with Helper Function
-        deleteImage($category->image);
-
-        $category->delete();
-
-        $notification = [
-            'message' => 'Deleted Category Successfully',
-            'alert-type' => 'error'
-        ];
-
-        return redirect()->route('category.index')->with($notification);
+    public function destroy($id){
+        try {
+            $data = $this->categoryRepository->delete($id);
+            return redirect()->route('category.index')
+            ->withSuccess('Category Deleted successfully.');
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
+
 }

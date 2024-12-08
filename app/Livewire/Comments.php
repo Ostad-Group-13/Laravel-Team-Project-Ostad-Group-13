@@ -18,6 +18,7 @@ class Comments extends Component
     public function addComment()
     {
         // Ensure user is authenticated
+        
         if (!Auth::check()) {
             $this->dispatch('toast', ['type' => 'error', 'message' => 'You must be logged in to comment.']);
             return;
