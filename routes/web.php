@@ -107,11 +107,17 @@ Route::middleware([
     # Backend User Recipe List Route
     Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
-    # Favorite
-    Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
-    Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
-    Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
+    # Favorite Recipe
+    Route::get('favorite/recipe', [Recipe::class, 'favorite'])->name('favorite.recipes');
+
+
+    // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
+    // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
 });
+Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
+
+Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
+Route::post('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
 
 /*develop by ekramul*/
 Route::resource('recipe-slider', RecipeSliderController::class);

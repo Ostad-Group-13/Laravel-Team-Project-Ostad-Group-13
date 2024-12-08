@@ -26,7 +26,6 @@ class RecipeSeeder extends Seeder
         # for loop
 
         for($i = 1; $i <= 5; $i++){
-
             $id = rand(1, 100);
             $title = fake()->sentence(10);
 
@@ -37,9 +36,9 @@ class RecipeSeeder extends Seeder
                 'cook_time' => rand(10, 45),
 
                 // 'photo' => 'https://img.freepik.com/premium-photo/meat-stew-with-with-eggplant-carrots-onions-peppers-zucchini_209364-343.jpg',
+                // https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg
 
                 'photo' => 'https://picsum.photos/id/' . $id . '/200/300/',
-
 
                 'video_link' => "https://www.pexels.com/video/delicious-fish-cooking-with-fresh-herbs-29643123/",
 
