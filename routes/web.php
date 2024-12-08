@@ -96,6 +96,7 @@ Route::middleware([
     //Common Feature For Backend
     Route::get('subscribe', [BackendController::class, 'Subscribe'])->name('subscribe');
     Route::get('contact-us', [BackendController::class, 'contact'])->name('contact');
+    Route::delete('contact-us/{contact}', [BackendController::class, 'ContactDelete'])->name('contact.delete');
     // Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
@@ -110,14 +111,16 @@ Route::middleware([
     # Favorite Recipe
     Route::get('favorite/recipe', [Recipe::class, 'favorite'])->name('favorite.recipes');
 
-
     // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
     // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+
+    /*develop by ekramul*/
+    Route::resource('recipe-slider', RecipeSliderController::class);
+
 });
+
 Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
 
 Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
 Route::post('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
 
-/*develop by ekramul*/
-Route::resource('recipe-slider', RecipeSliderController::class);

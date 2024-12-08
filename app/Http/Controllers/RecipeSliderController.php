@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use App\Models\RecipeSlider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class RecipeSliderController extends Controller
@@ -30,7 +31,7 @@ class RecipeSliderController extends Controller
     //Store a newly created resource in storage.
     public function store(Request $request)
     {
-        $user_id = auth()->user()->id;
+        $user_id = Auth::user()->id;
         $img = $request->file('img');
         $file_name = $img->getClientOriginalName();
         $img->move(public_path('uploads/slider'), $file_name);
