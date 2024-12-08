@@ -39,5 +39,9 @@ class Recipe extends Model
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
+    function recipeSlider(){
+        return $this->hasMany(RecipeSlider::class);
+    }
+
 
 }

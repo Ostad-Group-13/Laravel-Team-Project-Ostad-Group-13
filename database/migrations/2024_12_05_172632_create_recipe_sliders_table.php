@@ -17,10 +17,10 @@ return new class extends Migration
             $table->text('description');
             $table->string('img')->nullable();
 
-            //$table->unsignedBigInteger('recipe_id')->nullable();
+            $table->unsignedBigInteger('recipe_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
-            //$table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
