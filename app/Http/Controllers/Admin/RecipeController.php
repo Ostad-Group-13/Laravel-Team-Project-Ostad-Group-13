@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\Recipe;
 use App\Models\Category;
-use App\Models\Nutrition;
+use App\Models\Nutritions;
 use App\Models\Ingredient;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -116,7 +116,7 @@ class RecipeController extends Controller
                     $data['unit'] = $nutrition['unit'];
                     $data['recipe_id'] = $recipe->id;
 
-                    Nutrition::insert($data);
+                    Nutritions::insert($data);
                 }
             }
 
