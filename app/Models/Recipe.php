@@ -29,9 +29,15 @@ class Recipe extends Model
     }
   
     function nutritions(){
-        return $this->hasMany(Nutrition::class);
+        return $this->hasMany(Nutritions::class);
     }
 
+
+
+    // public function favoritedBy()
+    // {
+    //     return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    // }
 
 
     public function favoritedBy()

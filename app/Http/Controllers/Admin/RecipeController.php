@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
-
-
-
+use App\Models\Favorite;
+use App\Models\Nutritions;
+use App\Models\User;
 
 // use App\Models\Ingredient;
 
@@ -116,7 +116,7 @@ class RecipeController extends Controller
                     $data['unit'] = $nutrition['unit'];
                     $data['recipe_id'] = $recipe->id;
 
-                    Nutrition::insert($data);
+                    Nutritions::insert($data);
                 }
             }
 
@@ -349,5 +349,37 @@ class RecipeController extends Controller
         // }
 
 
+    }
+
+      # Favorite Recipe
+
+    //   function favorite(){
+
+    //     $userid = Auth::user()->id;
+    //     // return $user;
+
+    //     // $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
+    //     // $recipes = Recipe::where('user_id', $userid)->with('favoritedBy')->get();
+
+    //     // return $recipes;
+     
+    //     $recipes = User::where('id',$userid)->with('favoriteRecipes')->get();
+    //     return $recipes;
+
+       
+    //     return view('backend.recipe.favorite', compact('recipes'));
+    //   }
+
+
+    public function favorite()
+    {
+        // $user = User::with('favoriteRecipes')->find(1); // Replace with authenticated user if necessary
+
+        // return $user;
+        $userid = Auth::user()->id;
+
+        $user = User::where('id', $userid)->with('favoriteRecipes')->first();
+
+        return view('backend.recipe.favorite', compact('user'));
     }
 }
