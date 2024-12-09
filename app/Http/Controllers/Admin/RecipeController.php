@@ -15,14 +15,13 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Nutritions;
+use App\Models\Nutrition;
 use App\Models\User;
 
 // use App\Models\Ingredient;
 
 class RecipeController extends Controller
 {
-
 
     /**
      * Display a listing of the resource.
@@ -104,7 +103,7 @@ class RecipeController extends Controller
 
                     // Nutritions::insert($data);
                 }
-                Nutritions::insert($data);
+                Nutrition::insert($data);
             }
 
             DB::commit();
