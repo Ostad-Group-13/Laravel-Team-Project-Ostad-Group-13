@@ -8,7 +8,7 @@ use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\RecipeController as Recipe;
+use App\Http\Controllers\Admin\RecipeController AS Recipe;
 use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Frontend\PageController;
