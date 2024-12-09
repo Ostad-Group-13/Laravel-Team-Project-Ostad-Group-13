@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             SubscriptionSeeder::class,
             RecipeSeeder::class,
-            Sliderseeder::class
+            SliderSeeder::class
 
 
         ]);
