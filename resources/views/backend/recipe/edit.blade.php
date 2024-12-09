@@ -129,7 +129,7 @@
                             <label for="short_description" class="block text-gray-700 font-medium mb-1">
                                 Short Description:</label>
                             <textarea id="description" name="short_description" placeholder="Short Description" cols="5" rows="2"
-                                class="px-2 py-3 rounded w-full pt-2 border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out  @error('short_description') border-red-500 @enderror">{{  $recipe->short_description }}</textarea>
+                                class="px-2 py-3 rounded w-full pt-2 border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out  @error('short_description') border-red-500 @enderror">{{ $recipe->short_description }}</textarea>
                             @error('short_description')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
@@ -173,10 +173,9 @@
                             @enderror
                         </div>
 
-                        
+                        {{-- //{{dd($recipe->ingredients)}} --}}
                         <div id="total-container" class="space-y-4">
                             @foreach ($recipe->ingredients as $ingredient)
-                                {{-- @foreach ($ingredients as $index => $ingredient) --}}
                                 <div class="total-block space-y-4 border p-4 rounded shadow relative">
                                     <!-- Remove Button -->
                                     <button type="button"
@@ -184,14 +183,13 @@
                                         Remove
                                     </button>
 
-                                 
                                     <!-- Ingredient Title -->
                                     <div class="mb-4">
-                                        <label for="ingredient-title-{{ $ingredient }}"
+                                        <label for="ingredient-title-{{ $ingredient->id }}"
                                             class="block text-sm font-medium py-2">Ingredient Title</label>
-                                        <input type="text" name="ingredients[{{ $ingredient }}][title]"
-                                            id="ingredient-title-{{ $ingredient }}"
-                                            value="{{ $ingredient['ingredients_title'] }}"
+                                        <input type="text" name="ingredients[{{ $ingredient->id }}][title]"
+                                            id="ingredient-title-{{ $ingredient->id }}"
+                                            value="{{ $ingredient->ingredients_title }}"
                                             class="w-full p-2 border border-gray-300 rounded shadow-sm"
                                             placeholder="Ingredient Title">
                                     </div>
@@ -200,12 +198,12 @@
                                     <div class="list-container space-y-2">
 
                                         <span>Item List</span>
-                                        @foreach (json_decode($ingredient['ingredients_list']) as $item)
+                                        @foreach (json_decode($ingredient->ingredients_list) as $item)
                                             <div class="flex items-center space-x-2">
                                                 <input type="text"
-                                                    name="ingredients[{{ $item }}][ingredients_list][]"
+                                                    name="ingredients[{{ $ingredient->id }}][ingredients_list][]"
                                                     value="{{ $item }}"
-                                                    class="w-full p-2 border border-gray-300 rounded transition duration-300 ease-in-out "
+                                                    class="w-full p-2 border border-gray-300 rounded transition duration-300 ease-in-out"
                                                     placeholder="List Item">
                                                 <button type="button"
                                                     class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600 remove-list">
@@ -220,59 +218,64 @@
                                             Add More List Items
                                         </button>
                                     </div>
-                            @endforeach
-                        </div>
-
-
-                        <div id="nutrition-container" class="space-y-4">
-                            @foreach ($recipe->nutritions as $index => $nutrition)
-                                <div class="nutrition-block space-y-4 border p-4 rounded shadow relative">
-                                    <!-- Remove Nutrition Button -->
-                                    <button type="button"
-                                        class="absolute top-2 right-2 px-2 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600 remove-nutrition">
-                                        Remove All
-                                    </button>
-
-                                    <!-- Nutrition Name -->
-                                    <div class="mb-4 md:w-1/3 w-full">
-                                        <label for="nutrition-name-{{ $index }}"
-                                            class="block text-sm font-medium py-2">Nutrition Name</label>
-                                        <input type="text" name="nutritions[{{ $index }}][name]"
-                                            id="nutrition-name-{{ $index }}" value="{{ $nutrition['name'] }}"
-                                            class="w-full p-2 border border-gray-300 rounded shadow-sm"
-                                            placeholder="Nutrition Name">
-                                    </div>
-
-                                    <!-- Nutrition Amount -->
-                                    <div class="mb-4 md:w-1/3 w-full">
-                                        <label for="nutrition-amount-{{ $index }}"
-                                            class="block text-sm font-medium py-2">Amount</label>
-                                        <input type="text" name="nutritions[{{ $index }}][amount]"
-                                            id="nutrition-amount-{{ $index }}"
-                                            value="{{ $nutrition['amount'] }}"
-                                            class="w-full p-2 border border-gray-300 rounded shadow-sm"
-                                            placeholder="Amount">
-                                    </div>
-
-                                    <!-- Nutrition Unit -->
-                                    <div class="mb-4 md:w-1/3 w-full">
-                                        <label for="nutrition-unit-{{ $index }}"
-                                            class="block text-sm font-medium py-2">Unit</label>
-                                        <input type="text" name="nutritions[{{ $index }}][unit]"
-                                            id="nutrition-unit-{{ $index }}" value="{{ $nutrition['unit'] }}"
-                                            class="w-full p-2 border border-gray-300 rounded shadow-sm"
-                                            placeholder="Unit (e.g., grams, mg)">
-                                    </div>
                                 </div>
                             @endforeach
-                        </div>
 
-                   
-                        <!-- Submit Button -->
-                        <div class="mt-6">
-                            <button type="submit" class="flex gap-2 align-middle add-new-btn py-2">
-                                <x-add-icon />Update Recipe
-                            </button>
+
+
+
+                            <div id="nutrition-container" class="space-y-4">
+                                @foreach ($recipe->nutritions as $index => $nutrition)
+                                    <div class="nutrition-block space-y-4 border p-4 rounded shadow relative">
+                                        <!-- Remove Nutrition Button -->
+                                        <button type="button"
+                                            class="absolute top-2 right-2 px-2 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600 remove-nutrition">
+                                            Remove All
+                                        </button>
+
+                                        <!-- Nutrition Name -->
+                                        <div class="mb-4 md:w-1/3 w-full">
+                                            <label for="nutrition-name-{{ $index }}"
+                                                class="block text-sm font-medium py-2">Nutrition Name</label>
+                                            <input type="text" name="nutritions[{{ $index }}][name]"
+                                                id="nutrition-name-{{ $index }}"
+                                                value="{{ $nutrition['name'] }}"
+                                                class="w-full p-2 border border-gray-300 rounded shadow-sm"
+                                                placeholder="Nutrition Name">
+                                        </div>
+
+                                        <!-- Nutrition Amount -->
+                                        <div class="mb-4 md:w-1/3 w-full">
+                                            <label for="nutrition-amount-{{ $index }}"
+                                                class="block text-sm font-medium py-2">Amount</label>
+                                            <input type="text" name="nutritions[{{ $index }}][amount]"
+                                                id="nutrition-amount-{{ $index }}"
+                                                value="{{ $nutrition['amount'] }}"
+                                                class="w-full p-2 border border-gray-300 rounded shadow-sm"
+                                                placeholder="Amount">
+                                        </div>
+
+                                        <!-- Nutrition Unit -->
+                                        <div class="mb-4 md:w-1/3 w-full">
+                                            <label for="nutrition-unit-{{ $index }}"
+                                                class="block text-sm font-medium py-2">Unit</label>
+                                            <input type="text" name="nutritions[{{ $index }}][unit]"
+                                                id="nutrition-unit-{{ $index }}"
+                                                value="{{ $nutrition['unit'] }}"
+                                                class="w-full p-2 border border-gray-300 rounded shadow-sm"
+                                                placeholder="Unit (e.g., grams, mg)">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+
+                            <!-- Submit Button -->
+                            <div class="mt-6">
+                                <button type="submit" class="flex gap-2 align-middle add-new-btn py-2">
+                                    <x-add-icon />Update Recipe
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -284,11 +287,74 @@
     </div>
 </x-app-layout>
 
-{{-- <script>
-    $(document).ready(function() {
-        let totalCounter = {{ count($ingredients) }};
-        let nutritionCounter = {{ count($nutritions) }};
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
 
-        // The rest of your JavaScript remains the same
+        const totalContainer = document.getElementById('total-container');
+
+        totalContainer.addEventListener('click', function (event) {
+            if (event.target.classList.contains('add-more-list')) {
+                const listContainer = event.target.closest('.list-container');
+                const newItem = `
+                    <div class="flex items-center space-x-2">
+                        <input type="text" name="ingredients[new][ingredients_list][]" class="w-full p-2 border border-gray-300 rounded transition duration-300 ease-in-out" placeholder="List Item">
+                        <button type="button" class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600 remove-list">
+                            Remove
+                        </button>
+                    </div>`;
+                listContainer.insertAdjacentHTML('beforeend', newItem);
+            }
+        });
+
+        totalContainer.addEventListener('click', function (event) {
+            if (event.target.classList.contains('remove-list')) {
+                event.target.closest('.flex').remove();
+            }
+        });
+
+        totalContainer.addEventListener('click', function (event) {
+            if (event.target.classList.contains('remove-total')) {
+                event.target.closest('.total-block').remove();
+            }
+        });
+
+        const nutritionContainer = document.getElementById('nutrition-container');
+
+        const addNutritionButton = document.createElement('button');
+        addNutritionButton.textContent = 'Add New Nutrition';
+        addNutritionButton.className = 'mt-4 px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600';
+        addNutritionButton.type = 'button';
+        nutritionContainer.insertAdjacentElement('afterend', addNutritionButton);
+
+        addNutritionButton.addEventListener('click', function () {
+            const newIndex = nutritionContainer.querySelectorAll('.nutrition-block').length;
+            const newNutritionBlock = `
+                <div class="nutrition-block space-y-4 border p-4 rounded shadow relative">
+                    <button type="button" class="absolute top-2 right-2 px-2 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600 remove-nutrition">Remove All</button>
+
+                    <div class="mb-4 md:w-1/3 w-full">
+                        <label for="nutrition-name-${newIndex}" class="block text-sm font-medium py-2">Nutrition Name</label>
+                        <input type="text" name="nutritions[${newIndex}][name]" id="nutrition-name-${newIndex}" class="w-full p-2 border border-gray-300 rounded shadow-sm" placeholder="Nutrition Name">
+                    </div>
+
+                    <div class="mb-4 md:w-1/3 w-full">
+                        <label for="nutrition-amount-${newIndex}" class="block text-sm font-medium py-2">Amount</label>
+                        <input type="text" name="nutritions[${newIndex}][amount]" id="nutrition-amount-${newIndex}" class="w-full p-2 border border-gray-300 rounded shadow-sm" placeholder="Amount">
+                    </div>
+
+                    <div class="mb-4 md:w-1/3 w-full">
+                        <label for="nutrition-unit-${newIndex}" class="block text-sm font-medium py-2">Unit</label>
+                        <input type="text" name="nutritions[${newIndex}][unit]" id="nutrition-unit-${newIndex}" class="w-full p-2 border border-gray-300 rounded shadow-sm" placeholder="Unit (e.g., grams, mg)">
+                    </div>
+                </div>`;
+            nutritionContainer.insertAdjacentHTML('beforeend', newNutritionBlock);
+        });
+
+        nutritionContainer.addEventListener('click', function (event) {
+            if (event.target.classList.contains('remove-nutrition')) {
+                event.target.closest('.nutrition-block').remove();
+            }
+        });
     });
-</script> --}}
+</script>
+

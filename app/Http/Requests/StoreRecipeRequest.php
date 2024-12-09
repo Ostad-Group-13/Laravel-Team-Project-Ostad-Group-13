@@ -21,22 +21,22 @@ class StoreRecipeRequest extends FormRequest
      */
     public function rules(): array
     {
-       
+
         return [
 
-            'recipeTitle' => 'required|string|max:255',
-            'pre_time' => 'required|nullable|string|max:255',
-            'cook_time' => 'required|nullable|string|max:255',
-            'cat_id' => 'required|nullable|string',
-            'recipe_type' => 'required|nullable|string',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'video_link' => 'nullable|file',
+            // 'recipeTitle' => 'required|string|max:255',
+            // 'pre_time' => 'required|nullable|string|max:255',
+            // 'cook_time' => 'required|nullable|string|max:255',
+            // 'cat_id' => 'required|nullable|string',
+            // 'recipe_type' => 'required|nullable|string',
+            // 'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            // 'video_link' => 'nullable|file',
 
-            'short_description' => 'required|nullable|string',
-            'directions' => 'nullable|string',
-            'nutrition_text' => 'required|nullable|string',
+            // 'short_description' => 'required|nullable|string',
+            // 'directions' => 'nullable|string',
+            // 'nutrition_text' => 'required|nullable|string',
 
-            #ingredients 
+            #ingredients
             // 'ingredients' => 'nullable|array',
             // 'ingredients.*.title' => 'required_with:ingredients|string|max:255',
             // 'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
