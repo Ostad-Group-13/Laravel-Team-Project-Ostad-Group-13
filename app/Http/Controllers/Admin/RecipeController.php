@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Favorite;
 use App\Models\Nutritions;
 use App\Models\User;
 

@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 
-use App\Models\Ingredient;
-use App\Models\Nutritions;
 use App\Models\Recipe;
+use App\Models\Nutrition;
+use App\Models\Ingredient;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RecipeSeeder extends Seeder
 {
@@ -341,7 +341,7 @@ class RecipeSeeder extends Seeder
             ],
             [
 
-                'name' => 'Protein',
+                'name' => 'Proteintyr',
                 'amount' => 219,
                 'unit' => 'kcal',
                 'recipe_id' => 4,
@@ -350,7 +350,7 @@ class RecipeSeeder extends Seeder
 
         foreach ($nutrition as $value) {
 
-            Nutritions::create($value);
+            Nutrition::create($value);
         }
     }
 }
