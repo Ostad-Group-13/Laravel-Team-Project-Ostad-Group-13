@@ -16,25 +16,50 @@ class sliderseeder extends Seeder
         $slider = [
 
             [
-                'title' => 'Slider 1',
-                'description' => 'Slide 1',
-                'img' => 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                'user_id' => 1
+                'title' => fake()->sentence(20),
+                'description' => fake()->word(34),
+                'img' => 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+                'user_id' => rand(1, 4),
+                'recipe_id' => rand(1, 5),
+                'status' => 'active'
 
             ],
 
             [
-                'title' => 'Slider 2',
-                'description' => 'Slide 2',
-                'img' => 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                'user_id' => 1
+                'title' => fake()->sentence(20),
+                'description' => fake()->word(34),
+                'img' => 'https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg',
+                'user_id' => rand(1, 4),
+                'recipe_id' => rand(1, 5),
+                'status' => 'inactive'
             ],
 
             [
-                'title' => 'Slider 3',
-                'description' => 'Slide 3',
-                'img' => 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                'user_id' => 1
+                'title' => fake()->sentence(20),
+                'description' => fake()->word(34),
+                'img' => 'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg',
+                'user_id' => rand(1, 4),
+                'recipe_id' => rand(1, 5),
+                'status' => 'inactive'
+
+            ],
+            [
+                'title' => fake()->sentence(20),
+                'description' => fake()->word(34),
+                'img' => 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg',
+                'user_id' => rand(1, 4),
+                'recipe_id' => rand(1, 5),
+                'status' => 'inactive'
+
+            ],
+            [
+                'title' => fake()->sentence(20),
+                'description' => fake()->word(34),
+                'img' => 'https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg',
+                'user_id' => rand(1, 4),
+                'recipe_id' => rand(1, 5),
+                'status' => 'inactive'
+
             ],
         ];
 
