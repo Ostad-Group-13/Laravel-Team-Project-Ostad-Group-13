@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\RecipeSlider;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class sliderseeder extends Seeder
+class SliderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
