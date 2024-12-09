@@ -11,18 +11,10 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\File;
->>>>>>> 4a96b3efd34a9c3e199180acd80d47b5de92af28
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreRecipeRequest;
-
 use App\Http\Requests\UpdateRecipeRequest;
-
-use App\Http\Requests\StoreRecipeRequest;
-use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Favorite;
 use App\Models\Nutritions;
 use App\Models\User;
 
@@ -57,18 +49,22 @@ class RecipeController extends Controller
      */
     public function store(StoreRecipeRequest $request, Recipe $recipe)
     {
-        // dd($request->all());
+
         try {
             DB::beginTransaction();
 
             $url = '';
+
+            # Image Upload
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $url = $file->move('uploads/recipes/', $filename);
                 $recipe->photo = $url;
+                $recipe->save();
             }
 
+            # Recipe Create
             $recipe = Recipe::create([
                 'title' => $request->input('title'),
                 'slug' => Str::slug($request->input('title')),
@@ -84,6 +80,8 @@ class RecipeController extends Controller
                 'recipe_type' => $request->input('recipe_type'),
             ]);
 
+            # Ingredients Create
+
             if (!empty($request->input('ingredients'))) {
                 foreach ($request->input('ingredients') as $ingredient) {
                     Ingredient::create([
@@ -94,29 +92,19 @@ class RecipeController extends Controller
                 }
             }
 
+            # Nutrition Create
+
             if (!empty($request->input('nutritions'))) {
                 $data = [];
-<<<<<<< HEAD
-                foreach ($request->input('nutritions') as $nutrition) {
-                    $data[] = [
-                        'name' => $nutrition['name'],
-                        'amount' => $nutrition['amount'],
-                        'unit' => $nutrition['unit'],
-                        'recipe_id' => $recipe->id,
-                    ];
-=======
-
                 foreach ($request['nutritions'] as $nutrition) {
-
                     $data['name'] = $nutrition['name'];
                     $data['amount'] = $nutrition['amount'];
                     $data['unit'] = $nutrition['unit'];
                     $data['recipe_id'] = $recipe->id;
 
-                    Nutritions::insert($data);
->>>>>>> 4a96b3efd34a9c3e199180acd80d47b5de92af28
+                    // Nutritions::insert($data);
                 }
-                Nutrition::insert($data);
+                Nutritions::insert($data);
             }
 
             DB::commit();
@@ -163,30 +151,6 @@ class RecipeController extends Controller
     {
         try {
             DB::beginTransaction();
-<<<<<<< HEAD
-            if ($request->hasFile('photo')) {
-
-                if ($recipe->photo) {
-                    Storage::disk('public')->delete($recipe->photo);
-                }
-
-                // Store new photo
-                $photo = $request->file('photo')->store('recipes', 'public');
-                $recipe->photo = $photo;
-            }
-
-            // Update Recipe Details
-            $recipe->update([
-                'title' => $request->input('recipeTitle'),
-                'slug' => Str::slug($request->input('recipeTitle')),
-                'pre_time' => $request->input('pre_time'),
-                'cook_time' => $request->input('cook_time'),
-                'category_id' => $request->input('cat_id'),
-                'user_id' => Auth::id(),
-                'short_description' => $request->input('short_description'),
-                'directions' => $request->input('directions'),
-                'nutrition_text' => $request->input('nutrition_text'),
-=======
 
             // Validate input data
             // $validatedData = $request->validate([
@@ -205,18 +169,17 @@ class RecipeController extends Controller
             //     'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
             // ]);
 
+
             // Handle file upload for photo
             // if ($request->hasFile('photo')) {
             //     if ($recipe->photo) {
             //         // Storage::disk('public')->delete($recipe->photo);
-            //         // unlink($recipe->photo);
+            //         unlink($recipe->photo);
 
             //     }
             //     $photo = $request->file('photo')->store('recipes', 'public');
             //     $recipe->photo = $photo;
             // }
-
-            # old image  delete
 
 
 
@@ -224,8 +187,7 @@ class RecipeController extends Controller
 
             if ($request->hasFile('photo')) {
 
-
-                #img upload and old img delete
+                # old image  delete
                 if (File::exists($recipe->photo)) {
                     File::delete($recipe->photo);
                 }
@@ -234,19 +196,11 @@ class RecipeController extends Controller
 
                 $file = $request->file('photo');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
+                // $url = $file->move(public_path('uploads/car'), $filename);
                 $url = $file->move('uploads/recipes/', $filename);
                 $recipe->photo = $url;
+                $recipe->save();
             }
-
-
-            // # Image upload
-            // $file = $request->file('FileUpload');
-            // $filename = time() . '.' . $file->getClientOriginalExtension();
-            // // $url = $file->move(public_path('uploads/car'), $filename);
-            // $url = $file->move('uploads/blog/', $filename);
-            // // $file->move('uploads/car', $filename);
-            // // $url = uploadImage($request->file('image'), 'car');
-            // $blog->image = $url;
 
             // Update recipe
             $recipe->update([
@@ -254,7 +208,8 @@ class RecipeController extends Controller
                 'slug' => Str::slug($request['recipeTitle']),
                 'pre_time' => $request['pre_time'],
                 'cook_time' => $request['cook_time'],
-                'photo' => $url,
+
+                // 'photo' => $url,
                 'video_link' => $request['video_link'],
 
                 'category_id' => $request->cat_id,
@@ -266,7 +221,6 @@ class RecipeController extends Controller
                 'recipe_type' => $request->recipe_type,
 
 
->>>>>>> 4a96b3efd34a9c3e199180acd80d47b5de92af28
             ]);
 
             // Delete Old Ingredients and Recreate
@@ -303,9 +257,6 @@ class RecipeController extends Controller
             ], 500);
         }
     }
-
-
-
 
 
     /**
@@ -368,22 +319,22 @@ class RecipeController extends Controller
 
     }
 
-      # Favorite Recipe
+    # Favorite Recipe
 
     //   function favorite(){
 
     //     $userid = Auth::user()->id;
-    //     // return $user;
+    //     return $user;
 
-    //     // $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
-    //     // $recipes = Recipe::where('user_id', $userid)->with('favoritedBy')->get();
+    // $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
+    // $recipes = Recipe::where('user_id', $userid)->with('favoritedBy')->get();
 
-    //     // return $recipes;
-     
-    //     $recipes = User::where('id',$userid)->with('favoriteRecipes')->get();
-    //     return $recipes;
+    // return $recipes;
 
-       
+    // $recipes = User::where('id',$userid)->with('favoriteRecipes')->get();
+    // return $recipes;
+
+
     //     return view('backend.recipe.favorite', compact('recipes'));
     //   }
 

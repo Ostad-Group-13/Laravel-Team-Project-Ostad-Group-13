@@ -1,18 +1,21 @@
 <?php
 
-
-use App\Http\Controllers\RecipeSliderController;
-
 //use BackendController;
 use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
-use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\RecipeController as Recipe;
-use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\RecipeSliderController;
+use App\Http\Controllers\Admin\BackendController;
+
 use App\Http\Controllers\Frontend\PageController;
+//use App\Http\Controllers\RecipeSliderControllerers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\RecipeController;
+use App\Http\Controllers\Admin\RecipeController as Recipe;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +119,8 @@ Route::middleware([
 
     /*develop by ekramul*/
     Route::resource('recipe-slider', RecipeSliderController::class);
+    Route::get('recipe-slider/status/{recipeSlider}', [RecipeSliderController::class, 'SliderStatus'])->name('recipe-slider.status');
+
 
 });
 
