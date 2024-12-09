@@ -8,7 +8,7 @@
 
     <div class="bg-white shadow rounded-lg p-6">
         <div class="bg-gray-100 px-4 py-3 flex justify-between items-center border-b border-gray-300">
-            <h2 class="py-2 font-semibold pb-4 text-lg">Show Blog</h2>
+            <h2 class="py-2 font-semibold pb-4 text-lg">Show Slider</h2>
             <a href="{{ route('recipe-slider.index') }}" class="back-btn">
                 &larr; Back
             </a>
@@ -20,11 +20,9 @@
                 <table class="min-w-full border border-gray-300 divide-y divide-gray-200">
                     <thead class="">
                     <td>
-                        {{-- <img @if ($blog->image) ? src="{{ asset($blog->image) }}" : src="{{ asset($blog->image) }}" @endif"
-                        alt="" width="250" height="250" class="p-2 rounded"> --}}
-
-                        <img @if ($recipeSlider->img) src="{{ asset($recipeSlider->img) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif"
-                        alt="" width="120" height="120">
+                      
+                        <img @if ($recipeSlider->img) src="{{ asset("uploads/slider") }}/{{ $recipeSlider->img }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                        width="180" height="140">
 
                     </td>
                     <tr class="bg-gray-200 border-b-2 ">
@@ -32,11 +30,50 @@
                         <td>{{ $recipeSlider->title }}</td>
                     </tr>
 
-                    <tr class="bg-gray-200 border-b-2 ">
-                        <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">Short
+                    <tr class="">
+                        <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">
                             Description :</th>
                         <td>{{ $recipeSlider->description }}</td>
                     </tr>
+
+                     <tr class="bg-gray-200 border-b-2">
+                        <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">
+                           User:</th>
+                        <td>
+                            <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
+                                        {{ isset($recipeSlider->user->name)?$recipeSlider->user->name:'N/A' }}
+                                    </span>
+
+                                </td>
+                    </tr>
+
+                    @if($recipeSlider->recipe_id == null)
+                        <tr class="">
+                        <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">
+                            Recipe Details:</th>
+                        <td class="grid py-4 px-2">
+                            Recipe Title : 
+                            <span class="text-gray-200 bg-green-500 px-1 py-1 rounded my-2">
+                                {{ isset($recipeSlider->recipe->title)?$recipeSlider->recipe->title:'N/A' }}
+                            </span>
+
+                            <span class="text-indigo-600 px-2 py-3 my-2 w-25 border-b-2 border-b-slate-300">
+                                Cook Time : {{ $recipeSlider->recipe->cook_time }}
+                            </span>
+
+                            <span class="text-blue-500 px-2 py-3 my-2 rounded">
+                                Pre Time : {{ $recipeSlider->recipe->pre_time }}
+                            </span>
+                        </td>
+                    </tr>
+                        @else
+                        <tr aria-colspan="6">
+                            <td class="py-4 px-3 text-center">
+                                <span class="text-red-600">No Recipe Found</span>
+                            </td>
+                        </tr>
+                   
+                    @endif
 
                     </thead>
                 </table>

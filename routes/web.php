@@ -119,6 +119,8 @@ Route::middleware([
 
     /*develop by ekramul*/
     Route::resource('recipe-slider', RecipeSliderController::class);
+    Route::get('recipe-slider/status/{recipeSlider}', [RecipeSliderController::class, 'SliderStatus'])->name('recipe-slider.status');
+
 
 });
 
