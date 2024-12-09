@@ -30,7 +30,7 @@ class Recipe extends Model
   
   public function nutritions()
     {
-        return $this->hasMany(Nutritions::class);
+        return $this->hasMany(Nutrition::class);
     }
   
     public function favoritedBy()
