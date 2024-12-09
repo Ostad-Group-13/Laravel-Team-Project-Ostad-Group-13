@@ -71,9 +71,23 @@ class User extends Authenticatable
 
     public function blogs(){
         return $this->hasMany(Blog::class);
-    } 
-    
+    }
+
     public function recipe(){
         return $this->hasMany(Recipe::class);
+    }
+
+
+    // public function favoriteRecipes()
+    // {
+    //     return $this->belongsToMany(Recipe::class, 'favorites')->withTimestamps();
+    // }
+    
+    public function favoriteRecipes()
+    {
+        return $this->belongsToMany(Recipe::class, 'favorites')->withTimestamps();
+    }
+    function recipeSliders(){
+        return $this->hasMany(RecipeSlider::class);
     }
 }

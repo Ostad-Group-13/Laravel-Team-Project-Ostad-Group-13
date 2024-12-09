@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             SubscriptionSeeder::class,
             RecipeSeeder::class,
+            sliderseeder::class
+
+
         ]);
     }
 }
