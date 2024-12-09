@@ -236,7 +236,6 @@ class RecipeSeeder extends Seeder
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
-
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
 
             ]
@@ -335,13 +334,6 @@ class RecipeSeeder extends Seeder
             ],
             [
                 'name' => 'Cholesterol',
-                'amount' => 219,
-                'unit' => 'kcal',
-                'recipe_id' => 4,
-            ],
-            [
-
-                'name' => 'Proteintyr',
                 'amount' => 219,
                 'unit' => 'kcal',
                 'recipe_id' => 4,
