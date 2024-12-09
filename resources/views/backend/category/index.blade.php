@@ -37,7 +37,7 @@
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $category->name }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <img @if ($category->image) src="{{ asset($category->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                    <img @if ($category->image) src="{{ asset('uploads/'.$category->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         width="120" height="80">
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">

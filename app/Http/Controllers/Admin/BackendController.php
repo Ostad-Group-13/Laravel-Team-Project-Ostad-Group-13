@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 
 class BackendController extends Controller
@@ -25,7 +26,16 @@ class BackendController extends Controller
     public function Contact()
     {
 
-        $contacts = DB::table('contacts')->latest('id')->paginate(6);
+        $contacts = Contact::latest('id')->paginate(6);
+        return view('backend.contact', compact('contacts'));
+    
+      }
+      
+    public function ContactDelete(Contact $contact)
+    {
+
+        $contact->delete();
+        
         return view('backend.contact', compact('contacts'));
     }
 
@@ -33,7 +43,7 @@ class BackendController extends Controller
 
       // return "User Is : ". $user;
 
-    $userList = Blog::where('user_id', $user->id)->with('users')->get();
+    $userList = Blog::where('user_id', $user->id)->with('user')->get();
 
       // $user = Auth::User()->id;
       // $userList = Blog::where('user_id',$user)->with('category','users')->get();
@@ -49,7 +59,7 @@ class BackendController extends Controller
 
     $user = User::where('id',$UserPost)->first();
          
-    $userList = Blog::where('user_id', $UserPost)->with('users')->get();
+    $userList = Blog::where('user_id', $UserPost)->with('user')->get();
 
     return view('backend.user-list-post', compact('userList','user'));
 

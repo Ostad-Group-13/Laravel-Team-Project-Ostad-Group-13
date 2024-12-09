@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             ContactSeeder::class,
             SubscriptionSeeder::class,
+            RecipeSeeder::class,
+            sliderseeder::class
+
+
         ]);
     }
 }

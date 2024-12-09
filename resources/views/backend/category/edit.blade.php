@@ -62,7 +62,7 @@
                         <div class="w-1/4 rounded">
                             <label for="image" class="block text-gray-700 font-medium mb-1">Image</label>
                             <input type="file" class="dropify @error('image') border-red-500 @enderror"
-                                 @if ($category->image) ? data-default-file="{{ asset($category->image) }}":  @else  data-default-file="{{ asset('uploads/no-image.png') }}" @endif data-height="250"   name="image">
+                                 @if ($category->image) ? data-default-file="{{ asset('uploads/'.$category->image) }}":  @else  data-default-file="{{ asset('uploads/no-image.png') }}" @endif data-height="250"   name="image">
                             @if ($errors->has('image'))
                                 <span class="text-red-500 text-sm">{{ $errors->first('image') }}</span>
                             @endif

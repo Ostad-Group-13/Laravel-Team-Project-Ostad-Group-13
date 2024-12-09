@@ -1,13 +1,16 @@
 <?php
 
+
+use App\Http\Controllers\RecipeSliderController;
+
 //use BackendController;
 use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\RecipeController As Recipe;
-use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController};
-  
+use App\Http\Controllers\Admin\RecipeController as Recipe;
+use App\Http\Controllers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\RecipeController;
 
@@ -41,7 +44,7 @@ Route::get('/', [PageController::class, 'homePage']);
 Route::get('/contact',  [PageController::class, 'contactPage'])->name('contactPage');
 Route::get('/about',  [PageController::class, 'aboutPage'])->name('aboutPage');
 
-Route::get('/recipes',  [RecipeController::class, 'index'])->name('recipesPage');
+Route::get('/recipes-filter',  [RecipeController::class, 'index'])->name('recipesPage');
 
 Route::get('/recipes/{recipe:slug}',  [RecipeController::class, 'show'])->name('recipes.show');
 
@@ -93,14 +96,31 @@ Route::middleware([
     //Common Feature For Backend
     Route::get('subscribe', [BackendController::class, 'Subscribe'])->name('subscribe');
     Route::get('contact-us', [BackendController::class, 'contact'])->name('contact');
-    Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
+    Route::delete('contact-us/{contact}', [BackendController::class, 'ContactDelete'])->name('contact.delete');
+    // Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
     Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
 
     // Backend Recipe Route
     Route::resource('recipe', Recipe::class);
-    
+    Route::get('recipe/status/{recipe}', [Recipe::class, 'RecipeStatus'])->name('recipe.status');
+    # Backend User Recipe List Route
+    Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
+    # Favorite Recipe
+    Route::get('favorite/recipe', [Recipe::class, 'favorite'])->name('favorite.recipes');
+
+    // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
+    // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+
+    /*develop by ekramul*/
+    Route::resource('recipe-slider', RecipeSliderController::class);
 
 });
+
+Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
+
+Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
+Route::post('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+

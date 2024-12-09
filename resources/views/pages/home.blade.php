@@ -1,5 +1,5 @@
 <x-guest-layout>
-
+    
     <!-- slider area start -->
     <section class="slider_area py-[40px]">
       <div class="container">

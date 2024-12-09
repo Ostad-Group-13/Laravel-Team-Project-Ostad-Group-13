@@ -23,7 +23,7 @@ class BlogRepository implements BlogInterface
             'cat_id' => $request->cat_id,
         ]);
 
-        $image_path = (new FileUploadService())->imageUpload($request, $data, $this->file_path);
+        $image_path = (new FileUploadService())->imageUpload($request, $data, 'image' , $this->file_path);
         $data->update([
             'image' => $image_path
         ]);
@@ -59,7 +59,7 @@ class BlogRepository implements BlogInterface
             'cat_id' => $request->cat_id,
         ]);
 
-        $image_path = (new FileUploadService())->imageUpload($request, $data, $this->file_path);
+        $image_path = (new FileUploadService())->imageUpload($request, $data, 'image' , $this->file_path);
         $data->update([
             'image' => $image_path
         ]);

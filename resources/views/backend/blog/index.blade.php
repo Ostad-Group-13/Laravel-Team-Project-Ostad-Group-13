@@ -48,7 +48,7 @@
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $item->short_description }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <img @if ($item->image) src="{{ asset($item->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                    <img @if ($item->image) src="{{ asset('uploads/'.$item->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         alt="" width="120" height="120">
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2 flex align-item-center">
