@@ -9,7 +9,7 @@ class Recipe extends Model
 
     protected $table = 'recipes';
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     # Relationship
 
@@ -27,12 +27,12 @@ class Recipe extends Model
     {
         return $this->hasMany(Ingredient::class);
     }
-
-    function nutritions()
+  
+  public function nutritions()
     {
         return $this->hasMany(Nutritions::class);
     }
-
+  
     public function favoritedBy()
     {
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
