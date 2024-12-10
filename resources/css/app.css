@@ -33,14 +33,14 @@ body{
   p{
     @apply text-[#00000099] text-base leading-[28px];
   }
-  
+
   .container{
     @apply mx-auto px-4;
   }
   .main_menu ul li a{
     @apply font-medium text-base leading-[19.36px] text-black;
   }
-  
+
   /* button css start */
   .login_btn{
     @apply font-medium rounded-lg text-base inline-block;
@@ -57,19 +57,19 @@ body{
   .btn_secondary{
     @apply bg-[#E7FAFE] hover:bg-[#FFC7C7] text-black font-medium rounded-[10px] text-base px-[37px] py-[18px] transition-all duration-300 ease-in-out;
   }
-  
+
   /* button css end */
-  
+
   /* Mobile Menu Styles */
   #mobile_menu {
     z-index: 1001;
   }
-  
+
   /* Overlay Styles */
   #overlay {
     z-index: 1000;
   }
-  
+
   .slider-crical-image{
     @apply absolute top-[50px] left-1/2 -translate-x-1/2;
   }
@@ -92,7 +92,7 @@ body{
     padding-top: 70px;
     padding-bottom: 30px;
   }
-  
+
   .favrict_icon{
     @apply absolute top-[10px] right-[10px] w-[48px] h-[48px] rounded-full bg-white text-center flex items-center justify-center text-[#DBE2E5] cursor-pointer;
   }
@@ -111,7 +111,7 @@ body{
   .recipe_title{
     @apply text-[24px] leading-[32px] font-semibold text-black;
   }
-  
+
   .link_text{
     @apply text-[#FF6363];
   }
@@ -133,11 +133,11 @@ body{
 
 .rd_head_info_item:not(:first-child){
   @apply border-l border-[#DBE2E5] pl-[10px];
-  
+
 }
 .rounded-btn span {
   @apply block text-center mt-4 text-[12px] font-semibold uppercase text-black;
-  letter-spacing: 3px; 
+  letter-spacing: 3px;
 }
 .rounded-btn .icon{
   @apply w-[80px] h-[80px] rounded-full bg-[#E7FAFE] flex items-center justify-center text-[#DBE2E5] cursor-pointer hover:bg-[#FF6363] hover:text-white transition-all duration-300 ease-in-out;
@@ -234,4 +234,7 @@ span[aria-current='page']{
 }
 li.filter_list_item {
   margin-bottom: 7px;
+}
+li.filter_list_item {
+    color: #000000;
 }

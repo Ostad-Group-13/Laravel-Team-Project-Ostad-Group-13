@@ -22,28 +22,24 @@ class UpdateRecipeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cat_id' => 'required',
-            'recipeTitle' => 'required|string|max:255',
-            'pre_time' => 'required|nullable|string|max:255',
-            'cook_time' => 'required|nullable|string|max:255',
 
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'video_link' => 'nullable|string',
+                // 'title' => 'required|string|max:255',
+                // 'slug' => 'required|string|max:255|unique:recipes,slug,' . $recipe->id,
+                // 'pre_time' => 'nullable|string|max:255',
+                // 'cook_time' => 'nullable|string|max:255',
+                // 'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
 
-            'short_description' => 'required|nullable|string',
-            'directions' => 'nullable|string',
-            'nutrition_text' => 'required|nullable|string',
+                // 'ingredients' => 'nullable|array',
+                // 'ingredients.*.title' => 'required_with:ingredients|string|max:255',
+                // 'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
+                // 'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
+                // 'nutritions' => 'nullable|array',
 
-            // 'ingredients' => 'nullable|array',
-            // 'ingredients.*.title' => 'required_with:ingredients|string|max:255',
-            // 'ingredients.*.ingredients_list' => 'required_with:ingredients|array',
-            // 'ingredients.*.ingredients_list.*' => 'required_with:ingredients|string|max:255',
-
-            // 'nutritions' => 'nullable|array',
-            // 'nutritions.*.name' => 'required_with:nutritions|string|max:255',
-            // 'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
-            // 'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
-
+                // 'nutritions.*.name' => 'required_with:nutritions|string|max:255',
+                // 'nutritions.*.amount' => 'required_with:nutritions|string|max:255',
+                // 'nutritions.*.unit' => 'required_with:nutritions|string|max:255',
         ];
+
+        
     }
 }

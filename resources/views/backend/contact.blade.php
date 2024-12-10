@@ -37,7 +37,14 @@
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $contact->message }}</td>
                      
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
-                                    <a href="#" class="edit-btn">Edit</a>
+                          
+                                    <form action="{{ route('contact.delete',$contact) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                       <button type="submit" class="delete-btn inline-flex items-center gap-2 " onclick="DeleteConfirm(event)">
+                                            Delete</button>
+                                    </form>
+
                                     
                                 </td>
                             </tr>

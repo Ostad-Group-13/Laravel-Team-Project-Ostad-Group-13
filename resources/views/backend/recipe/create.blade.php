@@ -15,12 +15,12 @@
 
                             <!-- Title -->
                             <div class="mb-4 w-3/4">
-                                <label for="recipeTitle" class="block text-gray-700 font-medium mb-1">
+                                <label for="title" class="block text-gray-700 font-medium mb-1">
                                     Recipe Name:</label>
-                                <input id="title" type="text" name="recipeTitle" value="{{ old('recipeTitle') }}"
-                                    placeholder="Recipe Name..." autocomplete="recipeTitle"
-                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('recipeTitle') border-red-500 @enderror">
-                                @error('recipeTitle')
+                                <input id="title" type="text" name="title" value="{{ old('title') }}"
+                                    placeholder="Recipe Name..." autocomplete="title"
+                                    class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('title') border-red-500 @enderror">
+                                @error('title')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -30,17 +30,17 @@
                                 <label for="status"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Select an Category</label>
-                                <select id="cat_id" name="cat_id"
+                                    <select id="cat_id" name="cat_id"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                                     @error('cat_id') border-red-500 @enderror">
-                                    <option selected>Select Category</option>
+                                    <option value="" selected disabled>Select Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
-
                                 </select>
+
                                 @error('cat_id')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -139,7 +139,7 @@
                             <div class="w-3/4">
                                 <label for="directions" class="block text-gray-700 font-medium mb-1">
                                     Directions:</label>
-                                <textarea id="description" name="directions" placeholder="Directions" 
+                                <textarea id="description" name="directions" placeholder="Directions"
                                     class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out summernote @error('directions') border-red-500 @enderror">
                             {{ old('directions') }}</textarea>
 
@@ -160,11 +160,11 @@
                             </div>
                         </div>
 
-                      
+
                         <div>
                             <label for="nutrition_text" class="block text-gray-700 font-medium mb-1">Nutrition
                                 Text</label>
-                            <textarea name="nutrition_text" id="nutrition_text" cols="5" rows="2" placeholder="Nutrition Text..." 
+                            <textarea name="nutrition_text" id="nutrition_text" cols="5" rows="2" placeholder="Nutrition Text..."
                                 class="px-2 py-3 rounded w-full pt-2 border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out @error('nutrition_text') border-red-500 @enderror">{{ old('nutrition_text') }}</textarea>
                             @error('nutrition_text')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -262,12 +262,12 @@
                 <!-- Ingredients List Container -->
                 <div class="list-container space-y-2">
                     <div class="flex items-center space-x-2">
-                        <input type="text" name="ingredients[${totalCounter}][ingredients_list][]" 
+                        <input type="text" name="ingredients[${totalCounter}][ingredients_list][]"
                             class="w-full p-2 border border-gray-300 rounded" placeholder="List Item 1">
  <button type="button" class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600 remove-list flex gap-2 align-center">
                     <x-close-icon />Remove
                 </button>
-                        
+
                     </div>
                 </div>
 
@@ -291,7 +291,7 @@
             const listContainer = $(this).siblings(".list-container");
             const newListItem = `
             <div class="flex items-center space-x-2">
-                <input type="text" name="${listContainer.find('input').first().attr('name')}" 
+                <input type="text" name="${listContainer.find('input').first().attr('name')}"
                     class="w-full p-2 border border-gray-300 rounded" placeholder="List Item">
                 <button type="button" class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600 remove-list flex gap-2 align-center">
                     <x-close-icon />Remove
@@ -316,7 +316,7 @@
             const newBlock = `
             <div class="nutrition-block space-y-4 border p-4 rounded shadow relative">
                 <!-- Remove Nutrition Button -->
-               
+
                  <button type="button" class="flex gap-2 align-center absolute top-2 right-2 px-2 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 remove-nutrition">
                     <x-delete-icon />
                     Remove List
@@ -345,7 +345,7 @@
                             class="w-full p-2 border border-gray-300 rounded shadow-sm" placeholder="Unit (e.g., grams, mg)">
                     </div>
 
-                </div>    
+                </div>
 
             </div>
         `;

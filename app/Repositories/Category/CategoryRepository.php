@@ -19,8 +19,7 @@ class CategoryRepository implements CategoryInterface
             'color' => $request->color,
             'status' => $request->status,
         ]);
-        $image_path = (new FileUploadService())->imageUpload($request, $data, $this->file_path);
-
+        $image_path = (new FileUploadService())->imageUpload($request, $data, 'image' , $this->file_path);
         $data->update([
             'image' => $image_path
         ]);
@@ -53,7 +52,7 @@ class CategoryRepository implements CategoryInterface
             'status' => $request->status,
         ]);
 
-        $image_path = (new FileUploadService())->imageUpload($request, $data, $this->file_path);
+        $image_path = (new FileUploadService())->imageUpload($request, $data, 'image' , $this->file_path);
         $data->update([
             'image' => $image_path
         ]);

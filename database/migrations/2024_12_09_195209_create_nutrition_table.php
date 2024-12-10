@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nutritions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('amount');
+        Schema::create('nutrition', function (Blueprint $table) {
+            $table->string('name')->unique(); // Unique constraint
+            $table->integer('amount');
             $table->string('unit');
-
-            $table->unsignedBigInteger('recipe_id')->nullable();
-
-            #Relationship
+            $table->unsignedBigInteger('recipe_id');
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
-
+            $table->unique(['name', 'recipe_id']);
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nutritions');
+        Schema::dropIfExists('nutrition');
     }
 };
