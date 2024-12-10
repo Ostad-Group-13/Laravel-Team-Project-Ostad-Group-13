@@ -80,11 +80,11 @@
                                 class="px-5 py-3 border-b-2 border-gray-200  text-left uppercase tracking-wider border-r border-r-gray-500">
                                 Recipe
                             </th>
-                            <th class="px-5 py-3 text-left uppercase tracking-wider border-r border-r-blue-600">
+                            {{-- <th class="px-5 py-3 text-left uppercase tracking-wider border-r border-r-blue-600">
                                 Status
                             </th>
                             <th class="px-5 py-3 text-left uppercase tracking-wider border-r border-r-blue-600">Action
-                            </th>
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -119,20 +119,20 @@
                                     </div>
                                 </td>
 
-                                <td
+                                {{-- <td
                                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
                                     <p class="text-gray-900 whitespace-no-wrap">Sept 28, 2019</p>
                                     <p class="text-gray-600 whitespace-no-wrap">Due in 3 days</p>
-                                </td>
+                                </td> --}}
 
-                                <td
+                                {{-- <td
                                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
 
                                     <a href=""
                                         class="px-2 py-2 rounded transition duration-300 ease-linear border-2 border-blue-600 hover:bg-blue-500  text-lg hover:text-white">Show</a>
                                     <a href="" class="px-2 py-2 rounded bg-blue-500 text-white text-lg">Edit</a>
                                     <a href="" class="px-2 py-2 rounded bg-red-500 text-white text-lg">Delete</a>
-                                </td>
+                                </td> --}}
                             </tr>
                         @empty
                             <tr>
