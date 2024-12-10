@@ -24,17 +24,17 @@ class StoreRecipeRequest extends FormRequest
 
         return [
 
-            // 'recipeTitle' => 'required|string|max:255',
-            // 'pre_time' => 'required|nullable|string|max:255',
-            // 'cook_time' => 'required|nullable|string|max:255',
-            // 'cat_id' => 'required|nullable|string',
-            // 'recipe_type' => 'required|nullable|string',
-            // 'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            // 'video_link' => 'nullable|file',
+            'recipeTitle' => 'required|string|max:255',
+            'pre_time' => 'required|nullable|string|max:255',
+            'cook_time' => 'required|nullable|string|max:255',
+            'cat_id' => 'required|nullable|string',
+            'recipe_type' => 'required|nullable|string',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'video_link' => 'nullable|file',
 
-            // 'short_description' => 'required|nullable|string',
-            // 'directions' => 'nullable|string',
-            // 'nutrition_text' => 'required|nullable|string',
+            'short_description' => 'required|nullable|string',
+            'directions' => 'nullable|string',
+            'nutrition_text' => 'required|nullable|string',
 
             #ingredients
             // 'ingredients' => 'nullable|array',
