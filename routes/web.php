@@ -5,17 +5,20 @@ use App\Livewire\Comments;
 use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
 use App\Http\Controllers\FavoriteController;
+
+# Backend Controller
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\RecipeSliderController;
 use App\Http\Controllers\Admin\BackendController;
-
-use App\Http\Controllers\Frontend\PageController;
 //use App\Http\Controllers\RecipeSliderControllerers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Frontend\RecipeController;
 use App\Http\Controllers\Admin\RecipeController as Recipe;
+use App\Http\Controllers\Admin\CategoryController;
+
+# Frontend Controller
+use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,12 +123,9 @@ Route::middleware([
     /*develop by ekramul*/
     Route::resource('recipe-slider', RecipeSliderController::class);
     Route::get('recipe-slider/status/{recipeSlider}', [RecipeSliderController::class, 'SliderStatus'])->name('recipe-slider.status');
-
-
 });
 
 Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
 
 Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
 Route::post('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
-

@@ -74,8 +74,8 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
@@ -97,8 +97,8 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
@@ -120,8 +120,8 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
@@ -143,15 +143,16 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
 
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
 
-            ],[
+            ],
+            [
                 'title' => fake()->sentence(10),
                 'slug' => Str::slug(fake()->sentence(10)),
 
@@ -165,15 +166,16 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
 
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
 
-            ],[
+            ],
+            [
                 'title' => fake()->sentence(10),
                 'slug' => Str::slug(fake()->sentence(10)),
 
@@ -187,15 +189,16 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
 
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
 
-            ],[
+            ],
+            [
                 'title' => fake()->sentence(10),
                 'slug' => Str::slug(fake()->sentence(10)),
 
@@ -209,15 +212,16 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
 
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
 
-            ],[
+            ],
+            [
                 'title' => fake()->sentence(10),
                 'slug' => Str::slug(fake()->sentence(10)),
 
@@ -231,12 +235,11 @@ class RecipeSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => rand(1, 4),
 
-                'short_description' => fake()->sentence(35),
-                'directions' => fake()->paragraph(50),
+                'short_description' => fake()->sentence(25),
+                'directions' => fake()->paragraph(10),
                 'nutrition_text' => fake()->sentence(20),
 
                 'recipe_type' => fake()->randomElement(['asian', 'indian', 'thai', 'chines']),
-
                 'recipe_status' => fake()->randomElement(['pending', 'approved'])
 
             ]
@@ -335,13 +338,6 @@ class RecipeSeeder extends Seeder
             ],
             [
                 'name' => 'Cholesterol',
-                'amount' => 219,
-                'unit' => 'kcal',
-                'recipe_id' => 4,
-            ],
-            [
-
-                'name' => 'Proteintyr',
                 'amount' => 219,
                 'unit' => 'kcal',
                 'recipe_id' => 4,
