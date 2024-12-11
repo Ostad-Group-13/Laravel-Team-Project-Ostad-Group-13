@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\CategoryController;
 # Frontend Controller
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\RecipeController;
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +86,13 @@ Route::middleware([
     ]);
 
     Route::get('/dashboard', function () {
+
+        // $data = [
+        //     'category' => Category::all(),
+        //     'user' => User::all(),
+        // ];
+
+        // return $data['user']->count();
         return view('dashboard');
     })->name('dashboard');
 
@@ -126,6 +136,7 @@ Route::middleware([
 });
 
 Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
+Route::get('/demo', [FavoriteController::class, 'demo'])->name('demo.index');
 
 Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
 Route::post('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');

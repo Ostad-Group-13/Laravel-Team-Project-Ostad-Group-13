@@ -1,4 +1,4 @@
-<div class="racipe_item">
+
 <div class="racipe_item">
 
     <div class="w-full h-[250px] rounded-[30px] overflow-hidden relative">
@@ -8,12 +8,11 @@
             <span>{{ $recipe->recipe_type }}</span>
         </div>
 
-
         @auth
             @if (auth()->user()->favoriteRecipes->contains($recipe->id))
                 <form action="{{ route('recipes.unfavorite', $recipe) }}" method="POST">
                     @csrf
-                    <button class=" absolute top-[20px] right-[10px] px-[10px] py-[3px]   text-white capitalize  ">
+                    <button onclick="Favorite()" class=" absolute top-[20px] right-[10px] px-[10px] py-[3px]   text-white capitalize  ">
                         <img width="48" height="48" src="https://img.icons8.com/fluency/48/hearts.png"
                             alt="hearts" />
                     </button>
@@ -21,7 +20,7 @@
             @else
                 <form action="{{ route('recipes.favorite', $recipe) }}" method="POST">
                     @csrf
-                    <button class=" absolute top-[20px] right-[10px] px-[10px] py-[5px]  text-white capitalize  ">
+                    <button onclick="UnFavorite()" class=" absolute top-[20px] right-[10px] px-[10px] py-[5px]  text-white capitalize  ">
                         <img width="50" height="50" src="https://img.icons8.com/ios-glyphs/50/hearts.png"
                             alt="hearts" />
                     </button>
@@ -72,5 +71,5 @@
     </div>
 </div>
 
-</div>
+
 
