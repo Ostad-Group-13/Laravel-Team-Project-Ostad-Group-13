@@ -43,9 +43,9 @@
                             <!--  Image  -->
                             <div class="mb-4 w-1/4">
                                 <label for="FileUpload" class="block text-gray-700 font-medium mb-1">Image :</label>
-                                <input type="file" name="FileUpload" class="dropify @error('FileUpload') border-red-500 @enderror"
+                                <input type="file" name="img" class="dropify @error('img') border-red-500 @enderror"
                                        @if ($recipeSlider->img) data-default-file="{{ asset($recipeSlider->img) }}" @else data-default-file="{{ asset('uploads/no-image.png') }}" @endif data-height="265" />
-                                @error('FileUpload')
+                                @error('img')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>

@@ -27,7 +27,7 @@
                         <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Description</th>
                         <th class="py-4 px-3 text-left text-xs font-medium  uppercase  border-l">Image</th>
                         <th class="py-4 px-3 text-left text-xs font-medium  uppercase  border-l">User</th>
-                        <th class="py-4 px-3 text-left text-xs font-medium  uppercase  border-l">Recipe</th>
+                        <th class="py-4 px-3 text-left text-xs font-medium  uppercase  border-l">Recipe Name</th>
                         <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Action</th>
                     </tr>
                     </thead>
@@ -38,21 +38,23 @@
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $item->title }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $item->description }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700">
-                                <img @if ($item->image) src="{{ asset($item->image) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
+                                <img @if ($item->img) src="{{asset("uploads/slider/$item->img") }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                 alt="" width="120" height="120">
+
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700">
-
-                                    <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
+                                <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
                                         {{ isset($item->user->name)?$item->user->name:'N/A' }}
-                                    </span>
+                                </span>
                             </td>
-                            <td class="px-4 py-2 text-sm text-gray-700">
 
-                                    <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
-                                        {{ $item->recipe->title }}
-                                    </span>
+                            <td class="px-4 py-2 text-sm text-gray-700">
+                                <span class="text-gray-200 bg-green-500 px-1 py-1 rounded">
+                                        {{ ($item->recipe->title) }}
+                                </span>
                             </td>
+
+
                             <td class="px-4 py-2 text-sm text-gray-700 space-x-2 flex align-item-center">
                                 <a href="{{ route('recipe-slider.show', $item) }}" class="show-btn">Show</a>
                                 <a href="{{ route('recipe-slider.edit', $item) }}" class="edit-btn">Edit</a>

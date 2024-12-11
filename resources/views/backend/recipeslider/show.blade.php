@@ -20,12 +20,8 @@
                 <table class="min-w-full border border-gray-300 divide-y divide-gray-200">
                     <thead class="">
                     <td>
-                        {{-- <img @if ($blog->image) ? src="{{ asset($blog->image) }}" : src="{{ asset($blog->image) }}" @endif"
-                        alt="" width="250" height="250" class="p-2 rounded"> --}}
-
-                        <img @if ($recipeSlider->img) src="{{ asset($recipeSlider->img) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif"
+                        <img @if ($recipeSlider->img) src="{{ asset("uploads/slider/$recipeSlider->img") }}" @else src="{{ asset('uploads/no-image.png') }}" @endif"
                         alt="" width="120" height="120">
-
                     </td>
                     <tr class="bg-gray-200 border-b-2 ">
                         <th class="py-4 px-3 text-left text-xs font-medium text-gray-700 uppercase">Title :</th>
@@ -36,6 +32,11 @@
                         <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">Short
                             Description :</th>
                         <td>{{ $recipeSlider->description }}</td>
+                    </tr>
+                    <tr class="bg-gray-200 border-b-2 ">
+                        <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">Short
+                            Recipe Title :</th>
+                        <td>{{ $recipeSlider->recipe->title }}</td>
                     </tr>
 
                     </thead>

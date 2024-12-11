@@ -15,7 +15,7 @@ class RecipeSliderController extends Controller
     public function index()
     {
 
-        $recipeSlider = RecipeSlider::with('user', 'recipe')->latest()->paginate(2);
+        $recipeSlider = RecipeSlider::with('user', 'recipe')->latest()->paginate(10);
         return view('backend.recipeslider.index', compact('recipeSlider'));
     }
 
@@ -31,22 +31,21 @@ class RecipeSliderController extends Controller
     //Store a newly created resource in storage.
     public function store(Request $request)
     {
+
         $user_id = Auth::user()->id;
         $img = $request->file('img');
         $file_name = $img->getClientOriginalName();
         $img->move(public_path('uploads/slider'), $file_name);
 
-        $recipeSlider = RecipeSlider::create([
+        RecipeSlider::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'img' => $file_name,
             'user_id' => $user_id,
             'recipe_id' => $request->input('recipe_id'),
         ]);
-        return response()->json([
-            'status' => "Success",
-            'data' => $recipeSlider
-        ], 201);
+        return redirect()->route('recipe-slider.index');
+
     }
 
 
@@ -69,19 +68,25 @@ class RecipeSliderController extends Controller
     //Update the specified resource in storage.
     public function update(Request $request, RecipeSlider $recipeSlider)
     {
+        $user_id = Auth::user()->id;
 
         $slider_id = $recipeSlider->id;
+
 
         if($request->hasFile('img')) {
             $img = $request->file('img');
             $file_name = $img->getClientOriginalName();
-            $img->move(public_path('uploads/slider'), $file_name);
+            $img->move(('uploads/slider'), $file_name);
 
-            $filePath=$request->input('file_path');
-            File::delete($filePath);
+            //$old_image = 'uploads/slider/' . $recipeSlider->img;
+            //if (file_exists($old_image)) {
+            //    unlink($old_image);
+            //}
 
+            $old_image = 'uploads/slider/' . $recipeSlider->img;
+            File::delete($old_image);
 
-             RecipeSlider::where('id', $slider_id)->update([
+            RecipeSlider::where('id', $slider_id)->where('user_id', $user_id)->update([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
                 'img' => $file_name,
@@ -90,7 +95,7 @@ class RecipeSliderController extends Controller
 
         }
         else{
-            RecipeSlider::where('id', $slider_id)->update([
+            RecipeSlider::where('id', $slider_id)->where('user_id', $user_id)->update([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
 
