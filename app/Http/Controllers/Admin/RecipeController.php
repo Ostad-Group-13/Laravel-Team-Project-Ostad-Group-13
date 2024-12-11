@@ -296,10 +296,10 @@ class RecipeController extends Controller
     {
         // $user = User::with('favoriteRecipes')->find(1); // Replace with authenticated user if necessary
 
-        // return $user;
+        // return Auth::user()->name;
         $userid = Auth::user()->id;
-
-        $user = User::where('id', $userid)->with('favoriteRecipes')->first();
+        $user = User::where('id', $userid)->withCount('favoriteRecipes')->first();
+        // return $user->name->favorite_recipes_count;
 
         return view('backend.recipe.favorite', compact('user'));
     }

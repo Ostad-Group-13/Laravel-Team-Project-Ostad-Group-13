@@ -18,6 +18,7 @@ class RecipeSliderController extends Controller
     {
 
         $recipeSlider = RecipeSlider::with('user', 'recipe')->latest()->paginate(5);
+        return response()->json($recipeSlider);
 
         return view('backend.recipeslider.index', compact('recipeSlider'));
     }

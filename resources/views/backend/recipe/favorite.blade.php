@@ -64,6 +64,7 @@
         <span>Hi,{{ Auth::user()->name }}</span>
         <h2 class="text-blue-600 font-semibold text-lg px-1 pt-3">Total Favorite Recipe List
             {{ count($user['favoriteRecipes']) }}</h2>
+            {{-- {{ $user->favorite_recipes_count }} --}}
         <div class="py-4">
             <div class="inline-block min-w-full rounded-lg">
                 <table class="min-w-full leading-normal">
