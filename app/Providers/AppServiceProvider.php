@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Recipe;
+use App\Models\RecipeSlider;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -36,10 +37,11 @@ class AppServiceProvider extends ServiceProvider
             $blog = Blog::all();
             $category = Category::get();
             $recipe = Recipe::get();
+            $allSlider = RecipeSlider::with('recipe','user')->get();
 
             $category = Category::get();
 
-            View::share(['category' => $category, 'user' => $user, 'blog' => $blog, 'recipe' => $recipe]);
+            View::share(['category' => $category, 'user' => $user, 'blog' => $blog, 'recipe' => $recipe, 'allSlider' => $allSlider]);
 
             // view()->share('categorylist', $categorylist);
         }
