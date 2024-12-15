@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
@@ -10,6 +11,13 @@ class Recipe extends Model
     protected $table = 'recipes';
 
     protected $guarded = ['id'];
+    
+    # default created_at set
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $value == "0000-00-00 00:00:00" ? "0000-00-00 00:00:00" : $value;
+    }
 
     # Relationship
 
@@ -28,7 +36,7 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
-  public function nutritions()
+    public function nutritions()
     {
         return $this->hasMany(Nutrition::class);
     }
