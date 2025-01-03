@@ -39,7 +39,7 @@ class RecipeController extends Controller
         }
 
     
-        $recipes = $recipes->with('category')->paginate(9);
+        $recipes = $recipes->where('recipe_status', 'approved')->with('category')->paginate(6);
     
         if ($request->ajax()) {
             return view('pages.recipe.partials.recipes', compact('recipes'))->render();

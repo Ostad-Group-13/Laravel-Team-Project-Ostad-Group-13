@@ -14,7 +14,7 @@ class PageController extends Controller
 
     function homePage(){
         $categorys = Category::where('status', 'active')->take(6)->get();
-        $recipes = Recipe::take(6)->with('category')->get();
+        $recipes = Recipe::where('recipe_status', 'approved')->take(6)->with('category')->get();
         //return $categorys;
         return view('pages.home', ['categorys' => $categorys, 'recipes' => $recipes]);
     }

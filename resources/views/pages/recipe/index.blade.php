@@ -22,7 +22,7 @@
                     <div class="filter_item mb-[30px]">
                         <h2 class="filter_title">Recipe Type</h2>
                         <ul class="filter_list">
-                            @foreach (['Asian', 'Indian', 'Thai', 'Chinese'] as $recipeType)
+                            @foreach (['Asian', 'Indian', 'Thai', 'Chines'] as $recipeType)
                                 <li class="filter_list_item">
                                     <label>
                                         <input class="filter_recipe" type="checkbox" name="recipe_types[]" value="{{ $recipeType }}">

@@ -125,7 +125,7 @@
                   @endforeach
                 </ul>
               </div>
-              <p class="text-center self-end">{{ $recipe->nutritions_text }}</p>
+              <p class="text-center self-end">{{ $recipe->nutrition_text }}</p>
           </div>
         </div>
           
