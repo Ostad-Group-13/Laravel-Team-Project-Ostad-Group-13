@@ -293,13 +293,6 @@ class RecipeController extends Controller
 
         return view('backend.userRecipe.index', compact('recipes'));
 
-        // if (Auth::check() == 1) {
-
-        //     $recipes = Recipe::where('user_id', $user)->with('ingredients', 'nutritions')->paginate(6);
-        // } else {
-        //     echo 'no';
-        // }
-
     }
 
 
@@ -309,7 +302,8 @@ class RecipeController extends Controller
 
         // return Auth::user()->name;
         $userid = Auth::user()->id;
-        $user = User::where('id', $userid)->withCount('favoriteRecipes')->first();
+
+        $user = User::where('id', $userid)->withCount('favorites')->first();
         // return $user->name->favorite_recipes_count;
 
         return view('backend.recipe.favorite', compact('user'));

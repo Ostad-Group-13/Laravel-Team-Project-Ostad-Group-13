@@ -161,6 +161,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
 Route::get('/favorites', [FavoriteRecipeController::class, 'favoriteRecipe'])->name('favorites.index');
 
+Route::delete('/favorite/delete/{recipe}', [FavoriteRecipeController::class, 'favoriteDelete'])->name('favorite.delete');
+
 Route::post('/recipes/{recipe}/favorite', [FavoriteRecipeController::class, 'favorite'])->name('recipes.favorite');
 
 Route::delete('/recipes/{recipe}/unfavorite', [FavoriteRecipeController::class, 'unfavorite'])->name('recipes.unfavorite');

@@ -53,4 +53,20 @@ class FavoriteRecipeController extends Controller
             'message' => 'Recipe unfavorited successfully.',
         ]);
     }
+
+    public function favoriteDelete(Recipe $recipe)
+    {
+     
+        $user = Auth::user();
+        if ($user->favorites->contains($recipe)) {
+        }
+        
+        $user->favorites()->detach($recipe->id);
+
+        response()->json([
+            'success' => true,
+            'message' => 'Favorite Recipe Remove successfully.',
+        ]);
+        return redirect()->route('favorites.index');
+    }
 }
