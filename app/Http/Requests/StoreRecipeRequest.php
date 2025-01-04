@@ -30,7 +30,7 @@ class StoreRecipeRequest extends FormRequest
             'cat_id' => 'required|nullable|string',
             'recipe_type' => 'required|nullable|string',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'video_link' => 'nullable|file',
+            // 'video_link' => 'nullable|file',
 
             'short_description' => 'required|nullable|string',
             'directions' => 'nullable|string',

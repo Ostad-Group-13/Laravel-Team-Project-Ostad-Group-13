@@ -38,30 +38,27 @@
                         @forelse ($recipes as $recipe)
                             <tr>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ Str::limit($recipe->title,10) }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ Str::limit($recipe->title, 10) }}</td>
                                 {{-- <td class="px-4 py-2 text-sm text-gray-700">{{ $recipe->title }}</td> --}}
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     <img @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
                                         width="80" height="40">
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    @if($recipe->category_id !== null)
-                                      
-                                    <span class="text-white px-3 py-2 bg-gray-400 rounded">{{ $recipe->category->name }}</span>
+                                    @if ($recipe->category_id !== null)
+                                        <span
+                                            class="text-white px-3 py-2 bg-gray-400 rounded">{{ $recipe->category->name }}</span>
                                     @else
-                                    <span class="text-red-600 px-3 py-2 font-semibold rounded">No Category</span>
-
+                                        <span class="text-red-600 px-3 py-2 font-semibold rounded">No Category</span>
                                     @endif
                                 </td>
 
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     @if ($recipe->user_id != null)
-                                
-                                    <span class="text-white px-3 py-2 bg-blue-500 rounded">{{ $recipe->user->name }}</span>
-
+                                        <span
+                                            class="text-white px-3 py-2 bg-blue-500 rounded">{{ $recipe->user->name }}</span>
                                     @else
-                                     <span class="text-red-600 px-3 py-2 font-semibold rounded">No User</span>
-
+                                        <span class="text-red-600 px-3 py-2 font-semibold rounded">No User</span>
                                     @endif
 
                                 </td>
@@ -71,12 +68,33 @@
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     @if ($recipe->recipe_status == 'pending')
-                                        <span class="text-orange-600 rounded text-lg font-semibold  capitalize">{{ $recipe->recipe_status }}</span>
+                                        <span
+                                            class="text-orange-600 rounded text-lg font-semibold  capitalize">{{ $recipe->recipe_status }}</span>
                                     @else
-                                        <span class="text-green-600 rounded  text-lg font-semibold capitalize">{{ $recipe->recipe_status }}</span>
+                                        <span
+                                            class="text-green-600 rounded  text-lg font-semibold capitalize">{{ $recipe->recipe_status }}</span>
                                     @endif
 
                                 </td>
+
+                                <td>
+                                    {{-- <input data-id="{{ $recipe->id }}" class="toggle-class" type="checkbox"
+                                        data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                        data-on="Yes" data-off="No" @if (!empty($recipe) && $recipe->recipe_status) {{ 'checked' }} @endif
+                                       > 
+                                       
+                                       @if (isset($recipe->recipe_status) && $recipe->recipe_status)checked="checked"@endif
+                                       
+                                       --}}
+
+                                    <input type="checkbox" class="toggle-class" data-toggle="toggle"
+                                        data-on="{{ $recipe->recipe_status == 'Approved' }}" data-onstyle="success" 
+                                       data-off="{{ $recipe->recipe_status == 'Pending' }}"  data-offstyle="danger" 
+                                        data-id="{{ $recipe->id }}">
+                                </td>
+
+                                {{-- {{ $recipe->recipe_status ? 'checked' : '' }} --}}
+                                {{-- <input  data-toggle="toggle" data-on="Yes" data-off="No" @if (!empty($person) && $person->intern_extern) {{ 'checked' }} @endif data-onstyle="primary" data-offstyle="info" type="checkbox" name="intern_extern"> --}}
 
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
 
@@ -118,4 +136,21 @@
             </div>
         </div>
     </div>
+    <script>
+        let url = window.location.origin;
+        console.log(url);
+
+        $('body').on('click', '.toggle-class', function() {
+            let id = $(this).data('id');
+            console.log(id);
+
+            let view = url + '/recipe.status' + '/' + id
+            // console.log(view);
+            axios.get(view)
+                .then(function(res) {
+                    console.log(res);
+
+                })
+        })
+    </script>
 </x-app-layout>

@@ -3,7 +3,7 @@
   <div class="racipe_page pb-[70px]">
     <div class="section_title_area py-10 text-center bg-gray-200 mb-20">
       <div class="container">
-        <h1 class="text-3xl font-bold">Category - <span class="text-[#ff0000]">{{ $category->name }}</span></h1>
+        <h1 class="text-3xl font-bold">Category  - <span class="text-[#ff0000]">{{ $category->name }}</span></h1>
       </div>
     </div>
     <div class="container">

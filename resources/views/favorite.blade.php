@@ -63,18 +63,18 @@
 </div>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+
 <script>
     // fetch('https://jsonplaceholder.typicode.com/users')
     //   .then(response => response.json())
     //   .then(json => console.log(json))
 
     //   axios.get('recipe-slider')
-      axios.get("{{ route('recipe-slider.index') }}")
+
+    axios.get("{{ route('recipe-slider.index') }}")
             .then(response => {
                 console.log(response.data);
-                
-            })
-            .catch(error => response.json())
+            }).catch(error => response.json())
 </script>
 
 <script>

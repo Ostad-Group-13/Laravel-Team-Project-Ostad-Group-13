@@ -1,0 +1,2 @@
+<input checked data-toggle="toggle" data-on="Yes" @if(isset($person->intern_extern) && $person->intern_extern)checked="checked"@endif 
+data-onstyle="primary" data-offstyle="info" type="checkbox" value="1" name="intern_extern">

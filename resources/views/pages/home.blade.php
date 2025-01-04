@@ -30,6 +30,11 @@
             align-items: center;
         }
 
+        .slider_itam {
+            height: 65vh;
+            border-radius: 5px solid red;
+        }
+
         .swiper-slide img {
             display: block;
             /* width: 100%; */
@@ -92,21 +97,21 @@
             <div class="swiper-pagination"></div>
         </div> --}}
 
-        <div class="container swiper mySwiper">
-            <div class="slider_wrapp swiper-wrapper">
+        <div class="container swiper hero-slider">
+            <div class="swiper-wrapper rounded-lg">
                 {{-- @for ($slide = 1; $slide <= 3; $slide++)
                 @endfor --}}
+                
                 @foreach ($allSlider as $slider)
                     @if ($slider->status == 'active')
                         <x-home-slider :slider="$slider" />
                     @endif
                 @endforeach
 
-             
-
             </div>
-            {{-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div> --}}
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+
             <div class="swiper-pagination"></div>
             <div class="autoplay-progress">
                 <svg viewBox="0 0 48 48">

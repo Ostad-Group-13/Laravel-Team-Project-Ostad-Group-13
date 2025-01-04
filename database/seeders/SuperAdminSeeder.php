@@ -18,7 +18,7 @@ class SuperAdminSeeder extends Seeder
         $superAdmin = User::create([
             'name' => 'Super Admin Test User',
             'email' => 'superadmin@example.com',
-            'password' => Hash::make('superadmin@example.com')
+            'password' => Hash::make('superadmin@mail.com')
         ]);
         $superAdmin->assignRole('Super Admin');
 
@@ -26,7 +26,7 @@ class SuperAdminSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin Test User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('admin@example.com')
+            'password' => Hash::make('admin@mail.com')
         ]);
         $admin->assignRole('Admin');
 
@@ -34,17 +34,16 @@ class SuperAdminSeeder extends Seeder
         $productManager = User::create([
             'name' => 'Product Manager Test User',
             'email' => 'manager@example.com',
-            'password' => Hash::make('manager@example.com')
+            'password' => Hash::make('manager@mail.com')
         ]);
         $productManager->assignRole('Product Manager');
 
         // Creating User
         $user = User::create([
             'name' => 'User Test User',
-            'email' => 'user@example.com',
+            'email' => 'user@mail.com',
             'password' => Hash::make('user@example.com')
 
         ]);
-
     }
 }
