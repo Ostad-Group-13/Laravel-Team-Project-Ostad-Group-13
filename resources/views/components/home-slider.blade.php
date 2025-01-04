@@ -1,5 +1,4 @@
-<div
-    class="slider_itam swiper-slide flex lg:flex-row flex-col items-center justify-between bg-[#E7FAFE] w-full lg:h-[640px] h-full rounded-[50px] overflow-hidden relative py-20 lg:p-0">
+<div class="slider_itam swiper-slide flex lg:flex-row flex-col items-center justify-between bg-[#E7FAFE] w-full lg:h-[640px] h-full rounded-[50px] overflow-hidden relative py-20 lg:p-0">
     <div class="slider-crical-image hidden lg:block">
         <img src="{{ asset('/assets/img/sliders/Badge.png') }}" alt="">
     </div>

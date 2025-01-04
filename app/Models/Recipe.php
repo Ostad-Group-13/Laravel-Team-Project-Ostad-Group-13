@@ -40,10 +40,14 @@ class Recipe extends Model
     {
         return $this->hasMany(Nutrition::class);
     }
-
+   
+    # Favorite Recipe
     public function favoritedBy()
     {
-        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+
+        // return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorites');
+
     }
 
     function recipeSlider()

@@ -65,8 +65,8 @@
         <h2 class="text-blue-600 font-semibold text-lg px-1 pt-3">Total Favorite Recipe List
             {{ count($user['favoriteRecipes']) }}</h2>
             {{-- {{ $user->favorite_recipes_count }} --}}
-        <div class="py-4">
-            <div class="inline-block min-w-full rounded-lg">
+        <div>
+            <div class="flex min-w-full rounded-lg">
                 <table class="min-w-full leading-normal">
                     <thead class="bg-blue-500 text-white font-semibold text-lg">
                         <tr>
@@ -92,21 +92,21 @@
                         @forelse ($user['favoriteRecipes'] as $recipe)
                             <tr>
                                 <td
-                                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
+                                    class="px-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
                                     {{ $loop->iteration }}</td>
                                 <td
-                                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
+                                    class="px-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
                                     <div class="flex">
                                         <div class="flex-shrink-0 w-10 h-10 mt-2">
                                             <img class="w-full h-full rounded"
                                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
                                                 alt="" />
                                         </div>
-                                        <span class="px-2 py-3 pt-4 text-green-700">{{ $user->name }}</span>
+                                        <span class="px-2 pt-4 text-green-700">{{ $user->name }}</span>
                                     </div>
                                 </td>
                                 <td
-                                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
+                                    class="px-5 border-b border-gray-200 bg-white text-sm border-r border-r-gray-300">
                                     <div class="flex">
                                         <div class="flex-shrink-0 w-[80px] mt-1">
                                             <img class="w-full h-full rounded-lg" src="{{ $recipe->photo }}"

@@ -64,7 +64,6 @@
                         <p class="text-4xl font-bold ">No Recipes Found.</p>
                     </div>
 
-
                     <div id="recipes-list" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[20px]">
                         @include('pages.recipe.partials.recipes', ['recipes' => $recipes])
                     </div>
@@ -80,6 +79,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const filterForm = document.getElementById('filter-form');
+
             const loader = document.getElementById('loader');
             const recipesList = document.getElementById('recipes-list');
 
