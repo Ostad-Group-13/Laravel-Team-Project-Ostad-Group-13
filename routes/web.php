@@ -147,6 +147,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
     // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+    
+    // Recipe Histroy
+
 
     /*develop by ekramul*/
 

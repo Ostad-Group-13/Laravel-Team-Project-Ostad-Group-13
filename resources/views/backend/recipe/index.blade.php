@@ -72,7 +72,7 @@
                                             class="text-orange-600 rounded text-lg font-semibold  capitalize">{{ $recipe->recipe_status }}</span>
                                     @else
                                         <span
-                                            class="text-green-600 rounded  text-lg font-semibold capitalize">{{ $recipe->recipe_status }}</span>
+                                            class="text-green-600 rounded text-lg font-semibold capitalize">{{ $recipe->recipe_status }}</span>
                                     @endif
 
                                 </td>
@@ -88,8 +88,8 @@
                                        --}}
 
                                     <input type="checkbox" class="toggle-class" data-toggle="toggle"
-                                        data-on="{{ $recipe->recipe_status == 'Approved' }}" data-onstyle="success" 
-                                       data-off="{{ $recipe->recipe_status == 'Pending' }}"  data-offstyle="danger" 
+                                        data-on="{{ $recipe->recipe_status == 'Approved' }}" data-onstyle="success"
+                                        data-off="{{ $recipe->recipe_status == 'Pending' }}" data-offstyle="danger"
                                         data-id="{{ $recipe->id }}">
                                 </td>
 
@@ -99,11 +99,16 @@
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
 
                                     @if ($recipe->recipe_status == 'pending')
-                                        <a href="{{ route('recipe.status', $recipe) }}"
-                                            class="bg-green-600 px-2 py-1.5 rounded text-white">Approved</a>
+                                        {{-- <a href="{{ route('recipe.status', $recipe) }}"
+                                            class="bg-green-600 px-2 py-1.5 rounded text-white"
+                                            onclick="statusRecipe({{ $recipe->id }})">Approved</a> --}}
+                                            <button onclick="RecipeStatus({{ $recipe->id }})" class="bg-green-600 px-2 py-1.5 rounded text-white">Approved</button>
                                     @else
-                                        <a href="{{ route('recipe.status', $recipe) }}"
-                                            class="bg-red-600 px-2 py-1.5 rounded text-white">Pending</a>
+                                        {{-- <a href="{{ route('recipe.status', $recipe) }}"
+                                            class="bg-red-600 px-2 py-1.5 rounded text-white"
+                                            onclick="statusRecipe({{ $recipe->id }})">Pending</a> --}}
+
+                                            <button onclick="RecipeStatus({{ $recipe->id }})" class="bg-red-600 px-2 py-1.5 rounded text-white">Pending</button>
                                     @endif
 
                                     <a href="{{ route('recipe.show', $recipe) }}" class="show-btn">Show</a>
@@ -136,21 +141,71 @@
             </div>
         </div>
     </div>
-    <script>
-        let url = window.location.origin;
-        console.log(url);
 
-        $('body').on('click', '.toggle-class', function() {
-            let id = $(this).data('id');
-            console.log(id);
 
-            let view = url + '/recipe.status' + '/' + id
-            // console.log(view);
-            axios.get(view)
-                .then(function(res) {
-                    console.log(res);
-
-                })
-        })
-    </script>
 </x-app-layout>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+
+
+    let currentPageUrl = window.location.pathname;
+    // console.log(currentPageUrl);
+
+    // RecipeStatus(id) {
+
+    function RecipeStatus(id) {
+
+        const url = `/admin/recipe/status/${id}`;
+
+        axios.get(url).then(response => {
+            alert(response.data.message);
+            window.location.reload();
+
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
+
+    // const url = `/recipes?page=${currentPage}&search=${encodeURIComponent(searchQuery)}`;
+    // const url = `recipe/status/{recipe}`;
+
+    // axios setup code
+
+    // axios.get(`recipe/status/{recipe}`).then(function(res) {
+    //             console.log(res);
+
+    //         })
+
+
+    // $('body').on('click', '.toggle-class', function() {
+    //     let id = $(this).data('id');
+    //     console.log(id);
+
+    //     let view = url + '/recipe.status' + '/' + id
+    //     // console.log(view);
+    //     axios.get(view)
+    //         .then(function(res) {
+    //             console.log(res);
+
+    //         })
+    // })
+
+
+
+    $('body').on('click', '.toggle-class', function() {
+        let id = $(this).data('id');
+        console.log(id);
+        // `/admin/recipe/status/${id}`;
+        let view = '/admin/recipe/status/' + id
+        console.log(view);
+        axios.get(view)
+            .then(function(res) {
+                console.log(res);
+
+            })
+    })
+
+</script>
