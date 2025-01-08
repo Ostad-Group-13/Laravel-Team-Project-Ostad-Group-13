@@ -160,6 +160,16 @@ class RecipeController extends Controller
         return view('backend.recipe.user-recipes', compact('recipes', 'totalViews'));
     }
 
+
+    // public function UserRecipe()
+    // {
+    //     $user = Auth::user()->id;
+
+    //     $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
+
+    //     return view('backend.userRecipe.index', compact('recipes'));
+    // }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -276,7 +286,9 @@ class RecipeController extends Controller
             'alert-type' => "success"
         ];
 
-        return redirect()->route('recipe.index')->with($toasterMessage);
+        return response()->json(['success' => true, 'message' => 'Recipe Status Changed.']);
+
+        // return redirect()->route('recipe.index')->with($toasterMessage);
     }
 
     /*

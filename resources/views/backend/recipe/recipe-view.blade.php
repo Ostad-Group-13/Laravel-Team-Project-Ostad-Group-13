@@ -17,7 +17,7 @@
         <p>{{ $recipe->description }}</p>
         <p><strong>Views:</strong> {{ $recipe->view_count }}</p> --}}
 
-        <h2>Recently Viewed Products on User :{{ $recentlyViewedRecipe['user']->name }} </h2>
+        <h2>Recently Viewed Products on User hhh :{{ $recentlyViewedRecipe['user']->name }} </h2>
         <ul>
             @foreach ($recentlyViewedRecipe as $recentProduct)
                 {{-- @foreach ($recentlyViewedRecipe->recipe as $recipe)
