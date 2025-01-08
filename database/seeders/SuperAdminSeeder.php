@@ -1,0 +1,49 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class SuperAdminSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // Creating Super Admin User
+        $superAdmin = User::create([
+            'name' => 'Super Admin Test User',
+            'email' => 'superadmin@mail.com',
+            'password' => Hash::make('superadmin@mail.com')
+        ]);
+        $superAdmin->assignRole('Super Admin');
+
+        // Creating Admin User
+        $admin = User::create([
+            'name' => 'Admin Test User',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make('admin@mail.com')
+        ]);
+        $admin->assignRole('Admin');
+
+        // Creating Product Manager User
+        $productManager = User::create([
+            'name' => 'Product Manager Test User',
+            'email' => 'manager@mail.com',
+            'password' => Hash::make('manager@mail.com')
+        ]);
+        $productManager->assignRole('Product Manager');
+
+        // Creating User
+        $user = User::create([
+            'name' => 'User Test User',
+            'email' => 'user@mail.com',
+            'password' => Hash::make('user@mail.com')
+
+        ]);
+    }
+}
