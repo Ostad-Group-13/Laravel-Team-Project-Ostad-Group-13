@@ -11,24 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('recently_viewed_recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('color')->nullable();;
-            $table->string('slug')->nullable();;
-            $table->string('image')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            // $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('recipe_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
-
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('recently_viewed_recipes');
     }
 };

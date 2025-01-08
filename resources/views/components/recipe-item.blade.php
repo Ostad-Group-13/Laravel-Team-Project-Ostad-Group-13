@@ -1,5 +1,4 @@
 <div class="racipe_item">
-<div class="racipe_item">
 
     <div class="w-full h-[250px] rounded-[30px] overflow-hidden relative">
         <img class="w-full h-full object-cover" src="{{ asset($recipe->photo) }}" alt="">
@@ -7,30 +6,30 @@
             class="recipe_type absolute top-[20px] left-[20px] px-[10px] py-[5px] rounded-[20px] bg-[#FF6363] text-white capitalize">
             <span>{{ $recipe->recipe_type }}</span>
         </div>
-
-
         @auth
-            @if (auth()->user()->favoriteRecipes->contains($recipe->id))
-                <form action="{{ route('recipes.unfavorite', $recipe) }}" method="POST">
-                    @csrf
-                    <button class=" absolute top-[20px] right-[10px] px-[10px] py-[3px]   text-white capitalize  ">
-                        <img width="48" height="48" src="https://img.icons8.com/fluency/48/hearts.png"
+            <div class="recipe_type absolute top-3 right-1 px-[10px] py-[5px] rounded-[20px] text-white capitalize">
+                @if (auth()->user()->favoriteRecipes->contains($recipe->id))
+                    <!-- Un favorite code Start -->
+                    <button onclick="unfavorite({{ $recipe->id }})">
+                        <img class="overflow-hidden transition-all duration-300 ease-linear transform scale-105 hover:scale-125"
+                            width="48" height="48" src="https://img.icons8.com/fluency/48/hearts.png"
                             alt="hearts" />
                     </button>
-                </form>
-            @else
-                <form action="{{ route('recipes.favorite', $recipe) }}" method="POST">
-                    @csrf
-                    <button class=" absolute top-[20px] right-[10px] px-[10px] py-[5px]  text-white capitalize  ">
-                        <img width="50" height="50" src="https://img.icons8.com/ios-glyphs/50/hearts.png"
+                    <!-- Un favorite code End -->
+                @else
+                    <!-- Favorite code Start -->
+                    <button onclick="favorite({{ $recipe->id }})">
+                        <img class="overflow-hidden transition-all duration-300 ease-linear transform scale-105 hover:scale-125"
+                            width="50" height="50" src="https://img.icons8.com/ios-glyphs/50/hearts.png"
                             alt="hearts" />
                     </button>
-                </form>
-            @endif
+                    <!-- Favorite code End -->
+                @endif
+            </div>
         @else
-            <p class="px-2 py-3">
-                <a href="{{ route('login') }}" class="text-blue-600 px-2 py-3">Login</a> to favorite this recipe.
-            </p>
+            <div class="w-10/12 bg-gray-800 bg-opacity-60 text-center absolute top-[100px] right-[22px] px-2 py-1 rounded-lg text-white capitalize">
+                <a href="{{ route('login') }}"><b class="text-red-600 font-semibold text-xl">Login</b> to favorite this recipe.</a>
+            </div>
         @endauth
 
 
@@ -72,5 +71,59 @@
     </div>
 </div>
 
-</div>
 
+<!-- Script Code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script>
+
+<script>
+
+    //Favorite
+    function favorite(id) {
+
+        const url = `/recipes/${id}/favorite`;
+
+        axios.post(url).then(response => {
+            alert(response.data.message);
+            window.location.reload();
+            // showLoading();
+            // Display recipes
+            // displayRecipes(response.data);
+        }).catch(error => {
+            console.error(error);
+        });
+
+    }
+
+    // Un-favorite
+    function unfavorite(id) {
+
+        const url = `/recipes/${id}/unfavorite`;
+
+        axios.delete(url)
+            .then(response => {
+                alert(response.data.message);
+                window.location.reload();
+
+                // showLoading();
+                // fetchTasks();
+                // Display recipes
+                // displayRecipes(response.data);
+
+
+            }).catch(error => {
+                console.error(error);
+            });
+
+    }
+
+    //show Loader
+    function showLoading() {
+        document.getElementById('loading-spinner').style.display = 'block';
+    }
+
+    //Hide Loader
+    function hideLoading() {
+        document.getElementById('loading-spinner').style.display = 'none';
+    }
+
+</script>

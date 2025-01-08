@@ -1,24 +1,28 @@
 <?php
 
 //use BackendController;
-use App\Livewire\Comments;
-use Illuminate\Support\Facades\Route;
+use App\Models\Blog;
+use App\Models\User;
 //use Illuminate\Support\Facades\Routeers\Admin\{RoleController, UserController};
-use App\Http\Controllers\FavoriteController;
+use App\Models\Category;
 
 # Backend Controller
+use App\Livewire\Comments;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\RoleController;
+//use App\Http\Controllers\RecipeSliderControllerers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\RecipeSliderController;
-use App\Http\Controllers\Admin\BackendController;
-//use App\Http\Controllers\RecipeSliderControllerers\Admin\{BackendController, CategoryController, RoleController, UserController, UserRecipeController};
-use App\Http\Controllers\Admin\RecipeController as Recipe;
-use App\Http\Controllers\Admin\CategoryController;
 
 # Frontend Controller
+use App\Http\Controllers\Admin\BackendController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Middleware\IncrementRecipeViewCount;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\RecipeController;
+use App\Http\Controllers\Admin\RecipeController as Recipe;
+use App\Http\Controllers\frontend\FavoriteRecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,19 +74,24 @@ Route::get('/category/{category:slug}', [PageController::class, 'categoryByRecip
 
 
 
+# =================== Backend Route =================== #
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->prefix('admin')->group(function () {
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->prefix('admin')->group(function () {
 
+    // Resource Route Array
     Route::resources([
         'roles' => RoleController::class,
         'users' => UserController::class,
     ]);
 
     Route::get('/dashboard', function () {
+
+        // $data = [
+        //     'category' => Category::all(),
+        //     'user' => User::all(),
+        // ];
+
+        // return $data['user']->count();
         return view('dashboard');
     })->name('dashboard');
 
@@ -111,21 +120,52 @@ Route::middleware([
     // Backend Recipe Route
     Route::resource('recipe', Recipe::class);
     Route::get('recipe/status/{recipe}', [Recipe::class, 'RecipeStatus'])->name('recipe.status');
+
+    //Total views recipes on user View Recipes
+    // Route::get('/recipes/{recipe}', [Recipe::class, 'show'])->name('recipes.show');
+
+    Route::get('/recipes/{recipe}', [Recipe::class, 'show'])
+        ->middleware('increment.recipe.view')->name('recipes.show');
+
+
+    Route::get('/recipe-view', [Recipe::class, 'RecipeView'])->name('recipe.view');
+
+
+    //User Recipes Page
+    Route::get('user/recipes', [Recipe::class, 'userRecipes'])->name('recipes.user');
+
     # Backend User Recipe List Route
     Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
     # Favorite Recipe
     Route::get('favorite/recipe', [Recipe::class, 'favorite'])->name('favorite.recipes');
 
+    # Testing
+    // Route::get('popular/recipe', [Recipe::class, 'popularPosts'])->name('recipe.popular');
+
+    // Route::get('recipe-show/{recipe}', [Recipe::class, 'recipeShow'])->name('recipe.recipeshow');
+
     // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
     // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+    
+    // Recipe Histroy
+
 
     /*develop by ekramul*/
+
     Route::resource('recipe-slider', RecipeSliderController::class);
     Route::get('recipe-slider/status/{recipeSlider}', [RecipeSliderController::class, 'SliderStatus'])->name('recipe-slider.status');
+
 });
 
-Route::get('/favorites', [FavoriteController::class, 'favorites'])->name('favorites.index');
+# =================== Frontend Route =================== #
 
-Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
-Route::post('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
+# Favorite/UnFavorite Recipe Route #
+
+Route::get('/favorites', [FavoriteRecipeController::class, 'favoriteRecipe'])->name('favorites.index');
+
+Route::delete('/favorite/delete/{recipe}', [FavoriteRecipeController::class, 'favoriteDelete'])->name('favorite.delete');
+
+Route::post('/recipes/{recipe}/favorite', [FavoriteRecipeController::class, 'favorite'])->name('recipes.favorite');
+
+Route::delete('/recipes/{recipe}/unfavorite', [FavoriteRecipeController::class, 'unfavorite'])->name('recipes.unfavorite');

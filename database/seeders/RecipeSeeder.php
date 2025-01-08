@@ -247,6 +247,7 @@ class RecipeSeeder extends Seeder
 
 
         Recipe::insert($recipe);
+        // Recipe::create($recipe);
         # Ingredient insert multiple data
 
         # Ingredient create

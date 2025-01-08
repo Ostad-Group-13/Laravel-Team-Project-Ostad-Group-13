@@ -9,30 +9,35 @@
     <title>{{ config('app.name', 'OstadGroup13') }}</title>
     <link rel="shortcut icon" href="{{ asset('images/CP-Logo.png') }}" type="image/x-icon">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--  Toastr css -->
-    <link rel="stylesheet" href="{{ asset('assets/backend/') }}/css/toastr.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.1.1/css/bootstrap5-toggle.min.css"
+  rel="stylesheet">
 
-    <!--  summernote css -->
-    <link href="{{ asset('assets/backend/plugins') }}/summernote/summernote-lite.min.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!--  Sweet Alert 2 css -->
-    <link href="{{ asset('assets/backend/') }}/css/sweetalert2.min.css" rel="stylesheet">
+        <!--  Toastr css -->
+        <link rel="stylesheet" href="{{ asset('assets/backend/') }}/css/toastr.min.css" />
 
-    <!--  dropify js  -->
-    {{-- <link href="{{ asset('assets/backend/') }}/css/dropify.min.css" rel="stylesheet"> --}}
-    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+        <!--  summernote css -->
+        <link href="{{ asset('assets/backend/plugins') }}/summernote/summernote-lite.min.css" rel="stylesheet">
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"/> --}}
+        <!--  Sweet Alert 2 css -->
+        <link href="{{ asset('assets/backend/') }}/css/sweetalert2.min.css" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!--  dropify js  -->
+        {{-- <link href="{{ asset('assets/backend/') }}/css/dropify.min.css" rel="stylesheet"> --}}
+        <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 
-    <!-- Styles -->
-    @livewireStyles
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"/> --}}
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Styles -->
+        @livewireStyles
 
 </head>
 
@@ -69,7 +74,7 @@
                     @if (isset($header))
                         <header class="bg-white dark:bg-gray-800">
                             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                                 
+
                                 {{ $header }}
                             </div>
                         </header>
@@ -91,6 +96,11 @@
     <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.1.1/js/bootstrap5-toggle.ecmas.min.js"></script>
+    
     <!--  Toastr js -->
     <script src="{{ asset('assets/backend/') }}/js/toastr.min.js"></script>
 
@@ -103,7 +113,7 @@
     <!--  dropify js  -->
     <script src="{{ asset('assets/backend/') }}/js/dropify.min.js"></script>
 
-     {{-- <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script> --}}
+    {{-- <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script> --}}
 
     <script>
         // Get elements
@@ -192,7 +202,7 @@
             }
         @endif
 
-         // sweet alert 2 Delete Confirm
+        // sweet alert 2 Delete Confirm
         function DeleteConfirm(ev) {
             ev.preventDefault();
             let form = ev.currentTarget.closest('form');
@@ -243,7 +253,7 @@
             ]
         });
 
-         // create data
+        // create data
         // @if (Session::get('message'))
         //     Swal.fire({
         //         position: "top-end",
@@ -256,17 +266,16 @@
         // @endif
 
         // $('.dropify').dropify();
-         $('.dropify').dropify({
-        messages: {
-            'default': 'Drag and drop a file here or click',
-            'replace': 'Drag and drop or click to replace',
-            'remove': 'Remove',
-            'error': 'Ooops, something wrong happended.'
-        },
-        height: 200
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a file here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong happended.'
+            },
+            height: 200
 
-    });
-
+        });
     </script>
 
     @stack('modals')

@@ -12,7 +12,12 @@
                 <img class="w-[50px] h-[50px] rounded-full" src="{{ asset($recipe->user->profile_photo_url) }}" alt="user profile image">
                 <div class="flex flex-col">
                   <span class="font-medium text-sm">{{ $recipe->user->name }}</span>
+                  @if($recipe->created_at == "")
+                  <span>no</span>
+                  @else
                   <p class="text-[#00000099] text-sm font-medium">{{ $recipe->created_at->format('d F Y') }}</p>
+                  @endif
+                 
                 </div>
               </div>
             </div>

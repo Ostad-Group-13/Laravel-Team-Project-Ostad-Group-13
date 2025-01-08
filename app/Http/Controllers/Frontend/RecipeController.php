@@ -50,6 +50,8 @@ class RecipeController extends Controller
 
 
     function show(Recipe $recipe){
+
+       
         $recipes = Recipe::take(3)->inRandomOrder()->with('user')->get();
         $recipe->load(['category', 'user', 'nutritions', 'ingredients']);
         //return $recipe;

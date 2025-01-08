@@ -26,6 +26,10 @@ return new class extends Migration
             $table->text('nutrition_text')->nullable();
             $table->enum('recipe_type',['asian','indian','thai','chines'])->default('asian')->nullable();
             $table->enum('recipe_status',['pending','approved'])->default('pending')->nullable();
+            
+            // Recipes View Count
+            //$table->unsignedBigInteger('view_count')->default(0); // To track views
+
             #Relationship
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
