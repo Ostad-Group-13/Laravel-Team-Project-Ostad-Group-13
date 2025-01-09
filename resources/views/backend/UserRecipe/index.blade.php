@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Recipe') }}
+            {{ __('User Recipe') }}
         </h2>
     </x-slot>
 
@@ -31,6 +31,7 @@
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">User</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Recipe Type</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Status</th>
+                            <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Views</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Action</th>
                         </tr>
                     </thead>
@@ -76,9 +77,9 @@
                                     @endif
 
                                 </td>
+                                <td>{{ $recipe->view_count }}</td>
 
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
-
 
                                     @if (Auth::user()->hasRole('Super Admin'))
                                         @if ($recipe->recipe_status == 'pending')
@@ -122,6 +123,8 @@
                         @endforelse
                     </tbody>
                 </table>
+                <hr>
+        <h3 class="py-2 text-lg">Total Views Across All Your Recipes: {{ $totalViews }}</h3>
             </div>
             <div class="mt-4">
                 {{ $recipes->links() }}

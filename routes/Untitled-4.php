@@ -79,7 +79,6 @@
                                 :</th>
                             <td>{!! $recipe->directions !!}</td>
                         </tr>
-
                         <!-- Ingredients -->
                         <tr class="mb-3">
                             <th class="py-6 px-2 text-left text-xs font-medium text-gray-700 uppercase">
@@ -93,8 +92,7 @@
                                     {{-- @foreach ($ingredient as $list)
                                         <span>{{ $list->ingredients_list }}</span>
                                     @endforeach --}}
-                                   
-                                  
+
                                         @foreach (json_decode($ingredient['ingredients_list'], true) as $item)
                                             {{-- <li>{{ $item }}</li> --}}
                                             <span  class="bg-indigo-100 text-indigo-800 text-xs font-medium me-2 px-3 py-2 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{ $item }}</span>

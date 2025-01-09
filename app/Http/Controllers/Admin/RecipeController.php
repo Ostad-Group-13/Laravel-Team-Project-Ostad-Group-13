@@ -30,6 +30,7 @@ class RecipeController extends Controller
     public function index()
     {
         //
+        
         $recipes = Recipe::latest()->paginate(10);
         return view('backend.recipe.index', compact('recipes'));
     }
@@ -128,7 +129,7 @@ class RecipeController extends Controller
     {
 
         // Increment the view count
-        //    $recipeInc = $recipe->increment('view_count');
+           $recipeInc = $recipe->increment('view_count');
 
         //     // only 1 increment check user
         //     if(Auth::check()){
@@ -148,27 +149,7 @@ class RecipeController extends Controller
         return view('backend.recipe.show', compact('recipe', 'totalViews'));
     }
 
-
-    // Show all recipes for the authenticated user
-    public function userRecipes()
-    {
-
-        $userId = Auth::id();
-        $recipes = Recipe::where('user_id', $userId)->get();
-        $totalViews = $recipes->sum('view_count');
-
-        return view('backend.recipe.user-recipes', compact('recipes', 'totalViews'));
-    }
-
-
-    // public function UserRecipe()
-    // {
-    //     $user = Auth::user()->id;
-
-    //     $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
-
-    //     return view('backend.userRecipe.index', compact('recipes'));
-    // }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -268,7 +249,6 @@ class RecipeController extends Controller
     }
 
 
-
     function RecipeStatus(Recipe $recipe)
     {
 
@@ -303,10 +283,11 @@ class RecipeController extends Controller
 
         $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
 
-        return view('backend.userRecipe.index', compact('recipes'));
+        $totalViews = $recipes->sum('view_count');
+
+        return view('backend.userRecipe.index', compact('recipes','totalViews'));
 
     }
-
 
     public function favorite()
     {
@@ -321,5 +302,107 @@ class RecipeController extends Controller
         return view('backend.recipe.favorite', compact('user'));
     }
 
+    public function RecipeView(Recipe $recipe)
+    {
+
+        $userid = Auth::user()->id; 
+        $recentlyViewedRecipe = RecipeView::where('user_id', $userid)
+            ->with('user', 'recipes')
+            // ->where('recipe_id', $recipe->id)
+            ->get();
+
+        // $user = User::where('id', $userid)->withCount('favoriteRecipes')->first();
+
+        return view('backend.recipe.recipe-view', compact('recipe', 'recentlyViewedRecipe'));
+    }
+
+
+    # Popular Recipe
+
+    public function popularPosts(Recipe $recipe)
+    {
+
+        $posts = Recipe::orderBy('view_count', 'desc')->take(5)->get();
+        return view('backend.recipe.popular', compact('posts'));
+    }
+
+
+    public function recipeShow(Recipe $recipe)
+    {
+        // $ipAddress = Request::ip();
+        // return 2222;
+
+        // return $recipe;
+
+        $userID = Auth::user()->id;
+
+        //check user already recipe
+        $recentlyView = RecipeView::where('user_id', $userID)
+            ->where('recipe_id', $recipe->id)
+            ->first();
+
+            // Recipe::where('user_id', $userID,'views_count')->first()
+
+        if (!$recentlyView) {
+
+            // Add to recently viewed products
+            RecipeView::create([
+                'user_id' => $userID,
+                'recipe_id' => $recipe->id,
+            ]);
+            $recipe->increment('view_count');
+
+            // return 'Added on view';
+
+        }
+        // else{
+        //     return 'Sorry ALready Added on view';
+        // }
+
+        return redirect()->route('recipe.popular');
+        // return $recentlyView;
+
+        // if (!RecipeView::where('recipe_id',$recipe->id)->where('user_id', $userID)->exists()) {
+
+        //     RecipeView::create([
+        //         'user_id' => $userID,
+        //         'recipe_id' => $recipe->id,
+        //     ]);
+
+        //     $recipe->increment('view_count');
+        // }
+
+
+
+
+        // if (!$recentlyViewedProducts) {
+        //     // Add to recently viewed products
+        //     RecentlyViewedRecipe::create([
+        //         'user_id' => $userId,
+        //         'recipe_id' => $recipe->id,
+        //     ]);
+
+
+        // }
+
+
+        // Check if the user has already viewed this post
+
+        // $recentlyViewedProducts = RecipeView::where('user_id', $userId)
+        //     ->where('recipe_id', $recipe->id)
+        //     ->first();
+
+        // if(!RecipeView::where('recipe_id', $recipe->id)->where('user_id', $userID)->exists()) {
+
+        //     RecipeView::create([
+        //         'recipe_id' => $recipe->id,
+        //         'user_id' => $userID,
+        //     ]);
+
+        //     $recipe->increment('views');
+        // }
+
+        // return view('admin.posts.show', compact('post'));
+    }
 
 }

@@ -122,28 +122,22 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('recipe/status/{recipe}', [Recipe::class, 'RecipeStatus'])->name('recipe.status');
 
     //Total views recipes on user View Recipes
-    // Route::get('/recipes/{recipe}', [Recipe::class, 'show'])->name('recipes.show');
-
-    Route::get('/recipes/{recipe}', [Recipe::class, 'show'])
-        ->middleware('increment.recipe.view')->name('recipes.show');
+    Route::get('/recipes/{recipe}', [Recipe::class, 'show'])->name('recipes.show');
 
 
-    Route::get('/recipe-view', [Recipe::class, 'RecipeView'])->name('recipe.view');
-
-
-    //User Recipes Page
-    Route::get('user/recipes', [Recipe::class, 'userRecipes'])->name('recipes.user');
+   
 
     # Backend User Recipe List Route
-    Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
+    Route::get('user-recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
     # Favorite Recipe
     Route::get('favorite/recipe', [Recipe::class, 'favorite'])->name('favorite.recipes');
 
     # Testing
-    // Route::get('popular/recipe', [Recipe::class, 'popularPosts'])->name('recipe.popular');
+    Route::get('/recipe-view', [Recipe::class, 'RecipeView'])->name('recipe.view');
+    Route::get('popular/recipe', [Recipe::class, 'popularPosts'])->name('recipe.popular');
 
-    // Route::get('recipe-show/{recipe}', [Recipe::class, 'recipeShow'])->name('recipe.recipeshow');
+    Route::get('recipe-show/{recipe}', [Recipe::class, 'recipeShow'])->name('recipe.recipeshow');
 
     // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
     // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
