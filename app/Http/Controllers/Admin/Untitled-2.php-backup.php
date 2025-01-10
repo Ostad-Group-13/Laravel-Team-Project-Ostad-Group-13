@@ -214,15 +214,8 @@ class RecipeController extends Controller
         //         ->orderByRaw("FIELD(id, " . implode(',', $recentlyViewedIds) . ")")
         //         ->get();
 
-
-        
-
         return view('backend.recipe.show', compact('recipe', 'recentlyViewedProducts'));
      
-
-
-
-
         // return view('backend.recipe.show', compact('recipe'));
     }
 

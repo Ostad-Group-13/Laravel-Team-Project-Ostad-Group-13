@@ -113,6 +113,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('contact-us', [BackendController::class, 'contact'])->name('contact');
     Route::delete('contact-us/{contact}', [BackendController::class, 'ContactDelete'])->name('contact.delete');
     // Route::get('userList', [BackendController::class, 'userlist'])->name('user-list');
+
     Route::get('UserPost/{UserPost}', [BackendController::class, 'UserPost'])->name('User-Post');
 
     Route::get('comments/{recipe_id}', [Comments::class, 'render'])->name('comments');
@@ -122,34 +123,27 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('recipe/status/{recipe}', [Recipe::class, 'RecipeStatus'])->name('recipe.status');
 
     //Total views recipes on user View Recipes
-    // Route::get('/recipes/{recipe}', [Recipe::class, 'show'])->name('recipes.show');
-
-    Route::get('/recipes/{recipe}', [Recipe::class, 'show'])
-        ->middleware('increment.recipe.view')->name('recipes.show');
-
-
-    Route::get('/recipe-view', [Recipe::class, 'RecipeView'])->name('recipe.view');
-
-
-    //User Recipes Page
-    Route::get('user/recipes', [Recipe::class, 'userRecipes'])->name('recipes.user');
+    Route::get('/recipes/{recipe}', [Recipe::class, 'show'])->name('recipes.show');
 
     # Backend User Recipe List Route
-    Route::get('user/recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
+    Route::get('user-recipe', [Recipe::class, 'UserRecipe'])->name('user.recipe');
 
     # Favorite Recipe
     Route::get('favorite/recipe', [Recipe::class, 'favorite'])->name('favorite.recipes');
 
     # Testing
-    // Route::get('popular/recipe', [Recipe::class, 'popularPosts'])->name('recipe.popular');
 
-    // Route::get('recipe-show/{recipe}', [Recipe::class, 'recipeShow'])->name('recipe.recipeshow');
+    // Recipe view list
+    Route::get('recipe-view-list', [Recipe::class, 'RecipeViewList'])->name('recipe.view.list');
 
+    // Recipe Watch
+    Route::get('recipe-watch', [Recipe::class, 'RecipeWatch'])->name('recipe.watch');
+    
+    // Route::get('recipe-watch/{recipe}', [Recipe::class, 'RecipeWatch'])->
     // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
     // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
     
-    // Recipe Histroy
-
+    // Recipe History
 
     /*develop by ekramul*/
 

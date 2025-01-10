@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Recipe') }}
+            {{ __('User Recipe') }}
         </h2>
     </x-slot>
 
@@ -31,6 +31,7 @@
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">User</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Recipe Type</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Status</th>
+                            <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Views</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Action</th>
                         </tr>
                     </thead>
@@ -76,9 +77,9 @@
                                     @endif
 
                                 </td>
+                                <td>{{ $recipe->view_count }}</td>
 
                                 <td class="px-4 py-2 text-sm text-gray-700 space-x-2">
-
 
                                     @if (Auth::user()->hasRole('Super Admin'))
                                         @if ($recipe->recipe_status == 'pending')
@@ -122,7 +123,18 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                <div class="my-3">
+                    <button type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2.5">
+                        Total Views Across All Your Recipes : {{ $totalViews }} </button>
+                    <a href="{{ route('recipe.view.list') }}"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5">
+                        Recipe View List</a>
+                </div>
             </div>
+
+            {{-- <a href="#" class="px-2 py-2 my-2 overflow-hidden hover:bg-gray-600 text-white rounded border-2 border-indigo-600 hover:border-blue-900 transition-all duration-300 ease-in-out">Popular Recipe</a> --}}
             <div class="mt-4">
                 {{ $recipes->links() }}
             </div>
