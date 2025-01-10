@@ -78,30 +78,56 @@
                         </li>
 
                         {{-- @if (Auth::user()->hasRole('Super Admin')) --}}
-                            <li
-                                class="mb-2 {{ request()->routeIs('recipe.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
-                                <a href="{{ route('recipe.index') }}" class="flex align-middle gap-2 px-6 py-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                    </svg>
+                        <li
+                            class="mb-2 {{ request()->routeIs('recipe.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('recipe.index') }}" class="flex align-middle gap-2 px-6 py-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                </svg>
 
-                                    Recipe
-                                </a>
-                            </li>
+                                Recipe
+                            </a>
+                        </li>
                         {{-- @else --}}
-                            <li
-                                class="mb-2 {{ request()->routeIs('user.recipe') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
-                                <a href="{{ route('user.recipe') }}" class="flex align-middle gap-2 px-6 py-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                    User Recipe
-                                </a>
-                            </li>
+                        <li
+                            class="mb-2 {{ request()->routeIs('user.recipe') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('user.recipe') }}" class="flex align-middle gap-2 px-6 py-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                User Recipe
+                            </a>
+                        </li>
+ <li
+                            class="mb-2 {{ request()->routeIs('recipe.view.list') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('recipe.view.list') }}" class="flex align-middle gap-2 px-6 py-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                Recipe View List
+                            </a>
+                        </li>
+                        <li
+                            class="mb-2 {{ request()->routeIs('recipe.watch') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear">
+                            <a href="{{ route('recipe.watch') }}" class="flex align-middle gap-2 px-6 py-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                Recipe Watch
+                            </a>
+                        </li>
                         {{-- @endif --}}
 
 
@@ -120,9 +146,9 @@
                             class="mb-2 {{ request()->routeIs('recipe-slider.index') ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-blue-500 hover:text-white' }} transition duration-300 ease-linear ">
                             <a href="{{ route('recipe-slider.index') }}" class="flex align-middle gap-2 px-6 py-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
+                                    stroke-width="1.5" stroke="currentColor" class="size-5 mt-0.5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+                                        d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
                                 </svg>
 
                                 Recipe Slider

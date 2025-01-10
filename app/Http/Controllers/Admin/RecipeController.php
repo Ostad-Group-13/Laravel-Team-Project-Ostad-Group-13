@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Recipe;
 use App\Models\Category;
@@ -30,7 +31,7 @@ class RecipeController extends Controller
     public function index()
     {
         //
-        
+
         $recipes = Recipe::latest()->paginate(10);
         return view('backend.recipe.index', compact('recipes'));
     }
@@ -120,8 +121,6 @@ class RecipeController extends Controller
         }
     }
 
-
-
     /**
      * Display the specified resource.
      */
@@ -129,7 +128,8 @@ class RecipeController extends Controller
     {
 
         // Increment the view count
-           $recipeInc = $recipe->increment('view_count');
+        // $recipeInc = $recipe->increment('view_count');
+
 
         //     // only 1 increment check user
         //     if(Auth::check()){
@@ -142,14 +142,126 @@ class RecipeController extends Controller
         //     # check user
         //     Recipe::where('user_id', $recipe->user_id)->first();
 
+
+        $userID = Auth::user()->id;
+        // $recipe->increment('view_count');
+        // $recipe->update(['user_id' => $userID]);
+
         // Fetch total views for the user's recipes
+
         $totalViews = Recipe::where('user_id', $recipe->user_id)->sum('view_count');
+      
+
+        //check user already recipe view 
+        $recipeView = RecipeView::where('user_id', $userID)
+            ->where('recipe_id', $recipe->id)
+            ->first();
+
+            // if (!RecipeView::where('recipe_id',$recipe->id)->where('user_id', $userID)->exists()) {
+
+        //     RecipeView::create([
+        //         'user_id' => $userID,
+        //         'recipe_id' => $recipe->id,
+        //     ]);
+
+        //     $recipe->increment('view_count');
+        // }
+
+        // if (!$recentlyViewedProducts) {
+        //     // Add to recently viewed products
+        //     RecentlyViewedRecipe::create([
+        //         'user_id' => $userId,
+        //         'recipe_id' => $recipe->id,
+        //     ]);
+
+
+        // }
+
+
+        // or
+
+            // if(!RecipeView::where('recipe_id', $recipe->id)->where('user_id', $userID)->exists()) {
+
+        //     RecipeView::create([
+        //         'recipe_id' => $recipe->id,
+        //         'user_id' => $userID,
+        //     ]);
+
+        //     $recipe->increment('views');
+        // }
+
+        //
+        if (!$recipeView) {
+
+            // Add to Recipe watch
+            RecipeView::create([
+                'user_id' => $userID,
+                'recipe_id' => $recipe->id,
+            ]);
+
+            // recipe view count added
+            $recipe->increment('view_count');
+        }
+        // else{
+        //     return 'Sorry ALready Added on view';
+        // }
+
+
+        // =================
+
+
+
+        // $recipe->view_count = $recipe->view_count + 1;
+
+        // Recipe watch on store recipe
+        $recipeWatch = RecipeView::where('recipe_id', $recipe->id)->first();
+       
+
+        //expire on date
+        $expiresAt = Carbon::now()->addDay(); // Set expiry 1 day from now
+
+        // $recipeWatch = RecipeView::where('recipe_id', $recipe->id)->where('user_id', $userID)->first();
+
+        //check if user has watched the recipe
+
+        // if user has watched the recipe
+        // if ($recipeWatch) {
+        //     // delete the recipe watch
+        //     $recipeWatch->delete();
+            
+        //     $recipe->view_count = $recipe->view_count - 1;
+        //     $recipe->save();
+
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'message' => 'Recipe unwatched',
+        //         'view_count' => $recipe->view_count,
+        //         'total_views' => $totalViews,
+        //     ]);
+        // } else {
+        //     // if user has not watched the recipe added
+        //     $recipeWatch = new RecipeView();
+        //     $recipeWatch->recipe_id = $recipe->id;
+        //     $recipeWatch->user_id = $userID;
+        //     $recipeWatch->user_id = $userID;
+        //     $recipeWatch->expires_at = $expiresAt;
+        //     $recipeWatch->save();
+
+        //     $recipe->view_count = $recipe->view_count + 1;
+        //     $recipe->save();
+
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'message' => 'Recipe watched',
+        //         'view_count' => $recipe->view_count,
+        //         'total_views' => $totalViews,
+        //     ]);
+        // }
+
 
         // $recipe = Recipe::Where('slug', $slug)->with('ingredients', 'nutritions')->first();
         return view('backend.recipe.show', compact('recipe', 'totalViews'));
     }
-
-  
 
     /**
      * Show the form for editing the specified resource.
@@ -232,7 +344,6 @@ class RecipeController extends Controller
         }
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -272,7 +383,7 @@ class RecipeController extends Controller
     }
 
     /*
-    * User Recipe List
+    *  Login user Recipe List
     *
     */
 
@@ -283,10 +394,11 @@ class RecipeController extends Controller
 
         $recipes = Recipe::where('user_id', $user)->latest()->paginate(6);
 
+        // $recipes = Recipe::orderBy('view_count', 'desc')->get();
+
         $totalViews = $recipes->sum('view_count');
 
-        return view('backend.userRecipe.index', compact('recipes','totalViews'));
-
+        return view('backend.userRecipe.index', compact('recipes', 'totalViews'));
     }
 
     public function favorite()
@@ -302,107 +414,43 @@ class RecipeController extends Controller
         return view('backend.recipe.favorite', compact('user'));
     }
 
-    public function RecipeView(Recipe $recipe)
+    # Recipe View List
+    public function RecipeViewList()
     {
 
-        $userid = Auth::user()->id; 
-        $recentlyViewedRecipe = RecipeView::where('user_id', $userid)
+
+        $recipes = Recipe::where('view_count', '>', 0)->get();
+        // $recipes = Recipe::where('user_id', $recipe->user_id)->latest()->
+
+        $totalViews = $recipes->sum('view_count');
+
+        return view('backend.recipe.recipe-view-list', compact('recipes', 'totalViews'));
+    }
+
+
+
+    public function RecipeWatch(Recipe $recipe)
+    {
+
+        // $recipe->increment('views');
+
+        //recipe watch expire date over then delete
+
+        RecipeView::where('expires_at', '<', Carbon::now())->delete();
+
+
+        // foreach ($expiredRecipes as $recipe) {
+        //     Log::info('Deleting expired recipe: ' . $recipe->name);
+        //     $recipe->delete();
+        // }
+
+        $userid = Auth::user()->id;
+        $RecipeWatch = RecipeView::where('user_id', $userid)
             ->with('user', 'recipes')
             // ->where('recipe_id', $recipe->id)
             ->get();
 
-        // $user = User::where('id', $userid)->withCount('favoriteRecipes')->first();
 
-        return view('backend.recipe.recipe-view', compact('recipe', 'recentlyViewedRecipe'));
+        return view('backend.UserRecipe.recipe-watch', compact('RecipeWatch'));
     }
-
-
-    # Popular Recipe
-
-    public function popularPosts(Recipe $recipe)
-    {
-
-        $posts = Recipe::orderBy('view_count', 'desc')->take(5)->get();
-        return view('backend.recipe.popular', compact('posts'));
-    }
-
-
-    public function recipeShow(Recipe $recipe)
-    {
-        // $ipAddress = Request::ip();
-        // return 2222;
-
-        // return $recipe;
-
-        $userID = Auth::user()->id;
-
-        //check user already recipe
-        $recentlyView = RecipeView::where('user_id', $userID)
-            ->where('recipe_id', $recipe->id)
-            ->first();
-
-            // Recipe::where('user_id', $userID,'views_count')->first()
-
-        if (!$recentlyView) {
-
-            // Add to recently viewed products
-            RecipeView::create([
-                'user_id' => $userID,
-                'recipe_id' => $recipe->id,
-            ]);
-            $recipe->increment('view_count');
-
-            // return 'Added on view';
-
-        }
-        // else{
-        //     return 'Sorry ALready Added on view';
-        // }
-
-        return redirect()->route('recipe.popular');
-        // return $recentlyView;
-
-        // if (!RecipeView::where('recipe_id',$recipe->id)->where('user_id', $userID)->exists()) {
-
-        //     RecipeView::create([
-        //         'user_id' => $userID,
-        //         'recipe_id' => $recipe->id,
-        //     ]);
-
-        //     $recipe->increment('view_count');
-        // }
-
-
-
-
-        // if (!$recentlyViewedProducts) {
-        //     // Add to recently viewed products
-        //     RecentlyViewedRecipe::create([
-        //         'user_id' => $userId,
-        //         'recipe_id' => $recipe->id,
-        //     ]);
-
-
-        // }
-
-
-        // Check if the user has already viewed this post
-
-        // $recentlyViewedProducts = RecipeView::where('user_id', $userId)
-        //     ->where('recipe_id', $recipe->id)
-        //     ->first();
-
-        // if(!RecipeView::where('recipe_id', $recipe->id)->where('user_id', $userID)->exists()) {
-
-        //     RecipeView::create([
-        //         'recipe_id' => $recipe->id,
-        //         'user_id' => $userID,
-        //     ]);
-
-        //     $recipe->increment('views');
-        // }
-
-        // return view('admin.posts.show', compact('post'));
-    }
-
 }
