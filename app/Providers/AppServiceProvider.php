@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\RecipeSlider;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -21,16 +22,20 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    
+    /*
+    *
+    * Bootstrap any application services.
+    */
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Gate::before(function ($user, $ability) {
+ 
             return $user->hasRole('Super Admin') ? true : null;
-        });
 
+        });
+        
 
         if (!app()->runningInConsole() || app()->runningUnitTests()) {
             $user = User::with('favoriteRecipes')->first();
@@ -38,10 +43,11 @@ class AppServiceProvider extends ServiceProvider
             $category = Category::get();
             $recipe = Recipe::get();
             $allSlider = RecipeSlider::with('recipe','user')->get();
+            $allUsers = User::all();
 
-            $category = Category::get();
+            $comment = Comment::get();
 
-            View::share(['category' => $category, 'user' => $user, 'blog' => $blog, 'recipe' => $recipe, 'allSlider' => $allSlider]);
+            View::share(['allUsers' => $allUsers,'category' => $category, 'user' => $user, 'blog' => $blog, 'recipe' => $recipe, 'allSlider' => $allSlider,'comment' => $comment]);
 
             // view()->share('categorylist', $categorylist);
         }
