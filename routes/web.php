@@ -72,8 +72,6 @@ Route::post('/store-contact', [PageController::class, 'storeContact'])->name('st
 Route::get('/category/{category:slug}', [PageController::class, 'categoryByRecipe'])->name(name: 'category.by.recipe');
 
 
-
-
 # =================== Backend Route =================== #
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->prefix('admin')->group(function () {
@@ -139,8 +137,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     // Recipe Watch
     Route::get('recipe-watch', [Recipe::class, 'RecipeWatch'])->name('recipe.watch');
     
-    // Route::get('recipe-watch/{recipe}', [Recipe::class, 'RecipeWatch'])->
     // Route::post('/recipes/{recipe}/favorite', [FavoriteController::class, 'favorite'])->name('recipes.favorite');
+
     // Route::delete('/recipes/{recipe}/unfavorite', [FavoriteController::class, 'unfavorite'])->name('recipes.unfavorite');
     
     // Recipe History
