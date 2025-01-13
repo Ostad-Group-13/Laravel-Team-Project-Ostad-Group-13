@@ -14,13 +14,13 @@
                         #Sl No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Recipe Image
+                        Image
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Recipe Name
+                        Recipe Title
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Recipe Category
+                        Category
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Expire Date
@@ -37,25 +37,27 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $loop->index + 1 }}
                         </th>
-                        <td class="px-3 py-3">
-                             <img class="w-[180px]" src="{{ asset($item->recipes->photo) }}" alt="" >
+                        <td class="px-3 py-2">
+                             <img class="w-[120px] h-20" src="{{ asset($item->recipes->photo) }}" alt="" >
                         </td>
                         <td class="px-2 py-2">
                              {{ $item->recipes->title }}
                         </td>
                         <td class="px-2 py-2">
-                             {{ $item->recipes->category->name }}
+                             <span class="text-green-600 text-lg font-semibold">{{ $item->recipes->category->name }}</span>
                         </td>
-                        {{-- <td class="px-2 py-2">
-                            <p>Expires at: {{ $item->expires_at->format('y-m-d') }}</p>
-                        </td> --}}
+                       <td class="px-2 py-2 text-red-600">
+                       {{  Carbon\Carbon::parse($item->expires_at)->addDays(1)->format('l jS \of F Y h:i:s A') }} : {{  Carbon\Carbon::parse($item->expires_at)->addDays(1)->diffForHumans('D') }}
+                            {{-- <p>Expires at: {{ Carbon\Carbon::now()->diffForHumans($item->expires_at) }}</p> --}}
 
-                         <td class="px-2 py-2">
+                        </td>
+
+                        <td class="px-2 py-2">
                             {{-- {{ $item->expires_at->format('Y') }} --}}
                             {{-- {{ Carbon\Carbon::parse($item->expires_at)->addDay() }} --}}
 
-                            {{ Carbon\Carbon::now()->addDay($item->expires_at) }}
-                        </td>
+                            {{ Carbon\Carbon::parse($item->expires_at)->diffForHumans() }}
+                        </td> 
                         
                         <td class="px-6 py-4">
                             <a href="#" class="font-medium bg-green-800 text-white text-lg px-2 py-3 rounded">Remove Data</a>

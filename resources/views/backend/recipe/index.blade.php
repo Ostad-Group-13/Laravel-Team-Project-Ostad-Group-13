@@ -31,18 +31,21 @@
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">User</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Recipe Type</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Status</th>
+                            <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">View Count</th>
                             <th class="py-4 px-3 text-left text-xs font-medium  uppercase border-l">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse ($recipes as $recipe)
-                            <tr>
+                            <tr class="divide-x divide-slate-200">
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ Str::limit($recipe->title, 10) }}</td>
                                 {{-- <td class="px-4 py-2 text-sm text-gray-700">{{ $recipe->title }}</td> --}}
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <img @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif
-                                        width="80" height="40">
+                                    <div class="w-22">
+                                        <img class="w-20 h-15"
+                                        @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif>
+                                    </div>
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     @if ($recipe->category_id !== null)
@@ -77,7 +80,10 @@
 
                                 </td>
 
-                                <td>
+                                <td class="text-center">{{ $recipe->view_count }}</td>
+
+
+                                <td class="px-3">
                                     {{-- <input data-id="{{ $recipe->id }}" class="toggle-class" type="checkbox"
                                         data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                         data-on="Yes" data-off="No" @if (!empty($recipe) && $recipe->recipe_status) {{ 'checked' }} @endif
@@ -93,6 +99,7 @@
                                         data-id="{{ $recipe->id }}">
                                 </td>
 
+
                                 {{-- {{ $recipe->recipe_status ? 'checked' : '' }} --}}
                                 {{-- <input  data-toggle="toggle" data-on="Yes" data-off="No" @if (!empty($person) && $person->intern_extern) {{ 'checked' }} @endif data-onstyle="primary" data-offstyle="info" type="checkbox" name="intern_extern"> --}}
 
@@ -102,13 +109,15 @@
                                         {{-- <a href="{{ route('recipe.status', $recipe) }}"
                                             class="bg-green-600 px-2 py-1.5 rounded text-white"
                                             onclick="statusRecipe({{ $recipe->id }})">Approved</a> --}}
-                                            <button onclick="RecipeStatus({{ $recipe->id }})" class="bg-green-600 px-2 py-1.5 rounded text-white">Approved</button>
+                                        <button onclick="RecipeStatus({{ $recipe->id }})"
+                                            class="bg-green-600 px-2 py-1.5 rounded text-white">Approved</button>
                                     @else
                                         {{-- <a href="{{ route('recipe.status', $recipe) }}"
                                             class="bg-red-600 px-2 py-1.5 rounded text-white"
                                             onclick="statusRecipe({{ $recipe->id }})">Pending</a> --}}
 
-                                            <button onclick="RecipeStatus({{ $recipe->id }})" class="bg-red-600 px-2 py-1.5 rounded text-white">Pending</button>
+                                        <button onclick="RecipeStatus({{ $recipe->id }})"
+                                            class="bg-red-600 px-2 py-1.5 rounded text-white">Pending</button>
                                     @endif
 
                                     <a href="{{ route('recipe.show', $recipe) }}" class="show-btn">Show</a>
@@ -135,6 +144,11 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                <div class="px-3 py-2 my-3 rounded text-white bg-green-600">
+                    Total View of Recipe : {{ $totalViews ? $totalViews : 0 }}
+                </div>
+
             </div>
             <div class="mt-4">
                 {{ $recipes->links() }}
@@ -148,8 +162,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-
-
     let currentPageUrl = window.location.pathname;
     // console.log(currentPageUrl);
 
@@ -207,5 +219,4 @@
 
             })
     })
-
 </script>

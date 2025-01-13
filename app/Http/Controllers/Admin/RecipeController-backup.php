@@ -33,7 +33,8 @@ class RecipeController extends Controller
    {
       //
       $recipes = Recipe::latest()->paginate(10);
-      return view('backend.recipe.index', compact('recipes'));
+      $totalViews = $recipes->sum('view_count');
+      return view('backend.recipe.index', compact('recipes', 'totalViews'));
    }
 
    /**

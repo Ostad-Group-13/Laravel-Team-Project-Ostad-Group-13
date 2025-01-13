@@ -10,7 +10,7 @@ class RecipeView extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['user_id', 'recipe_id'];
+    protected $fillable = ['user_id', 'recipe_id', 'expires_at'];
 
     # Relationship
     public function user()

@@ -17,10 +17,12 @@
                     <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase">
                         Sl</th>
                     <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase">
+                        Recipe Photo</th>
+                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase">
                         Recipe Name</th>
                     <th scope="col" class="px-6 py-3 text-start text-xs font-medium uppercase">
                         View Count</th>
-                   
+
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
@@ -29,6 +31,10 @@
                 <tr class="odd:bg-white even:bg-gray-300 divide-x divide-gray-200 dark:divide-neutral-700">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
                         {{ $loop->index + 1 }}</td>
+                    <td class="p-3">
+                        <img class="rounded-lg w-[120px] h-20"
+                            @if ($recipe->photo) src="{{ asset($recipe->photo) }}" @else src="{{ asset('uploads/no-image.png') }}" @endif>
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                         {{ $recipe->title }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
